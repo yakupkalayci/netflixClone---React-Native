@@ -10,14 +10,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Welcome from './screens/Welcome';
+import HomeScreen from './screens/Home';
 
-const Stack = createNativeStackNavigator();
+import {RootStackParamList} from './screens/screenTypes';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={Welcome} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
