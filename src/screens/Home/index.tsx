@@ -18,7 +18,7 @@ function Home(): JSX.Element {
           let iconName;
           color = focused ? '#fff' : '#555';
 
-          if (route.name === 'HomeScreen') {
+          if (route.name === 'Home') {
             iconName = 'home';
             return <Icon name={iconName} size={size} color={color} />;
           } else if (route.name === 'Profile') {
@@ -32,7 +32,7 @@ function Home(): JSX.Element {
         tabBarInactiveBackgroundColor: '#000',
         headerShown: false,
       })}>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

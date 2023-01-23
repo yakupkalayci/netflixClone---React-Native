@@ -2,11 +2,11 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Welcome: undefined;
-  Home: undefined;
+  HomeScreen: undefined;
 };
 
 export type TabParamList = {
-  HomeScreen: undefined;
+  Home: undefined;
   Profile: undefined;
 };
 

@@ -6,7 +6,10 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
+
+import {login} from '../../services/actions/login';
 
 import {WelcomeProps} from '../screenTypes';
 
@@ -14,10 +17,17 @@ import styles from './style';
 
 function Welcome({navigation}: WelcomeProps): JSX.Element {
   const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>('');
 
   const handleLogin = () => {
-    navigation.navigate('Home');
+    const isAuth = login(username, password);
+    if (isAuth) {
+      navigation.navigate('HomeScreen');
+      setUsername('');
+      setPassword('');
+    } else {
+      Alert.alert('Try again..');
+    }
   };
 
   const handleInput = (text: string) => {
