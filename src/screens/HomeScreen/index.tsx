@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,23 +8,72 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import axios from 'axios';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IconInfo from 'react-native-vector-icons/Foundation';
 
 import Header from '../../components/header';
-import PreviewCard from '../../components/preview-card';
-
-import {HomeScreenProps} from '../screenTypes';
+import MovieSection from '../../components/movie-section';
 
 import styles from './style';
 
-function Home({route, navigation}: HomeScreenProps): JSX.Element {
-  // const {userName} = route.params;
+export type TrendingMoviesObjectType = {
+  day: [];
+  week: [];
+  contiuneWatching: [];
+};
 
-  // useEffect(() => {
-  //   Alert.alert(`Hoşgeldin, ${userName}`);
-  // }, []);
+function HomeScreen(): JSX.Element {
+  const [trendingMovies, setTrendingMovies] =
+    useState<TrendingMoviesObjectType>({
+      day: [],
+      week: [],
+      contiuneWatching: [],
+    });
+  const [randomImage, setRandomImage] = useState<number>(0);
+
+  const getRandomImageNumber = () => {
+    const random = Math.floor(Math.random() * trendingMovies.day.length) + 1;
+    setRandomImage(random);
+  };
+
+  useEffect(() => {
+    const getTrendingToday = async () => {
+      try {
+        const {data} = await axios.get(
+          `https://api.themoviedb.org/3/trending/movie/day?api_key=6ac941350ec89cb1623346348f0a7b4e`,
+        );
+        setTrendingMovies({...trendingMovies, day: data.results});
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getTrendingWeek = async () => {
+      try {
+        const {data} = await axios.get(
+          `https://api.themoviedb.org/3/trending/movie/week?api_key=6ac941350ec89cb1623346348f0a7b4e`,
+        );
+        setTrendingMovies({...trendingMovies, week: data.results});
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getContiuneWatching = async () => {
+      try {
+        const {data} = await axios.get(
+          `https://api.themoviedb.org/3/discover/movie?api_key=6ac941350ec89cb1623346348f0a7b4e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878&with_watch_monetization_types=flatrate`,
+        );
+        setTrendingMovies({...trendingMovies, contiuneWatching: data.results});
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getTrendingToday();
+    getTrendingWeek();
+    getContiuneWatching();
+    getRandomImageNumber();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +81,11 @@ function Home({route, navigation}: HomeScreenProps): JSX.Element {
       <ScrollView>
         <View style={styles.imageContainer}>
           <Image
-            source={require('../../assets/jaws.jpg')}
+            source={{
+              uri:
+                'https://image.tmdb.org/t/p/w500' +
+                trendingMovies.day[randomImage]?.poster_path,
+            }}
             style={styles.mainPoster}
             resizeMode={'contain'}
           />
@@ -55,43 +108,30 @@ function Home({route, navigation}: HomeScreenProps): JSX.Element {
           </TouchableOpacity>
         </View>
         <View style={styles.innerContainer}>
-          <Text style={styles.titles}>Previews</Text>
-          <ScrollView horizontal={true}>
-            <PreviewCard type="preview" imgName="americanGangster" />
-            <PreviewCard type="preview" imgName="blackPanther" />
-            <PreviewCard type="preview" imgName="breakingBad" />
-            <PreviewCard type="preview" imgName="guardiansVol" />
-            <PreviewCard type="preview" imgName="starWars" />
-            <PreviewCard type="preview" imgName="theDarkKnight" />
-          </ScrollView>
-          <Text style={styles.titles}>Continue watching for </Text>
-          <ScrollView horizontal={true}>
-            <PreviewCard type="movie" imgName="deadpool" />
-            <PreviewCard type="movie" imgName="gWillHunting" />
-            <PreviewCard type="movie" imgName="jMulaneyKidGorgeous" />
-            <PreviewCard type="movie" imgName="meanGirls" />
-            <PreviewCard type="movie" imgName="moonlight" />
-          </ScrollView>
-          <Text style={styles.titles}>Continue watching for</Text>
-          <ScrollView horizontal={true}>
-            <PreviewCard type="movie" imgName="deadpool" />
-            <PreviewCard type="movie" imgName="gWillHunting" />
-            <PreviewCard type="movie" imgName="jMulaneyKidGorgeous" />
-            <PreviewCard type="movie" imgName="meanGirls" />
-            <PreviewCard type="movie" imgName="moonlight" />
-          </ScrollView>
-          <Text style={styles.titles}>Continue watching for</Text>
-          <ScrollView horizontal={true}>
-            <PreviewCard type="movie" imgName="deadpool" />
-            <PreviewCard type="movie" imgName="gWillHunting" />
-            <PreviewCard type="movie" imgName="jMulaneyKidGorgeous" />
-            <PreviewCard type="movie" imgName="meanGirls" />
-            <PreviewCard type="movie" imgName="moonlight" />
-          </ScrollView>
+          <MovieSection
+            title="Previews"
+            data={trendingMovies.week}
+            type="preview"
+          />
+          <MovieSection
+            title="Continue watching for"
+            data={trendingMovies.contiuneWatching}
+            type="movie"
+          />
+          <MovieSection
+            title="Bugün Popüler"
+            data={trendingMovies.day}
+            type="movie"
+          />
+          <MovieSection
+            title="Bu Hafta Popüler"
+            data={trendingMovies.week}
+            type="movie"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-export default Home;
+export default HomeScreen;

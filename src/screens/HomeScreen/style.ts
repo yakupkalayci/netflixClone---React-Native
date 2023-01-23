@@ -10,8 +10,7 @@ type HomeScreenStyleProps = {
   actionButtonPlayText: TextStyle;
   actionText: TextStyle;
   innerContainer: ViewStyle;
-  titles: TextStyle;
-}
+};
 
 export default StyleSheet.create<HomeScreenStyleProps>({
   container: {
@@ -58,12 +57,5 @@ export default StyleSheet.create<HomeScreenStyleProps>({
   },
   innerContainer: {
     paddingLeft: 20,
-  },
-  titles: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    marginTop: 20,
   },
 });

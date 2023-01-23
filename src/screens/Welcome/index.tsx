@@ -13,18 +13,18 @@ import {WelcomeProps} from '../screenTypes';
 import styles from './style';
 
 function Welcome({navigation}: WelcomeProps): JSX.Element {
-  const [username, setUsername] = useState<string>();
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>();
 
   const handleLogin = () => {
-    navigation.navigate('HomeScreen', {userName: username});
+    navigation.navigate('Home');
   };
 
-  const handleInput = text => {
+  const handleInput = (text: string) => {
     setUsername(text);
   };
 
-  const handleInput2 = text => {
+  const handleInput2 = (text: string) => {
     setPassword(text);
   };
 
