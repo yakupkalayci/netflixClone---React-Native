@@ -36,7 +36,7 @@ function MovieCard(props: MovieCardProps): JSX.Element {
             : {width: 140, height: 180}
         }
       />
-      {showContent ? (
+      {showContent && type === 'movie' ? (
         <Details title={title} genres={genres} desc={desc} />
       ) : null}
     </TouchableOpacity>
