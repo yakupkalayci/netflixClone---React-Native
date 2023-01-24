@@ -9,19 +9,23 @@ import {
   Alert,
 } from 'react-native';
 
-import {login} from '../../services/actions/login';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {login} from '../../store/reducers/usersReducer';
 
-import {WelcomeProps} from '../screenTypes';
+import {LoginProps} from '../screenTypes';
 
 import styles from './style';
 
-function Welcome({navigation}: WelcomeProps): JSX.Element {
+function Login({navigation}: LoginProps): JSX.Element {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const dispatch = useAppDispatch();
+  const activeUser = useAppSelector(state => state.users.activeUser);
+
   const handleLogin = () => {
-    const isAuth = login(username, password);
-    if (isAuth) {
+    dispatch(login({username: username, password: password}));
+    if (Object.keys(activeUser).length) {
       navigation.navigate('HomeScreen');
       setUsername('');
       setPassword('');
@@ -52,6 +56,7 @@ function Welcome({navigation}: WelcomeProps): JSX.Element {
         />
         <TextInput
           value={password}
+          secureTextEntry={true}
           onChangeText={text => handleInput2(text)}
           placeholder="Password"
           style={styles.input}
@@ -65,4 +70,4 @@ function Welcome({navigation}: WelcomeProps): JSX.Element {
   );
 }
 
-export default Welcome;
+export default Login;

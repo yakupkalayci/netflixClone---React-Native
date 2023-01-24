@@ -20,7 +20,7 @@ function MovieSection(props: MovieSectionProps): JSX.Element {
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <MovieCard type={type} imgName={item.poster_path} />
+          <MovieCard type={type} imgName={item?.poster_path} />
         )}
         horizontal={true}
       />

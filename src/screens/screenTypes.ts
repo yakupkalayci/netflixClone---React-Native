@@ -1,7 +1,8 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 export type RootStackParamList = {
-  Welcome: undefined;
+  Login: undefined;
   HomeScreen: undefined;
 };
 
@@ -10,8 +11,6 @@ export type TabParamList = {
   Profile: undefined;
 };
 
-export type WelcomeProps = NativeStackScreenProps<
-  RootStackParamList,
-  'Welcome'
->;
+export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
+export type ProfileProps = BottomTabScreenProps<TabParamList, 'Profile'>;

@@ -6,46 +6,45 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  Alert,
+  Modal,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IconInfo from 'react-native-vector-icons/Foundation';
+import IconClose from 'react-native-vector-icons/Fontisto';
+
+import {useAppSelector} from '../../store/hooks';
 
 import Header from '../../components/header';
 import MovieSection from '../../components/movie-section';
 
-import {
-  getTrendingToday,
-  getTrendingWeek,
-  getContiuneWatching,
-} from '../../services/actions/fetchMovies';
+import {fetchMovies} from '../../services/actions/fetchMovies';
 
 import {getRandomImageNumber} from '../../utils/getRandomImageNumber';
 
 import styles from './style';
 
-export type TrendingMoviesObjectType = {
+export type MoviesObjectType = {
   day: [];
   week: [];
   contiuneWatching: [];
 };
 
 function HomeScreen(): JSX.Element {
-  const [trendingMovies, setTrendingMovies] =
-    useState<TrendingMoviesObjectType>({
-      day: [],
-      week: [],
-      contiuneWatching: [],
-    });
+  const [movies, setMovies] = useState<MoviesObjectType>({
+    day: [],
+    week: [],
+    contiuneWatching: [],
+  });
   const [randomImage, setRandomImage] = useState<number>(0);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  const activeUser = useAppSelector(state => state.users.activeUser);
 
 
   useEffect(() => {
-    getTrendingToday(trendingMovies, setTrendingMovies);
-    getTrendingWeek(trendingMovies, setTrendingMovies);
-    getContiuneWatching(trendingMovies, setTrendingMovies);
-    getRandomImageNumber(trendingMovies, setRandomImage);
+    fetchMovies(setMovies);
+    getRandomImageNumber(movies, setRandomImage);
   }, []);
 
   return (
@@ -57,7 +56,7 @@ function HomeScreen(): JSX.Element {
             source={{
               uri:
                 'https://image.tmdb.org/t/p/w500' +
-                trendingMovies.day[randomImage]?.poster_path,
+                movies.day[randomImage]?.poster_path,
             }}
             style={styles.mainPoster}
             resizeMode={'contain'}
@@ -75,30 +74,48 @@ function HomeScreen(): JSX.Element {
               Play
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => setModalVisible(!modalVisible)}>
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}>
+              <View style={styles.modalView}>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(false)}
+                  style={styles.closeBtn}>
+                  <IconClose name="close" color="red" size={20} />
+                </TouchableOpacity>
+                <Text style={styles.modalText}>
+                  Title: {movies.day[randomImage]?.title}
+                </Text>
+                <Text style={styles.modalText}>
+                  Original Title: {movies.day[randomImage]?.original_title}
+                </Text>
+                <Text style={styles.modalText}>
+                  Description: {movies.day[randomImage]?.overview}
+                </Text>
+              </View>
+            </Modal>
             <IconInfo name="info" size={30} color="#fff" />
             <Text style={styles.actionText}>Info</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.innerContainer}>
+          <MovieSection title="Previews" data={movies?.week} type="preview" />
           <MovieSection
-            title="Previews"
-            data={trendingMovies?.week}
-            type="preview"
-          />
-          <MovieSection
-            title="Continue watching for"
-            data={trendingMovies?.contiuneWatching}
+            title={`Contiune watching for ${activeUser?.username}`}
+            data={movies?.contiuneWatching}
             type="movie"
           />
-          <MovieSection
-            title="Bugün Popüler"
-            data={trendingMovies?.day}
-            type="movie"
-          />
+          <MovieSection title="Bugün Popüler" data={movies?.day} type="movie" />
           <MovieSection
             title="Bu Hafta Popüler"
-            data={trendingMovies?.week}
+            data={movies?.week}
             type="movie"
           />
         </View>

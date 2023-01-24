@@ -1,9 +1,9 @@
-import {TrendingMoviesObjectType} from '../screens/HomeScreen';
+import {MoviesObjectType} from '../screens/HomeScreen';
 
 export const getRandomImageNumber = (
-  trendingMovies: TrendingMoviesObjectType,
+  movies: MoviesObjectType,
   setRandomImage: React.Dispatch<React.SetStateAction<number>>,
 ) => {
-  const random = Math.floor(Math.random() * trendingMovies.day.length) + 1;
+  const random = Math.floor(Math.random() * movies.day.length) + 1;
   setRandomImage(random);
 };
