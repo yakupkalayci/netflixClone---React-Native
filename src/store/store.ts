@@ -3,8 +3,6 @@ import usersReducer from './reducers/usersReducer';
 
 export const store = configureStore({
   reducer: {
-    // movies: moviesReducer,
-    // lists: listsReducer,
     users: usersReducer
   }
 })

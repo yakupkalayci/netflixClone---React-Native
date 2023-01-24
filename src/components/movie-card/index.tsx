@@ -1,19 +1,28 @@
-import React from 'react';
-import {View, Image} from 'react-native';
+import React, {useState} from 'react';
+import {Image, TouchableOpacity} from 'react-native';
+
+import Details from './_partials/Detail';
 
 import styles from './style';
 
 interface MovieCardProps {
   type: 'preview' | 'movie';
   imgName: string;
+  title: string;
+  genres: number[];
+  desc: string;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
-  const {type, imgName} = props;
+  const {type, imgName, title, genres, desc} = props;
   const imgLink = 'https://image.tmdb.org/t/p/w500' + imgName;
 
+  const [showContent, setShowContent] = useState(false);
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => setShowContent(!showContent)}>
       <Image
         source={{uri: imgLink}}
         style={
@@ -27,7 +36,10 @@ function MovieCard(props: MovieCardProps): JSX.Element {
             : {width: 140, height: 180}
         }
       />
-    </View>
+      {showContent ? (
+        <Details title={title} genres={genres} desc={desc} />
+      ) : null}
+    </TouchableOpacity>
   );
 }
 
