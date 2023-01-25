@@ -1,15 +1,29 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import styles from './style';
 
-function Header(): JSX.Element {
+function Header({navigation}): JSX.Element {
+  const navigateToMovies = () => {
+    navigation.navigate('Movies');
+  }
+
+  const navigateToMyList = () => {
+    navigation.navigate('MyList');
+  }
+
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/icon.png')} style={styles.logo} />
-      <Text style={styles.listItem}>TV Shows</Text>
-      <Text style={styles.listItem}>Movies</Text>
-      <Text style={styles.listItem}>My List</Text>
+      <TouchableOpacity onPress={() => navigateToMovies()}>
+        <Text style={styles.listItem}>Movies</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text style={styles.listItem}>TV Shows</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigateToMyList()}>
+        <Text style={styles.listItem}>My List</Text>
+      </TouchableOpacity>
     </View>
   );
 }

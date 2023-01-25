@@ -26,6 +26,8 @@ function MovieSection(props: MovieSectionProps): JSX.Element {
             title={item?.title}
             genres={item?.genre_ids}
             desc={item?.overview}
+            id={item?.id}
+            vote={item?.vote_average}
           />
         )}
         horizontal={true}

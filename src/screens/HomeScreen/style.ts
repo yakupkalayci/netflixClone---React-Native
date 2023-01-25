@@ -11,8 +11,12 @@ type HomeScreenStyleProps = {
   actionText: TextStyle;
   innerContainer: ViewStyle;
   modalView: ViewStyle;
+  modalHeader: ViewStyle,
   button: ViewStyle;
   modalText: TextStyle;
+  modalTitle: TextStyle;
+  originalTitle: TextStyle;
+  detail: TextStyle;
   closeBtn: ViewStyle;
 };
 
@@ -67,9 +71,13 @@ export default StyleSheet.create<HomeScreenStyleProps>({
     right: -45,
     top: 350,
     margin: 50,
-    backgroundColor: '#555',
+    backgroundColor: '#444',
     borderRadius: 20,
     padding: 20,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   button: {
     borderRadius: 20,
@@ -77,10 +85,22 @@ export default StyleSheet.create<HomeScreenStyleProps>({
     elevation: 2,
   },
   modalText: {
-    color: 'white',
-    fontSize: 16,
-    letterSpacing: 1.3,
-    lineHeight: 18,
+    color: '#fff',
+    fontSize: 14,
+  },
+  modalTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  originalTitle: {
+    paddingBottom: 5,
+  },
+  detail: {
+    borderTopWidth: 1,
+    borderTopColor: 'red',
+    color: '#fff',
+    paddingTop: 5,
+    fontSize: 14,
   },
   closeBtn: {
     alignItems: 'flex-end',

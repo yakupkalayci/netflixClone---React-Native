@@ -21,7 +21,7 @@ function Login({navigation}: LoginProps): JSX.Element {
   const [password, setPassword] = useState<string>('');
 
   const dispatch = useAppDispatch();
-  const activeUser = useAppSelector(state => state.users.activeUser);
+  const activeUser = useAppSelector(state => state.users.usersData.activeUser);
 
   const handleLogin = () => {
     dispatch(login({username: username, password: password}));

@@ -9,7 +9,7 @@ import styles from './style';
 
 function Profile({navigation}: ProfileProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const activeUser = useAppSelector(state => state.users.activeUser);
+  const activeUser = useAppSelector(state => state.users.usersData.activeUser);
 
   const handleSignOut = () => {
     dispatch(logout());
@@ -20,7 +20,9 @@ function Profile({navigation}: ProfileProps): JSX.Element {
     <SafeAreaView style={styles.container}>
       <Text style={styles.pageTitle}>Account Information</Text>
       <View style={styles.inputContainer}>
+        <Text style={styles.label}>username:</Text>
         <TextInput value={activeUser?.username} style={styles.input} />
+        <Text style={styles.label}>password:</Text>
         <TextInput value={activeUser?.password} style={styles.input} />
         <View style={styles.buttonContainer}>
           <Button

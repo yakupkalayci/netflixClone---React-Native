@@ -3,7 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Entypo';
 import ProfileIcon from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../HomeScreen';
+// import HomeScreen from '../HomeScreen';
+import PagesNavigator from '../PagesNavigator';
 import Profile from '../Profile';
 
 import {TabParamList} from '../screenTypes';
@@ -32,7 +33,7 @@ function Home(): JSX.Element {
         tabBarInactiveBackgroundColor: '#000',
         headerShown: false,
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={PagesNavigator} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

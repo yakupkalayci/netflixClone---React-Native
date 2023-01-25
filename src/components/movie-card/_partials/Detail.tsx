@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+
+import {useAppDispatch} from '../../../store/hooks';
+import {addToList} from '../../../store/reducers/usersReducer';
 
 import {fetchGenre} from '../../../services/actions/fetchGenre';
 
@@ -10,12 +13,22 @@ interface DetailsProps {
   title: string;
   genres: number[];
   desc: string;
+  imgLink: string,
+  id: number;
+  vote: number;
 }
 
 const Details = (props: DetailsProps) => {
-  const {title, genres, desc} = props;
+  const {title, genres, desc, imgLink, id, vote} = props;
 
   const [genre, setGenre] = useState();
+
+  const dispatch = useAppDispatch();
+
+  const addMovie = () => {
+    dispatch(addToList({title, genre, desc, imgLink, id, vote}));
+    Alert.alert('Eklendi..');
+  };
 
   useEffect(() => {
     const getGenre = async () => {
@@ -30,8 +43,8 @@ const Details = (props: DetailsProps) => {
         <Text style={styles.title} numberOfLines={2}>
           {title}
         </Text>
-        <TouchableOpacity>
-          <Icon name="plus" color="#000" size={25} />
+        <TouchableOpacity onPress={() => addMovie()}>
+          <Icon name="plus" color="red" size={25} />
         </TouchableOpacity>
       </View>
       <Text style={styles.genre}>{genre?.name}</Text>

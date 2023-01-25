@@ -6,6 +6,7 @@ type StyleProps = {
   inputContainer: ViewStyle;
   input: TextStyle;
   buttonContainer: ViewStyle;
+  label: TextStyle;
 };
 
 export default StyleSheet.create<StyleProps>({
@@ -34,4 +35,9 @@ export default StyleSheet.create<StyleProps>({
   buttonContainer: {
     marginTop: 20,
   },
+  label: {
+    color: '#f0f0f0',
+    paddingLeft: 5,
+    paddingBottom: 5,
+  }
 });

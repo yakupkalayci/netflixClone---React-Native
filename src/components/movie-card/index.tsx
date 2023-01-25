@@ -11,10 +11,12 @@ interface MovieCardProps {
   title: string;
   genres: number[];
   desc: string;
+  id: number;
+  vote: number;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
-  const {type, imgName, title, genres, desc} = props;
+  const {type, imgName, title, genres, desc, id, vote} = props;
   const imgLink = 'https://image.tmdb.org/t/p/w500' + imgName;
 
   const [showContent, setShowContent] = useState(false);
@@ -37,7 +39,14 @@ function MovieCard(props: MovieCardProps): JSX.Element {
         }
       />
       {showContent && type === 'movie' ? (
-        <Details title={title} genres={genres} desc={desc} />
+        <Details
+          title={title}
+          genres={genres}
+          desc={desc}
+          imgLink={imgLink}
+          id={id}
+          vote={vote}
+        />
       ) : null}
     </TouchableOpacity>
   );
