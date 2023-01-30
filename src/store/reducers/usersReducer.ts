@@ -1,7 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-// const activeUser = {};
-
 const usersData = {
   users: [
     {
@@ -16,6 +14,7 @@ const usersData = {
     },
   ],
   activeUser: {},
+  message: '',
 };
 
 export const usersSlice = createSlice({
@@ -42,8 +41,12 @@ export const usersSlice = createSlice({
         movie => movie.id === action.payload.id,
       );
       if (!exist) {
+        state.usersData.message = 'You added the movie to your list!';
         state.usersData.activeUser.movieList.push(action.payload);
+      } else {
+        state.usersData.message = 'The movie has already been added';
       }
+      state.usersData.message = '';
     },
     removeFromList: (state, action) => {
       state.usersData.activeUser.movieList =

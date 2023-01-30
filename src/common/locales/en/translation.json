@@ -1,0 +1,52 @@
+{
+    "GLOBAL": {
+        "COMPONENTS": {
+            "ALERT": {
+                "TITLES": {
+                    "SUCCESS": "Success"
+                },
+                "MESSAGES": {
+                    "TRY_AGAIN": "Try Again..",
+                    "MOVIE_ADDED": "You added the movie to your list!"
+                }
+            },
+            "TEXT_INPUT": {
+                "PLACEHOLDERS": {
+                    "EMAIL_OR_PHONE": "Email or phone number",
+                    "PASSWORD": "Password"
+                }
+            },
+            "BUTTON": {
+                "TITLES": {
+                    "SIGN_IN": "Sign In",
+                    "SIGN_OUT": "Sign Out",
+                    "MY_LIST":"My List",
+                    "PLAY": "Play",
+                    "INFO": "Info",
+                    "ADDED": "Added",
+                    "REMOVE": "Remove"
+                }
+            }
+        },
+        "LABELS": {
+            "S_MOVIES": "'s Movies",
+            "NO_MOVIE": "No movie in your list!",
+            "ACCOUNT_INFORMATION": "Account Information",
+            "USERNAME": "username",
+            "PASSWORD": "password"
+        }
+    },
+    "PAGE_TITLES": {
+        "LOGIN": "Login",
+        "TAB_NAVIGATOR": "Tab Navigator",
+        "HOME": "Home",
+        "PROFILE": "Profile",
+        "HOME_SCREEN": "Home Screen",
+        "MY_LIST": "My List"
+    },
+    "NAVIGATION_MENU": {
+        "MOVIES": "Movies",
+        "TV_SHOWS": "TV Shows",
+        "MY_LIST": "My List"
+    }
+}

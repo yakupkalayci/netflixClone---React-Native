@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+// Import React
+import React, { useState } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 
+// Import Partials
 import Details from './_partials/Detail';
 
-import styles from './style';
+// Styles
+import styles from '../../assets/styles/MovieCard.style';
 
 interface MovieCardProps {
   type: 'preview' | 'movie';
@@ -16,37 +19,32 @@ interface MovieCardProps {
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
-  const {type, imgName, title, genres, desc, id, vote} = props;
+  // destruct props
+  const { type, imgName, title, genres, desc, id, vote } = props;
+
+  // variables
   const imgLink = 'https://image.tmdb.org/t/p/w500' + imgName;
 
+  // useState
   const [showContent, setShowContent] = useState(false);
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => setShowContent(!showContent)}>
+    <TouchableOpacity style={styles.container} onPress={() => setShowContent(!showContent)}>
       <Image
-        source={{uri: imgLink}}
+        source={{ uri: imgLink }}
         style={
           type === 'preview'
             ? {
                 width: 100,
                 height: 100,
                 borderRadius: 140 / 2,
-                resizeMode: 'contain',
+                resizeMode: 'contain'
               }
-            : {width: 140, height: 180}
+            : { width: 140, height: 180 }
         }
       />
       {showContent && type === 'movie' ? (
-        <Details
-          title={title}
-          genres={genres}
-          desc={desc}
-          imgLink={imgLink}
-          id={id}
-          vote={vote}
-        />
+        <Details title={title} genres={genres} desc={desc} imgLink={imgLink} id={id} vote={vote} />
       ) : null}
     </TouchableOpacity>
   );

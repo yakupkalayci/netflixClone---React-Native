@@ -9,6 +9,7 @@ type HomeScreenStyleProps = {
   actionButtonPlay: ViewStyle;
   actionButtonPlayText: TextStyle;
   actionText: TextStyle;
+  added: TextStyle;
   innerContainer: ViewStyle;
   modalView: ViewStyle;
   modalHeader: ViewStyle,
@@ -62,6 +63,9 @@ export default StyleSheet.create<HomeScreenStyleProps>({
   actionText: {
     color: '#fff',
     fontSize: 15,
+  },
+  added: {
+    color: 'green',
   },
   innerContainer: {
     paddingLeft: 20,

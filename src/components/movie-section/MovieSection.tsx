@@ -1,9 +1,12 @@
+// Import React
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
-import MovieCard from '../movie-card';
+// Import Compontns
+import MovieCard from '../movie-card/MovieCard';
 
-import styles from './style';
+// styles
+import styles from '../../assets/styles/MovieSection.style';
 
 interface MovieSectionProps {
   title: string;
@@ -12,14 +15,15 @@ interface MovieSectionProps {
 }
 
 function MovieSection(props: MovieSectionProps): JSX.Element {
-  const {title, data, type} = props;
+  // destruct props
+  const { title, data, type } = props;
 
   return (
     <View>
       <Text style={styles.titles}>{title}</Text>
       <FlatList
         data={data}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <MovieCard
             type={type}
             imgName={item?.poster_path}
