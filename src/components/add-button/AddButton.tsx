@@ -8,24 +8,23 @@ import Icon from 'react-native-vector-icons/Entypo';
 import styles from '../../assets/styles/AddButton.style';
 
 interface AddButtonProps {
-    iconName: string;
-    iconSize?: number;
-    iconColor: string;
-    text: string;
-    added?: boolean;
+  iconName: string;
+  iconSize?: number;
+  iconColor: string;
+  text: string;
+  added: boolean;
 }
 
 function AddButton(props: AddButtonProps) {
+  // destruct props
+  const { iconName, iconSize, iconColor, text, added } = props;
 
-    // destruct props
-    const { iconName, iconSize, iconColor, text, added } = props;
-
-    return (
-        <>
-        <Icon name={iconName} size={iconSize ? iconSize : 30} color={iconColor} />
-        <Text style={added ? [styles.actionText, styles.actionText] : styles.actionText} >{text}</Text>
-      </>
-    );
+  return (
+    <>
+      <Icon name={iconName} size={iconSize ? iconSize : 30} color={iconColor} />
+      <Text style={added ? [styles.actionText, styles.added] : styles.actionText}>{text}</Text>
+    </>
+  );
 }
 
 export default AddButton;

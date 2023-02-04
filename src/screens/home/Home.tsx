@@ -1,6 +1,6 @@
 // Import React
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native';
 
 // Import Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,13 +29,14 @@ import Header from '../../components/header/Header';
 import MovieSection from '../../components/movie-section/MovieSection';
 import InfoModal from '../../components/info-modal/InfoModal';
 import AddButton from '../../components/add-button/AddButton';
+import ActionButton from '../../components/action-button/ActionButton';
 
 // Style
 import styles from '../../assets/styles/HomeScreen.style';
 
 function Home({ navigation }) {
   // useState
-  const [user, setUser] = useState(getCurrentUser());
+  const [user, setUser] = useState(() => getCurrentUser());
   const [randomImageIndex, setRandomImageIndex] = useState<number>(0);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalType, setModalType] = useState<'video' | 'text'>('text');
@@ -54,6 +55,84 @@ function Home({ navigation }) {
     (state: RootState) => state?.globalReducer?.getMoviesWithGenre?.success?.data?.results
   );
 
+  const actionButtonData = [
+    {
+      id: 0,
+      onPressFunction: () => {
+        addMovie(
+          dailyTrendingMovies[randomImageIndex]?.title,
+          dailyTrendingMovies[randomImageIndex]?.overview,
+          `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
+          dailyTrendingMovies[randomImageIndex]?.id,
+          dailyTrendingMovies[randomImageIndex]?.vote_average,
+          movieList
+        );
+      },
+      style: styles.actionButton,
+      children: movieListCheck ? (
+        <AddButton iconName="plus" iconColor="green" iconSize={30} added={true} text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')} />
+      ) : (
+        <AddButton iconName="plus" iconColor="#fff" iconSize={30} added={false} text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')} />
+      )
+    },
+    {
+      id: 1,
+      onPressFunction: () => {
+        setModalVisible(!modalVisible);
+        setModalType('video');
+      },
+      style: [styles.actionButton, styles.actionButtonPlay],
+      children: (
+        <>
+          <InfoModal
+            isVisible={modalVisible}
+            setIsVisible={setModalVisible}
+            title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
+            imgLink={
+              dailyTrendingMovies &&
+              `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`
+            }
+            type={modalType}
+          />
+          <Icon name="controller-play" size={30} color="#000" />
+          <Text style={[styles.actionText, styles.actionButtonPlayText]}>
+            {t('GLOBAL.COMPONENTS.BUTTON.TITLES.PLAY')}
+          </Text>
+        </>
+      )
+    },
+    {
+      id: 2,
+      onPressFunction: () => {
+        setModalVisible(!modalVisible);
+        setModalType('text');
+      },
+      style: styles.actionButton,
+      children: (
+        <>
+          <InfoModal
+            isVisible={modalVisible}
+            setIsVisible={setModalVisible}
+            title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
+            originalTitle={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.original_title}
+            description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
+            vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
+            id={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.id}
+            genre={''}
+            imgLink={
+              dailyTrendingMovies &&
+              `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`
+            }
+            type={modalType}
+            userID={user.uid}
+          />
+          <IconInfo name="info" size={30} color="#fff" />
+          <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
+        </>
+      )
+    }
+  ];
+
   // useEffects
   useEffect(() => {
     dispatch(getDailyTrendingMovies());
@@ -64,12 +143,12 @@ function Home({ navigation }) {
 
   useEffect(() => {
     if (dailyTrendingMovies?.length > 0) {
-      getRandomImageIndex(dailyTrendingMovies, setRandomImageIndex);
+      setRandomImageIndex(getRandomImageIndex(dailyTrendingMovies));
     }
   }, [dailyTrendingMovies]);
 
   useEffect(() => {
-    if(dailyTrendingMovies?.length > 0) {
+    if (dailyTrendingMovies?.length > 0) {
       checkMovieList(dailyTrendingMovies[randomImageIndex]?.id, movieList, setMovieListCheck);
     }
   }, [movieList]);
@@ -96,83 +175,11 @@ function Home({ navigation }) {
           ) : null}
         </View>
         <View style={styles.actions}>
-          <TouchableOpacity
-            style={styles.actionButton}
-            onPress={() => {
-              addMovie(
-                dailyTrendingMovies[randomImageIndex]?.title,
-                dailyTrendingMovies[randomImageIndex]?.overview,
-                `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
-                dailyTrendingMovies[randomImageIndex]?.id,
-                dailyTrendingMovies[randomImageIndex]?.vote_average,
-                movieList
-              );
-            }}
-          >
-            {movieListCheck ? (
-              <AddButton
-                iconName="plus"
-                iconColor="green"
-                iconSize={30}
-                text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
-              />
-            ) : (
-              <AddButton
-                iconName="plus"
-                iconColor="#fff"
-                iconSize={30}
-                text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
-              />
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.actionButton, styles.actionButtonPlay]}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-              setModalType('video');
-            }}
-          >
-            <InfoModal
-              isVisible={modalVisible}
-              setIsVisible={setModalVisible}
-              title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
-              originalTitle={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.original_title}
-              description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
-              vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
-              genre={''}
-              imgLink={dailyTrendingMovies && `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`}
-              type={modalType}
-            />
-            <Icon name="controller-play" size={30} color="#000" />
-            <Text style={[styles.actionText, styles.actionButtonPlayText]}>
-              {t('GLOBAL.COMPONENTS.BUTTON.TITLES.PLAY')}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.actionButton}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-              setModalType('text');
-            }}
-          >
-            {dailyTrendingMovies && (
-              <InfoModal
-                isVisible={modalVisible}
-                setIsVisible={setModalVisible}
-                title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
-                originalTitle={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.original_title}
-                description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
-                vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
-                id={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.id}
-                genre={''}
-                imgLink={`https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`}
-                type={modalType}
-                userID={user.uid}
-              />
-            )}
-            <IconInfo name="info" size={30} color="#fff" />
-            <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
-          </TouchableOpacity>
+          {actionButtonData.map((item) => (
+            <ActionButton key={item.id} onPressFunction={item.onPressFunction} style={item.style}>
+              {item.children}
+            </ActionButton>
+          ))}
         </View>
         <View style={styles.innerContainer}>
           <MovieSection title={t('GLOBAL.LABELS.PREVIEWS')} data={weeklyTrendingMovies} type="preview" />

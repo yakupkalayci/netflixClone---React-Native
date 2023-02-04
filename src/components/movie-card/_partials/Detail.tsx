@@ -2,9 +2,6 @@
 import { useState, useEffect, useContext, Fragment } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-// Import Redux
-import { fetchGenre } from '../../../services/actions/fetchGenre';
-
 // Import Navigation Context
 import { NavigationContext } from '@react-navigation/native';
 
@@ -15,6 +12,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 // Import Utils
 import { addMovie } from '../../../common/utils/addMovie';
 import { openMovieDetailPage } from '../../../common/utils/openMovieDetailPage';
+import { fetchGenre } from '../../../common/utils/fetchGenre';
 
 // Import Components
 import InfoModal from '../../info-modal/InfoModal';

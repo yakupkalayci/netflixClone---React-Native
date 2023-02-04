@@ -1,8 +1,5 @@
-export const getRandomImageIndex = (
-  movies: any,
-  setRandomImageIndex: React.Dispatch<React.SetStateAction<number>>
-): void => {
+export const getRandomImageIndex = (movies: any): number => {
   const random = Math.floor(Math.random() * movies?.length) + 1;
 
-  setRandomImageIndex(random);
+  return random;
 };

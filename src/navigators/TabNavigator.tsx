@@ -41,8 +41,8 @@ const TabNavigator = () => (
       headerShown: false
     })}
   >
-    {tabRoutes.map((route, index) => (
-      <Tab.Screen key={index} name={route.name} component={route.component} />
+    {tabRoutes.map((route) => (
+      <Tab.Screen key={route.name} name={route.name} component={route.component} />
     ))}
   </Tab.Navigator>
 );

@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 
 // Import Routes
-import { mainStackRoutes } from './routes/routes';
+import { authStackRoutes } from './routes/routes';
 
 // import { RootStackParamList } from './screens/screenTypes';
 // import {TabParamList} from '../screens/screenTypes';
@@ -24,8 +24,8 @@ function App(): JSX.Element {
       <NavigationContainer>
         <AlertNotificationRoot theme="dark">
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {mainStackRoutes.map((route, index) => (
-              <Stack.Screen key={index} name={route.name} component={route.component} />
+            {authStackRoutes.map((route) => (
+              <Stack.Screen key={route.name} name={route.name} component={route.component} />
             ))}
           </Stack.Navigator>
         </AlertNotificationRoot>

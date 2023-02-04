@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Import Components
 import Header from '../../components//header/Header';
+import AddButton from '../../components/add-button/AddButton';
 
 // styles
 import styles from '../../assets/styles/MovieDetail.style';
@@ -67,17 +68,26 @@ function MovieDetail({ route, navigation }): JSX.Element {
                 </View>
                 <Text style={[styles.text, styles.genreText]}>{genre?.name}</Text>
               </View>
-              <TouchableOpacity style={styles.actionButton} onPress={() => addMovie(title, desc, imgLink, id, vote, movieList)}>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => addMovie(title, desc, imgLink, id, vote, movieList)}
+              >
                 {movieListCheck ? (
-                  <>
-                    <Icon name="plus" size={30} color="green" />
-                    <Text style={[styles.text, styles.added]}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}</Text>
-                  </>
+                  <AddButton
+                    iconName="plus"
+                    iconColor="green"
+                    iconSize={30}
+                    added={true}
+                    text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
+                  />
                 ) : (
-                  <>
-                    <Icon name="plus" size={30} color="#fff" />
-                    <Text style={styles.text}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}</Text>
-                  </>
+                  <AddButton
+                    iconName="plus"
+                    iconColor="#fff"
+                    iconSize={30}
+                    added={false}
+                    text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
+                  />
                 )}
               </TouchableOpacity>
             </View>
