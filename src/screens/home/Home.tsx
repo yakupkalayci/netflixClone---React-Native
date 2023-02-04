@@ -1,157 +1,204 @@
 // Import React
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView, Modal, Linking } from 'react-native';
+import { useEffect, useState } from 'react';
+import { SafeAreaView, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+
+// Import Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'src/store/store';
+import { getDailyTrendingMovies } from '../../store/actions/movies/getDailyTrendingMovies';
+import { getWeeklyTrendingMovies } from '../../store/actions/movies/getWeeklyTrendingMovies';
+import { getMoviesWithGenre } from '../../store/actions/movies/getMoviesWithGenre';
 
 // Import i18next
 import { t } from 'i18next';
 
-// Import Redux
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-
-// Import Services
-import { fetchMovies } from '../../services/actions/fetchMovies';
-
 // Import Utils
-import { getRandomImageNumber } from '../../common/utils/getRandomImageNumber';
+import { getRandomImageIndex } from '../../common/utils/getRandomImageIndex';
 import { addMovie } from '../../common/utils/addMovie';
+import { getCurrentUser } from '../../common/utils/getCurrentUser';
+import { emailParser } from '../../common/utils/emailParser';
+import { listenDB } from '../../common/utils/listenDB';
 import { checkMovieList } from '../../common/utils/checkMovieList';
-import { showToast } from '../../common/utils/showToast';
 
 // Import Icons
 import Icon from 'react-native-vector-icons/Entypo';
 import IconInfo from 'react-native-vector-icons/Foundation';
-import IconClose from 'react-native-vector-icons/Fontisto';
-
-// Import Alert Notification
-import { AlertNotificationRoot, ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import Components
 import Header from '../../components/header/Header';
 import MovieSection from '../../components/movie-section/MovieSection';
+import InfoModal from '../../components/info-modal/InfoModal';
+import AddButton from '../../components/add-button/AddButton';
 
 // Style
 import styles from '../../assets/styles/HomeScreen.style';
 
-export type MoviesObjectType = {
-  day: [];
-  week: [];
-  contiuneWatching: [];
-};
-
-function Home({ navigation }): JSX.Element {
+function Home({ navigation }) {
   // useState
-  const [movies, setMovies] = useState<MoviesObjectType>({
-    day: [],
-    week: [],
-    contiuneWatching: []
-  });
-  const [randomImage, setRandomImage] = useState<number>(0);
+  const [user, setUser] = useState(getCurrentUser());
+  const [randomImageIndex, setRandomImageIndex] = useState<number>(0);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalType, setModalType] = useState<'video' | 'text'>('text');
+  const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
+  const [movieList, setMovieList] = useState([]);
 
   // Variables
-  const dispatch = useAppDispatch();
-  const activeUser = useAppSelector((state) => state.users.usersData.activeUser);
+  const dispatch = useDispatch();
+  const dailyTrendingMovies = useSelector(
+    (state: RootState) => state?.globalReducer?.getDailyTrendingMovies?.success?.data?.results
+  );
+  const weeklyTrendingMovies = useSelector(
+    (state: RootState) => state?.globalReducer?.getWeeklyTrendingMovies?.success?.data?.results
+  );
+  const moviesWithGenre = useSelector(
+    (state: RootState) => state?.globalReducer?.getMoviesWithGenre?.success?.data?.results
+  );
 
-  const imgLink = 'https://image.tmdb.org/t/p/w500' + movies?.day[randomImage]?.poster_path;
-  const title = movies.day[randomImage]?.title;
-  const genre = undefined;
-  const desc = movies.day[randomImage]?.overview;
-  const id = movies.day[randomImage]?.id;
-  const vote = movies.day[randomImage]?.vote_average;
-
-  // Method for open Youtube video
-  const handleOpenYoutube = () => {
-    Linking.openURL('https://www.youtube.com/watch?v=82I1ErFD63U');
-  };
-
-
-  // useEffect
+  // useEffects
   useEffect(() => {
-    fetchMovies(setMovies);
-    getRandomImageNumber(movies, setRandomImage);
+    dispatch(getDailyTrendingMovies());
+    dispatch(getWeeklyTrendingMovies());
+    dispatch(getMoviesWithGenre(10751));
+    listenDB(user?.uid, setMovieList);
   }, []);
+
+  useEffect(() => {
+    if (dailyTrendingMovies?.length > 0) {
+      getRandomImageIndex(dailyTrendingMovies, setRandomImageIndex);
+    }
+  }, [dailyTrendingMovies]);
+
+  useEffect(() => {
+    if(dailyTrendingMovies?.length > 0) {
+      checkMovieList(dailyTrendingMovies[randomImageIndex]?.id, movieList, setMovieListCheck);
+    }
+  }, [movieList]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <AlertNotificationRoot theme="dark">
-        <Header navigation={navigation} />
-        <ScrollView>
-          <View style={styles.imageContainer}>
+      <Header navigation={navigation} />
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          {dailyTrendingMovies ? (
             <Image
               source={{
-                uri: 'https://image.tmdb.org/t/p/w500' + movies.day[randomImage]?.poster_path
+                uri: dailyTrendingMovies
+                  ? 'https://image.tmdb.org/t/p/w500' + dailyTrendingMovies[randomImageIndex]?.poster_path
+                  : ''
               }}
               style={styles.mainPoster}
               resizeMode={'contain'}
             />
-          </View>
-          <View style={styles.actions}>
-            <TouchableOpacity
-              style={styles.actionButton}
-              onPress={() => {
-                addMovie(dispatch, title, genre, desc, imgLink, id, vote);
-                showToast(ALERT_TYPE.SUCCESS, t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.MOVIE_ADDED'));
-              }}
-            >
-              {checkMovieList(useAppSelector, movies.day[randomImage]?.id) ? (
-                <>
-                  <Icon name="plus" size={30} color="green" />
-                  <Text style={[styles.actionText, styles.added]}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}</Text>
-                </>
-              ) : (
-                <>
-                  <Icon name="plus" size={30} color="#fff" />
-                  <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}</Text>
-                </>
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.actionButtonPlay]}
-              onPress={() => handleOpenYoutube()}
-            >
-              <Icon name="controller-play" size={30} color="#000" />
-              <Text style={[styles.actionText, styles.actionButtonPlayText]}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.PLAY')}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton} onPress={() => setModalVisible(!modalVisible)}>
-              <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <View style={styles.modalView}>
-                  <View style={styles.modalHeader}>
-                    <Text style={[styles.modalText, styles.modalTitle]}>Title: {movies.day[randomImage]?.title}</Text>
-                    <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeBtn}>
-                      <IconClose name="close" color="red" size={20} />
-                    </TouchableOpacity>
-                  </View>
-                  <Text style={[styles.modalText, styles.originalTitle]}>
-                    Original Title: {movies.day[randomImage]?.original_title}
-                  </Text>
-                  <Text style={[styles.modalText, styles.detail]}>
-                    Description: {movies.day[randomImage]?.overview}
-                  </Text>
-                </View>
-              </Modal>
-              <IconInfo name="info" size={30} color="#fff" />
-              <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.innerContainer}>
-            <MovieSection title="Previews" data={movies?.week} type="preview" />
-            <MovieSection
-              title={`Contiune watching for ${activeUser?.username}`}
-              data={movies?.contiuneWatching}
-              type="movie"
+          ) : null}
+        </View>
+        <View style={styles.actions}>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => {
+              addMovie(
+                dailyTrendingMovies[randomImageIndex]?.title,
+                dailyTrendingMovies[randomImageIndex]?.overview,
+                `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
+                dailyTrendingMovies[randomImageIndex]?.id,
+                dailyTrendingMovies[randomImageIndex]?.vote_average,
+                movieList
+              );
+            }}
+          >
+            {movieListCheck ? (
+              <AddButton
+                iconName="plus"
+                iconColor="green"
+                iconSize={30}
+                text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
+              />
+            ) : (
+              <AddButton
+                iconName="plus"
+                iconColor="#fff"
+                iconSize={30}
+                text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
+              />
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.actionButtonPlay]}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              setModalType('video');
+            }}
+          >
+            <InfoModal
+              isVisible={modalVisible}
+              setIsVisible={setModalVisible}
+              title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
+              originalTitle={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.original_title}
+              description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
+              vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
+              genre={''}
+              imgLink={dailyTrendingMovies && `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`}
+              type={modalType}
             />
-            <MovieSection title="Bugün Popüler" data={movies?.day} type="movie" />
-            <MovieSection title="Bu Hafta Popüler" data={movies?.week} type="movie" />
-          </View>
-        </ScrollView>
-      </AlertNotificationRoot>
+            <Icon name="controller-play" size={30} color="#000" />
+            <Text style={[styles.actionText, styles.actionButtonPlayText]}>
+              {t('GLOBAL.COMPONENTS.BUTTON.TITLES.PLAY')}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              setModalType('text');
+            }}
+          >
+            {dailyTrendingMovies && (
+              <InfoModal
+                isVisible={modalVisible}
+                setIsVisible={setModalVisible}
+                title={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.title}
+                originalTitle={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.original_title}
+                description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
+                vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
+                id={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.id}
+                genre={''}
+                imgLink={`https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`}
+                type={modalType}
+                userID={user.uid}
+              />
+            )}
+            <IconInfo name="info" size={30} color="#fff" />
+            <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.innerContainer}>
+          <MovieSection title={t('GLOBAL.LABELS.PREVIEWS')} data={weeklyTrendingMovies} type="preview" />
+          <MovieSection
+            title={t('GLOBAL.LABELS.CONTIUNE_WATCHING_FOR') + ` ${emailParser(user?.email)}`}
+            data={moviesWithGenre}
+            type="movie"
+            movieList={movieList}
+            userID={user.uid}
+          />
+          <MovieSection
+            title={t('GLOBAL.LABELS.POPULAR_TODAY')}
+            data={dailyTrendingMovies}
+            type="movie"
+            movieList={movieList}
+            userID={user.uid}
+          />
+          <MovieSection
+            title={t('GLOBAL.LABELS.POPULAR_THIS_WEEK')}
+            data={weeklyTrendingMovies}
+            type="movie"
+            movieList={movieList}
+            userID={user.uid}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

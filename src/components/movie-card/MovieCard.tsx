@@ -1,5 +1,5 @@
 // Import React
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 
 // Import Partials
@@ -16,11 +16,13 @@ interface MovieCardProps {
   desc: string;
   id: number;
   vote: number;
+  movieList: [];
+  userID?: object;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
   // destruct props
-  const { type, imgName, title, genres, desc, id, vote } = props;
+  const { type, imgName, title, genres, desc, id, vote, movieList, userID } = props;
 
   // variables
   const imgLink = 'https://image.tmdb.org/t/p/w500' + imgName;
@@ -43,9 +45,19 @@ function MovieCard(props: MovieCardProps): JSX.Element {
             : { width: 140, height: 180 }
         }
       />
-      {showContent && type === 'movie' ? (
-        <Details title={title} genres={genres} desc={desc} imgLink={imgLink} id={id} vote={vote} />
-      ) : null}
+      {showContent && (
+        <Details
+          type={type}
+          title={title}
+          genres={genres}
+          desc={desc}
+          imgLink={imgLink}
+          id={id}
+          vote={vote}
+          movieList={movieList}
+          userID={userID}
+        />
+      )}
     </TouchableOpacity>
   );
 }

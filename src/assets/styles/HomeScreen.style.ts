@@ -1,4 +1,4 @@
-import {StyleSheet, ViewStyle, ImageStyle, TextStyle, View} from 'react-native';
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native';
 
 type HomeScreenStyleProps = {
   container: ViewStyle;
@@ -9,7 +9,6 @@ type HomeScreenStyleProps = {
   actionButtonPlay: ViewStyle;
   actionButtonPlayText: TextStyle;
   actionText: TextStyle;
-  added: TextStyle;
   innerContainer: ViewStyle;
   modalView: ViewStyle;
   modalHeader: ViewStyle,
@@ -25,7 +24,6 @@ export default StyleSheet.create<HomeScreenStyleProps>({
   container: {
     flex: 1,
     backgroundColor: '#222222',
-    paddingTop: 10,
   },
   imageContainer: {
     paddingTop: 10,
@@ -63,9 +61,6 @@ export default StyleSheet.create<HomeScreenStyleProps>({
   actionText: {
     color: '#fff',
     fontSize: 15,
-  },
-  added: {
-    color: 'green',
   },
   innerContainer: {
     paddingLeft: 20,

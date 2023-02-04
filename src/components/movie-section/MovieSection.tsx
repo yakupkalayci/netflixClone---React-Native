@@ -1,5 +1,4 @@
 // Import React
-import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 
 // Import Compontns
@@ -12,11 +11,13 @@ interface MovieSectionProps {
   title: string;
   data: [];
   type: 'preview' | 'movie';
+  movieList?: [];
+  userID?: object;
 }
 
 function MovieSection(props: MovieSectionProps): JSX.Element {
   // destruct props
-  const { title, data, type } = props;
+  const { title, data, type, movieList, userID } = props;
 
   return (
     <View>
@@ -32,6 +33,8 @@ function MovieSection(props: MovieSectionProps): JSX.Element {
             desc={item?.overview}
             id={item?.id}
             vote={item?.vote_average}
+            movieList={movieList}
+            userID={userID}
           />
         )}
         horizontal={true}

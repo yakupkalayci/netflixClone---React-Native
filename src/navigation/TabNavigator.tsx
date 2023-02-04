@@ -1,6 +1,3 @@
-// Import React
-import React from 'react';
-
 // Import i18next
 import { t } from 'i18next';
 

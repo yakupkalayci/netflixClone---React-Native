@@ -1,10 +1,10 @@
-import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
+import { Toast, ALERT_TYPE } from 'react-native-alert-notification';
 
 export const showToast = (type: ALERT_TYPE, title: string, text: string) => {
   Toast.show({
-    type: type,
-    title: title,
+    type,
+    title,
     textBody: text,
-    autoClose: 2000,
+    autoClose: 5000,
   });
 };

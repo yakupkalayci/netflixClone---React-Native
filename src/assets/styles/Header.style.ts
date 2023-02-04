@@ -14,6 +14,7 @@ export default StyleSheet.create<StyleProps>({
     opacity: 0.8,
     zIndex: 10,
     padding: 10,
+    marginTop: 10
   },
   logo: {
     width: 25,

@@ -1,45 +1,49 @@
 // Import React
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, Fragment } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 // Import Redux
-import { useAppDispatch } from '../../../store/hooks';
 import { fetchGenre } from '../../../services/actions/fetchGenre';
 
-// Import i18next
-import { t } from 'i18next';
+// Import Navigation Context
+import { NavigationContext } from '@react-navigation/native';
 
 // Import Icons
 import Icon from 'react-native-vector-icons/Entypo';
-
-// Import Alert Notification
-import { ALERT_TYPE } from 'react-native-alert-notification';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 // Import Utils
 import { addMovie } from '../../../common/utils/addMovie';
-import { showToast } from '../../../common/utils/showToast';
+import { openMovieDetailPage } from '../../../common/utils/openMovieDetailPage';
+
+// Import Components
+import InfoModal from '../../info-modal/InfoModal';
 
 // styles
 import styles from '../../../assets/styles/Details.style';
 
 interface DetailsProps {
+  type: 'preview' | 'movie';
   title: string;
   genres: number[];
   desc: string;
   imgLink: string;
   id: number;
   vote: number;
+  movieList: [];
+  userID?: object;
 }
 
 const Details = (props: DetailsProps) => {
   // destruct props
-  const { title, genres, desc, imgLink, id, vote } = props;
+  const { type, title, genres, desc, imgLink, id, vote, movieList, userID } = props;
 
   // variables
-  const dispatch = useAppDispatch();
+  const navigation = useContext(NavigationContext);
 
   // useState
   const [genre, setGenre] = useState();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   // useEffect
   useEffect(() => {
@@ -47,29 +51,53 @@ const Details = (props: DetailsProps) => {
     const getGenre = async () => {
       setGenre(await fetchGenre(genres[0]));
     };
-
     getGenre();
   }, []);
 
   return (
-    <View style={styles.detailsContainer}>
-      <View style={styles.header}>
-        <Text style={styles.title} numberOfLines={2}>
-          {title}
-        </Text>
-        <TouchableOpacity
-          onPress={() => {
-            addMovie(dispatch, title, genre, desc, imgLink, id, vote);
-            showToast(ALERT_TYPE.SUCCESS, t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.MOVIE_ADDED'));
-          }}
-        >
-          <Icon name="plus" color="red" size={25} />
+    <View style={type === 'movie' ? styles.detailsContainer : [styles.detailsContainer, styles.playButtonContainer]}>
+      {type === 'movie' ? (
+        <>
+          <View style={styles.header}>
+            <View style={styles.headerLeft}>
+              <Text style={styles.title} numberOfLines={2}>
+                {title}
+              </Text>
+              <Text style={styles.genre}>{genre?.name}</Text>
+            </View>
+            <View style={styles.headerButtons}>
+              <TouchableOpacity
+                onPress={() => {
+                  addMovie(title, desc, imgLink, id, vote, movieList);
+                }}
+              >
+                <Icon name="plus" color="red" size={25} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID });
+                }}
+              >
+                <MaterialIcon name="open-in-full" color="green" size={20} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text style={styles.detail} numberOfLines={6}>
+            {desc}
+          </Text>
+        </>
+      ) : (
+        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+          <MaterialIcon name="play-circle-outline" color="#fff" size={37} />
+          <InfoModal
+            type="video"
+            isVisible={modalVisible}
+            setIsVisible={setModalVisible}
+            title={title}
+            imgLink={imgLink}
+          />
         </TouchableOpacity>
-      </View>
-      <Text style={styles.genre}>{genre?.name}</Text>
-      <Text style={styles.detail} numberOfLines={6}>
-        {desc}
-      </Text>
+      )}
     </View>
   );
 };

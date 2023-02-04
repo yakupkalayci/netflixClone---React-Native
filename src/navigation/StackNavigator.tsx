@@ -1,6 +1,3 @@
-// Import React
-import React from 'react';
-
 // Import React-Navigation
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

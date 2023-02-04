@@ -3,28 +3,36 @@
         "COMPONENTS": {
             "ALERT": {
                 "TITLES": {
-                    "SUCCESS": "Success"
+                    "SUCCESS": "Success",
+                    "ERROR": "Error",
+                    "WARNING": "Warning"
                 },
                 "MESSAGES": {
                     "TRY_AGAIN": "Try Again..",
-                    "MOVIE_ADDED": "You added the movie to your list!"
+                    "MOVIE_ADDED": "You added the movie to your list!",
+                    "PROFILE_UPDATED": "Profile informations updated!",
+                    "INPUTS_CANT_BE_LEFT_EMPTY": "Inputs can't be left empty",
+                    "MOVIE_ALREADY_ADDED": "You have already added the movie to your list!"
                 }
             },
             "TEXT_INPUT": {
                 "PLACEHOLDERS": {
-                    "EMAIL_OR_PHONE": "Email or phone number",
-                    "PASSWORD": "Password"
+                    "EMAIL": "Email",
+                    "PASSWORD": "Password",
+                    "RE_PASSWORD": "Password Again"
                 }
             },
             "BUTTON": {
                 "TITLES": {
-                    "SIGN_IN": "Sign In",
+                    "LOGIN": "Login",
+                    "SIGN_UP": "Sign Up",
                     "SIGN_OUT": "Sign Out",
                     "MY_LIST":"My List",
                     "PLAY": "Play",
                     "INFO": "Info",
                     "ADDED": "Added",
-                    "REMOVE": "Remove"
+                    "REMOVE": "Remove",
+                    "UPDATE_PROFILE": "Update Profile"
                 }
             }
         },
@@ -33,16 +41,24 @@
             "NO_MOVIE": "No movie in your list!",
             "ACCOUNT_INFORMATION": "Account Information",
             "USERNAME": "username",
-            "PASSWORD": "password"
+            "PASSWORD": "password",
+            "SIGN_UP_NOW": "New to Netflix? Sign up now.",
+            "PREVIEWS" : "Previews",
+            "CONTIUNE_WATCHING_FOR" : "Contiune watching for",
+            "POPULAR_TODAY": "Popular Today",
+            "POPULAR_THIS_WEEK": "Popular This Week",
+            "GO_BACK": "Go Back"
         }
     },
     "PAGE_TITLES": {
         "LOGIN": "Login",
+        "SIGN_UP": "Sign Up",
         "TAB_NAVIGATOR": "Tab Navigator",
         "HOME": "Home",
         "PROFILE": "Profile",
         "HOME_SCREEN": "Home Screen",
-        "MY_LIST": "My List"
+        "MY_LIST": "My List",
+        "MOVIE_DETAIL": "Movie Detail"
     },
     "NAVIGATION_MENU": {
         "MOVIES": "Movies",
