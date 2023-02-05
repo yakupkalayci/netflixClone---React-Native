@@ -1,6 +1,6 @@
 // Import React
 import { useState, useEffect } from 'react';
-import { SafeAreaView, Text, FlatList } from 'react-native';
+import { SafeAreaView, Text, FlatList, ActivityIndicator } from 'react-native';
 
 // Import i18next
 import { t } from 'i18next';
@@ -21,10 +21,11 @@ function MyList({ navigation }): JSX.Element {
   // varibles
   const [user, setUser] = useState(() => getCurrentUser());
   const [movieList, setMovieList] = useState<object[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // useEffect
   useEffect(() => {
-    listenDB(user?.uid, setMovieList);
+    listenDB(user?.uid, setMovieList, setLoading);
   }, [user]);
 
   return (
@@ -34,7 +35,9 @@ function MyList({ navigation }): JSX.Element {
         {emailParser(user?.email)}
         {t('GLOBAL.LABELS.S_MOVIES')}
       </Text>
-      {movieList ? (
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : movieList ? (
         <FlatList
           data={movieList}
           renderItem={({ item }) => (

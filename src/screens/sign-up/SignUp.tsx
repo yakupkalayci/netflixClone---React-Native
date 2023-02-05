@@ -24,6 +24,7 @@ function SignUp({ navigation }): JSX.Element {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rePassword, setRePassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Method for user signup
   const handleSignUp = () => {
@@ -33,7 +34,7 @@ function SignUp({ navigation }): JSX.Element {
 
         return;
       }
-
+      setLoading(true);
       auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
@@ -44,7 +45,8 @@ function SignUp({ navigation }): JSX.Element {
         })
         .catch((err) => {
           showToast(ALERT_TYPE.DANGER, 'Error', authErrorParser(err.message));
-        });
+        })
+        .finally(() => setLoading(false));
     } else {
       showToast(
         ALERT_TYPE.WARNING,
@@ -65,6 +67,7 @@ function SignUp({ navigation }): JSX.Element {
       setRePassword={setRePassword}
       navigation={navigation}
       handleSignUp={handleSignUp}
+      loading={loading}
     />
   );
 }

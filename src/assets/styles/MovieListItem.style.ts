@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -12,10 +12,11 @@ export default StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft: 10,
   },
   image: {
     width: 140,
-    height: 180,
+    height: Dimensions.get('window').height / 3,
     resizeMode: 'cover',
   },
   removeButton: {

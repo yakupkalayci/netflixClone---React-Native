@@ -1,6 +1,6 @@
 // Import React
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native';
+import { SafeAreaView, Text, View, Image, ScrollView, ActivityIndicator } from 'react-native';
 
 // Import Constants
 import { MOVIE_SECTION_TYPES } from '../../common/constants/movie-section/movieSectionTypes';
@@ -170,7 +170,7 @@ function Home({ navigation }) {
       data: dailyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid
+      userID: user.uid,
     },
     {
       id: 13,
@@ -178,7 +178,7 @@ function Home({ navigation }) {
       data: weeklyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid
+      userID: user.uid,
     }
   ];
 
@@ -221,7 +221,7 @@ function Home({ navigation }) {
               style={styles.mainPoster}
               resizeMode={'contain'}
             />
-          ) : null}
+          ) : <ActivityIndicator size="large" />}
         </View>
         <View style={styles.actions}>
           {actionButtonData.map((item) => (

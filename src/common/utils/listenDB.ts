@@ -7,8 +7,13 @@ import { firebase } from '@react-native-firebase/database';
 // Import Utils
 import { movieListDataParser } from './movieListDataParser';
 
-export const listenDB = (userID: string, setMovieList: Dispatch<SetStateAction<never[]>>) => {
-    const reference = firebase
+export const listenDB = (
+  userID: string,
+  setMovieList: Dispatch<SetStateAction<never[]>>,
+  setLoading?: Dispatch<SetStateAction<boolean>>
+) => {
+  setLoading && setLoading(true);
+  const reference = firebase
     .app()
     .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')
     .ref('/users/' + userID + '/movies');
@@ -17,5 +22,6 @@ export const listenDB = (userID: string, setMovieList: Dispatch<SetStateAction<n
     const data = snapshot.val();
 
     data && setMovieList(Object.keys(data).length ? movieListDataParser(data) : []);
+    setLoading && setLoading(false);
   });
-}
+};

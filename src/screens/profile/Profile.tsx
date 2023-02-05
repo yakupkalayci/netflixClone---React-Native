@@ -48,7 +48,7 @@ function Profile({ navigation }): JSX.Element {
             t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'),
             t('GLOBAL.COMPONENTS.ALERT.MESSAGES.PROFILE_UPDATED')
           );
-          navigation.navigate(t('PAGE_TITLES.HOME'));
+          navigation.navigate(t('PAGE_TITLES.LOGIN'));
           setUsername('');
           setPassword('');
         })

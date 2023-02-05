@@ -19,15 +19,16 @@ import AuthForm from '../../components/auth-form/AuthForm';
 
 // import {LoginProps} from '../screenTypes';
 
-
 function Login({ navigation }): JSX.Element {
   // useState
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Method for user login
   const handleLogin = () => {
     if (email && password) {
+      setLoading(true);
       auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
@@ -37,7 +38,8 @@ function Login({ navigation }): JSX.Element {
         })
         .catch((err) =>
           showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.ERROR'), authErrorParser(err.message))
-        );
+        )
+        .finally(() => setLoading(false));
     } else {
       showToast(
         ALERT_TYPE.WARNING,
@@ -56,6 +58,7 @@ function Login({ navigation }): JSX.Element {
       setPassword={setPassword}
       navigation={navigation}
       handleLogin={handleLogin}
+      loading={loading}
     />
   );
 }

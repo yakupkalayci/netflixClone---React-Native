@@ -27,17 +27,16 @@ interface InfoModalProps {
   title: string;
   originalTitle?: string;
   description?: string;
-  genre: [];
+  genre?: [];
   vote?: number;
   id?: number
   imgLink?: string;
-  movieList?: [];
   userID?: object;
 }
 
 function InfoModal(props: InfoModalProps) {
   // destruct props
-  const { isVisible, setIsVisible, title, originalTitle, description, genre, vote, imgLink, id, type, movieList, userID } = props;
+  const { isVisible, setIsVisible, title, originalTitle, description, genre, vote, imgLink, id, type, userID } = props;
 
   // variables
   const navigation = useContext(NavigationContext);
