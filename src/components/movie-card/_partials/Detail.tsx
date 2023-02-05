@@ -29,7 +29,7 @@ interface DetailsProps {
   id: number;
   vote: number;
   movieList: [];
-  userID?: object;
+  userID?: string;
 }
 
 const Details = (props: DetailsProps) => {
@@ -49,6 +49,7 @@ const Details = (props: DetailsProps) => {
     const getGenre = async () => {
       setGenre(await fetchGenre(genres[0]));
     };
+
     getGenre();
   }, []);
 
@@ -66,7 +67,7 @@ const Details = (props: DetailsProps) => {
             <View style={styles.headerButtons}>
               <TouchableOpacity
                 onPress={() => {
-                  addMovie(title, desc, imgLink, id, vote, movieList);
+                  addMovie(title, desc, imgLink, id, vote, movieList, genre);
                 }}
               >
                 <Icon name="plus" color="red" size={25} />

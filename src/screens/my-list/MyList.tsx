@@ -2,15 +2,12 @@
 import { useState, useEffect } from 'react';
 import { SafeAreaView, Text, FlatList } from 'react-native';
 
-// Import Firebase
-import { firebase } from '@react-native-firebase/database';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-
 // Import i18next
 import { t } from 'i18next';
 
 // Import Utils
-import { movieListDataParser } from '../../common/utils/movieListDataParser';
+import { listenDB } from '../../common/utils/listenDB';
+import { getCurrentUser } from '../../common/utils/getCurrentUser';
 import { emailParser } from '../../common/utils/emailParser';
 
 // Import Components
@@ -22,33 +19,12 @@ import styles from '../../assets/styles/MyList.styles';
 
 function MyList({ navigation }): JSX.Element {
   // varibles
-  const [user, setUser] = useState<FirebaseAuthTypes.User>();
+  const [user, setUser] = useState(() => getCurrentUser());
   const [movieList, setMovieList] = useState<object[]>();
 
-  const getCurrentUser = () => {
-    const currentUser = auth().currentUser;
-
-    if (currentUser) {
-      setUser(currentUser);
-    }
-  };
-
-  // useEffects
+  // useEffect
   useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  useEffect(() => {
-    const reference = firebase
-      .app()
-      .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')
-      .ref('/users/' + user?.uid + '/movies');
-
-    reference.on('value', (snapshot) => {
-      const data = snapshot.val();
-
-      data && Object.keys(data).length ? setMovieList(movieListDataParser(data)) : null;
-    });
+    listenDB(user?.uid, setMovieList);
   }, [user]);
 
   return (
@@ -64,7 +40,7 @@ function MyList({ navigation }): JSX.Element {
           renderItem={({ item }) => (
             <MovieListItem
               title={item.title}
-              // genre={item.genre}
+              genre={item.genre}
               description={item.desc}
               imgLink={item.imgLink}
               id={item.id}

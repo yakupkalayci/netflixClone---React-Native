@@ -2,6 +2,9 @@
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native';
 
+// Import Constants
+import { MOVIE_SECTION_TYPES } from '../../common/constants/movie-section/movieSectionTypes';
+
 // Import Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store/store';
@@ -65,14 +68,27 @@ function Home({ navigation }) {
           `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
           dailyTrendingMovies[randomImageIndex]?.id,
           dailyTrendingMovies[randomImageIndex]?.vote_average,
-          movieList
+          movieList,
+          dailyTrendingMovies[randomImageIndex]?.genre_ids
         );
       },
       style: styles.actionButton,
       children: movieListCheck ? (
-        <AddButton iconName="plus" iconColor="green" iconSize={30} added={true} text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')} />
+        <AddButton
+          iconName="plus"
+          iconColor="green"
+          iconSize={30}
+          added={true}
+          text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
+        />
       ) : (
-        <AddButton iconName="plus" iconColor="#fff" iconSize={30} added={false} text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')} />
+        <AddButton
+          iconName="plus"
+          iconColor="#fff"
+          iconSize={30}
+          added={false}
+          text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
+        />
       )
     },
     {
@@ -118,7 +134,7 @@ function Home({ navigation }) {
             description={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.overview}
             vote={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.vote_average}
             id={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.id}
-            genre={''}
+            genre={dailyTrendingMovies && dailyTrendingMovies[randomImageIndex]?.genre_ids}
             imgLink={
               dailyTrendingMovies &&
               `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`
@@ -130,6 +146,39 @@ function Home({ navigation }) {
           <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
         </>
       )
+    }
+  ];
+
+  const movieSectionData = [
+    {
+      id: 10,
+      title: t('GLOBAL.LABELS.PREVIEWS'),
+      data: weeklyTrendingMovies,
+      type: MOVIE_SECTION_TYPES.PREVİEW
+    },
+    {
+      id: 11,
+      title: t('GLOBAL.LABELS.CONTIUNE_WATCHING_FOR') + ` ${emailParser(user?.email)}`,
+      data: moviesWithGenre,
+      type: MOVIE_SECTION_TYPES.MOVIE,
+      movieList,
+      userID: user.uid
+    },
+    {
+      id: 12,
+      title: t('GLOBAL.LABELS.POPULAR_TODAY'),
+      data: dailyTrendingMovies,
+      type: MOVIE_SECTION_TYPES.MOVIE,
+      movieList,
+      userID: user.uid
+    },
+    {
+      id: 13,
+      title: t('GLOBAL.LABELS.POPULAR_THIS_WEEK'),
+      data: weeklyTrendingMovies,
+      type: MOVIE_SECTION_TYPES.MOVIE,
+      movieList,
+      userID: user.uid
     }
   ];
 
@@ -182,28 +231,16 @@ function Home({ navigation }) {
           ))}
         </View>
         <View style={styles.innerContainer}>
-          <MovieSection title={t('GLOBAL.LABELS.PREVIEWS')} data={weeklyTrendingMovies} type="preview" />
-          <MovieSection
-            title={t('GLOBAL.LABELS.CONTIUNE_WATCHING_FOR') + ` ${emailParser(user?.email)}`}
-            data={moviesWithGenre}
-            type="movie"
-            movieList={movieList}
-            userID={user.uid}
-          />
-          <MovieSection
-            title={t('GLOBAL.LABELS.POPULAR_TODAY')}
-            data={dailyTrendingMovies}
-            type="movie"
-            movieList={movieList}
-            userID={user.uid}
-          />
-          <MovieSection
-            title={t('GLOBAL.LABELS.POPULAR_THIS_WEEK')}
-            data={weeklyTrendingMovies}
-            type="movie"
-            movieList={movieList}
-            userID={user.uid}
-          />
+          {movieSectionData.map((item) => (
+            <MovieSection
+              key={item.id}
+              title={item.title}
+              data={item.data}
+              type={item.type}
+              movieList={item.movieList}
+              userID={item.userID}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -12,7 +12,7 @@ interface MovieSectionProps {
   data: [];
   type: 'preview' | 'movie';
   movieList?: [];
-  userID?: object;
+  userID?: string;
 }
 
 function MovieSection(props: MovieSectionProps): JSX.Element {

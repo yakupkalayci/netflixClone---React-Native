@@ -17,7 +17,7 @@ interface MovieCardProps {
   id: number;
   vote: number;
   movieList: [];
-  userID?: object;
+  userID?: string;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {

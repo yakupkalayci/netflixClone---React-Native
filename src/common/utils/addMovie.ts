@@ -20,7 +20,7 @@ export const addMovie = (
   id: number,
   vote: number,
   movieList: [],
-  genre?: object | undefined
+  genre: object | [] | undefined
 ) => {
   const user = getCurrentUser();
 

@@ -1,4 +1,5 @@
 // Import React
+import { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 // Import Firebase Database
@@ -6,6 +7,7 @@ import { firebase } from '@react-native-firebase/database';
 
 // Import utils
 import { openMovieDetailPage } from '../../common/utils/openMovieDetailPage';
+import { fetchGenre } from '../../common/utils/fetchGenre';
 
 // Import i18next
 import { t } from 'i18next';
@@ -19,7 +21,7 @@ import styles from '../../assets/styles/MovieListItem.style';
 interface MovieListItemProps {
   imgLink: string;
   title: string;
-  genre?: object;
+  genre: object | [];
   description: string;
   id: number;
   vote: number;
@@ -32,7 +34,8 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
   // destruct props
   const { imgLink, title, genre, description, id, vote, movieKey, userID, navigation } = props;
 
-  // variables
+  // useState
+  const [fetchedGenre, setFetchedGenre] = useState();
 
   // method for remove movie from my list
   const removeMovie = async () => {
@@ -42,6 +45,17 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
       .ref('/users/' + userID + '/movies/' + movieKey)
       .remove();
   };
+
+  useEffect(() => {
+    if(Array.isArray(genre)) {
+      // method for getting the genre name according to genre id
+      const getGenre = async () => {
+        setFetchedGenre(await fetchGenre(genre[0]));
+      };
+
+      getGenre();
+    }
+  }, [genre]);
 
   return (
     <View style={styles.container}>
@@ -58,7 +72,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
           <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
         <View style={styles.detailContainer}>
-          <Text style={styles.genre}>{genre?.name}</Text>
+          <Text style={styles.genre}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
           <View style={styles.vote}>
             <Icon name="star" color="yellow" size={20} />
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>

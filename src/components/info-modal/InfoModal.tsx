@@ -27,7 +27,7 @@ interface InfoModalProps {
   title: string;
   originalTitle?: string;
   description?: string;
-  genre?: any;
+  genre: [];
   vote?: number;
   id?: number
   imgLink?: string;

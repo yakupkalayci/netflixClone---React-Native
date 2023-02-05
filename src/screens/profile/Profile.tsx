@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import { SafeAreaView, Text, View, TextInput, Button } from 'react-native';
 
 // Import Firebase Auth
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 // Import Utils
 import { showToast } from '../../common/utils/showToast';
 import { authErrorParser } from '../../common/utils/authErrorParser';
+import { getCurrentUser } from '../../common/utils/getCurrentUser';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
@@ -22,7 +23,7 @@ import styles from '../../assets/styles/Profile.style';
 
 function Profile({ navigation }): JSX.Element {
   // useState
-  const [user, setUser] = useState<FirebaseAuthTypes.User>();
+  const [user, setUser] = useState(() => getCurrentUser());
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -33,6 +34,7 @@ function Profile({ navigation }): JSX.Element {
       .then(() => navigation.navigate(t('PAGE_TITLES.LOGIN')));
   };
 
+  // method for update profile informations
   const updateProfile = async () => {
     if (username && password) {
       await user
@@ -61,12 +63,6 @@ function Profile({ navigation }): JSX.Element {
       );
     }
   };
-
-  useEffect(() => {
-    const currentUser = auth().currentUser;
-
-    setUser(currentUser || undefined);
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

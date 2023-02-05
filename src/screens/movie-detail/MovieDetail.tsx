@@ -6,6 +6,7 @@ import { SafeAreaView, View, Text, TouchableOpacity, ScrollView } from 'react-na
 import { addMovie } from '../../common/utils/addMovie';
 import { listenDB } from '../../common/utils/listenDB';
 import { checkMovieList } from '../../common/utils/checkMovieList';
+import { fetchGenre } from '../../common/utils/fetchGenre';
 
 // Import i18next
 import { t } from 'i18next';
@@ -30,9 +31,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
   // useState
   const [movieList, setMovieList] = useState([]);
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
-
-  // method for checking if the movie is exist on the databse or not. If exists the apperance of add button will change in the ui.
-  // const checkMovieList = () => setMovieListCheck(() => movieList.find((movie) => movie.id === id) ? true : false);
+  const [fetchedGenre, setFetchedGenre] = useState();
 
   // useEffect
   useEffect(() => {
@@ -43,6 +42,17 @@ function MovieDetail({ route, navigation }): JSX.Element {
   useEffect(() => {
     checkMovieList(id, movieList, setMovieListCheck);
   }, [movieList]);
+
+  useEffect(() => {
+    if (Array.isArray(genre)) {
+      // method for getting the genre name according to genre id
+      const getGenre = async () => {
+        setFetchedGenre(await fetchGenre(genre[0]));
+      };
+
+      getGenre();
+    }
+  }, [genre]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,7 +76,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
                   <Icon name="star" color="yellow" size={20} />
                   <Text style={[styles.text, styles.voteText]}>{vote}</Text>
                 </View>
-                <Text style={[styles.text, styles.genreText]}>{genre?.name}</Text>
+                <Text style={[styles.text, styles.genreText]}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
               </View>
               <TouchableOpacity
                 style={styles.actionButton}
