@@ -1,4 +1,8 @@
-import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
+// Import React Native
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 type StyleProps = {
   container: ViewStyle;
@@ -12,32 +16,32 @@ type StyleProps = {
 export default StyleSheet.create<StyleProps>({
   container: {
     flex: 1,
-    backgroundColor: '#222222',
-    padding: 15,
+    backgroundColor: CUSTOM_COLORS.MAIN_BACKGROUND_COLOR,
+    padding: 15
   },
   pageTitle: {
-    color: '#fff',
+    color: CUSTOM_COLORS.WHITE,
     fontSize: 25,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   inputContainer: {
-    marginTop: 20,
+    marginTop: 20
   },
   input: {
-    backgroundColor: '#444',
-    color: '#f0f0f0',
+    backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     width: '100%',
     borderRadius: 10,
     marginBottom: 7,
     padding: 15,
-    fontSize: 17,
+    fontSize: 17
   },
   buttonContainer: {
-    marginTop: 20,
+    marginTop: 20
   },
   label: {
-    color: '#f0f0f0',
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     paddingLeft: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   }
 });

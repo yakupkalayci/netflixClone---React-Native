@@ -4,6 +4,7 @@ import { SafeAreaView, Text, View, Image, ScrollView, ActivityIndicator } from '
 
 // Import Constants
 import { MOVIE_SECTION_TYPES } from '../../common/constants/movie-section/movieSectionTypes';
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 // Import Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -76,7 +77,7 @@ function Home({ navigation }) {
       children: movieListCheck ? (
         <AddButton
           iconName="plus"
-          iconColor="green"
+          iconColor={CUSTOM_COLORS.GREEN}
           iconSize={30}
           added={true}
           text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
@@ -84,7 +85,7 @@ function Home({ navigation }) {
       ) : (
         <AddButton
           iconName="plus"
-          iconColor="#fff"
+          iconColor={CUSTOM_COLORS.WHITE}
           iconSize={30}
           added={false}
           text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
@@ -110,7 +111,7 @@ function Home({ navigation }) {
             }
             type={modalType}
           />
-          <Icon name="controller-play" size={30} color="#000" />
+          <Icon name="controller-play" size={30} color={CUSTOM_COLORS.BLACK} />
           <Text style={[styles.actionText, styles.actionButtonPlayText]}>
             {t('GLOBAL.COMPONENTS.BUTTON.TITLES.PLAY')}
           </Text>
@@ -142,7 +143,7 @@ function Home({ navigation }) {
             type={modalType}
             userID={user.uid}
           />
-          <IconInfo name="info" size={30} color="#fff" />
+          <IconInfo name="info" size={30} color={CUSTOM_COLORS.WHITE} />
           <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
         </>
       )

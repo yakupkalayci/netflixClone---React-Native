@@ -1,4 +1,8 @@
+// Import React Native
 import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native';
+
+// Import constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 type HomeScreenStyleProps = {
   container: ViewStyle;
@@ -23,56 +27,56 @@ type HomeScreenStyleProps = {
 export default StyleSheet.create<HomeScreenStyleProps>({
   container: {
     flex: 1,
-    backgroundColor: '#222222',
+    backgroundColor: CUSTOM_COLORS.MAIN_BACKGROUND_COLOR
   },
   imageContainer: {
-    paddingTop: 10,
+    paddingTop: 10
   },
   mainPoster: {
     height: 450,
     width: '90%',
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
   actions: {
-    backgroundColor: '#000',
+    backgroundColor: CUSTOM_COLORS.BLACK,
     flexDirection: 'row',
     alignSelf: 'center',
     width: '100%',
     justifyContent: 'space-evenly',
     padding: 10,
-    marginTop: 15,
+    marginTop: 15
   },
   actionButton: {
     paddingLeft: 15,
     paddingRight: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   actionButtonPlay: {
-    backgroundColor: '#fff',
+    backgroundColor: CUSTOM_COLORS.WHITE,
     borderRadius: 3,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   actionButtonPlayText: {
-    color: '#000',
+    color: CUSTOM_COLORS.BLACK,
     fontWeight: 'bold',
     fontSize: 17,
   },
   actionText: {
-    color: '#fff',
-    fontSize: 15,
+    color: CUSTOM_COLORS.WHITE,
+    fontSize: 15
   },
   innerContainer: {
-    paddingLeft: 20,
+    paddingLeft: 20
   },
   modalView: {
     position: 'absolute',
     right: -45,
     top: 350,
     margin: 50,
-    backgroundColor: '#444',
+    backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
     borderRadius: 20,
-    padding: 20,
+    padding: 20
   },
   modalHeader: {
     flexDirection: 'row',
@@ -81,27 +85,27 @@ export default StyleSheet.create<HomeScreenStyleProps>({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
+    elevation: 2
   },
   modalText: {
-    color: '#fff',
-    fontSize: 14,
+    color: CUSTOM_COLORS.WHITE,
+    fontSize: 14
   },
   modalTitle: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   originalTitle: {
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   detail: {
     borderTopWidth: 1,
-    borderTopColor: 'red',
-    color: '#fff',
+    borderTopColor: CUSTOM_COLORS.RED,
+    color: CUSTOM_COLORS.WHITE,
     paddingTop: 5,
-    fontSize: 14,
+    fontSize: 14
   },
   closeBtn: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   }
 });

@@ -2,6 +2,9 @@
 import { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+
 // Import utils
 import { addMovie } from '../../common/utils/addMovie';
 import { listenDB } from '../../common/utils/listenDB';
@@ -73,7 +76,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
             <View style={styles.upperDetails}>
               <View style={styles.upperLeft}>
                 <View style={styles.voteContainer}>
-                  <Icon name="star" color="yellow" size={20} />
+                  <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
                   <Text style={[styles.text, styles.voteText]}>{vote}</Text>
                 </View>
                 <Text style={[styles.text, styles.genreText]}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
@@ -85,7 +88,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
                 {movieListCheck ? (
                   <AddButton
                     iconName="plus"
-                    iconColor="green"
+                    iconColor={CUSTOM_COLORS.GREEN}
                     iconSize={30}
                     added={true}
                     text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
@@ -93,7 +96,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
                 ) : (
                   <AddButton
                     iconName="plus"
-                    iconColor="#fff"
+                    iconColor={CUSTOM_COLORS.GREEN}
                     iconSize={30}
                     added={false}
                     text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}

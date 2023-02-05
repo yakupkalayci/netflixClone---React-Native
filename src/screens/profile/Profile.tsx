@@ -1,6 +1,9 @@
 // Import React
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, Button } from 'react-native';
+
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 // Import Firebase Auth
 import auth from '@react-native-firebase/auth';
@@ -80,12 +83,12 @@ function Profile({ navigation }): JSX.Element {
         <View style={styles.buttonContainer}>
           <Button
             title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.UPDATE_PROFILE')}
-            color="red"
+            color={CUSTOM_COLORS.RED}
             onPress={() => updateProfile()}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_OUT')} color="gray" onPress={() => handleSignOut()} />
+          <Button title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_OUT')} color={CUSTOM_COLORS.GRAY} onPress={() => handleSignOut()} />
         </View>
       </View>
     </SafeAreaView>

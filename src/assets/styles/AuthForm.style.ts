@@ -1,4 +1,8 @@
+// Import React Native
 import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native';
+
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 type StyleProps = {
   container: ViewStyle;
@@ -13,7 +17,7 @@ type StyleProps = {
 export default StyleSheet.create<StyleProps>({
   container: {
     flex: 1,
-    backgroundColor: '#222222',
+    backgroundColor: CUSTOM_COLORS.MAIN_BACKGROUND_COLOR,
     alignItems: 'center'
   },
   image: {
@@ -29,8 +33,8 @@ export default StyleSheet.create<StyleProps>({
     width: '80%'
   },
   input: {
-    backgroundColor: '#444',
-    color: '#f0f0f0',
+    backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     width: '100%',
     borderRadius: 10,
     marginBottom: 7,
@@ -40,14 +44,14 @@ export default StyleSheet.create<StyleProps>({
   buttonContainer: {
     width: '100%',
     borderWidth: 1,
-    borderColor: '#f0f0f0',
+    borderColor: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     borderRadius: 10,
     marginTop: 20
   },
   buttonText: {
     fontSize: 21,
     textAlign: 'center',
-    color: '#f0f0f0',
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     padding: 10,
     fontWeight: '500',
     letterSpacing: 1.2
@@ -55,7 +59,7 @@ export default StyleSheet.create<StyleProps>({
   infoText: {
     fontSize: 15,
     textAlign: 'center',
-    color: '#f0f0f0',
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     letterSpacing: 1.2,
     marginTop: 20
   }

@@ -1,4 +1,8 @@
-import {StyleSheet, ViewStyle, TextStyle} from 'react-native';
+// Import React Native
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
+
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 type InfoModalStyleProps = {
   modalView: ViewStyle;
@@ -15,22 +19,22 @@ type InfoModalStyleProps = {
 export default StyleSheet.create<InfoModalStyleProps>({
   modalView: {
     margin: 25,
-    backgroundColor: '#444',
+    backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
     borderRadius: 15,
-    padding: 20,
+    padding: 20
   },
   modalHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
+    elevation: 2
   },
   modalText: {
-    color: '#fff',
-    fontSize: 14,
+    color: CUSTOM_COLORS.WHITE,
+    fontSize: 14
   },
   modalTitle: {
     fontSize: 20,
@@ -39,14 +43,14 @@ export default StyleSheet.create<InfoModalStyleProps>({
   },
   originalTitle: {
     marginVertical: 10,
-    fontSize: 15,
+    fontSize: 15
   },
   detail: {
     borderTopWidth: 1,
-    borderTopColor: 'red',
-    color: '#fff',
+    borderTopColor: CUSTOM_COLORS.RED,
+    color: CUSTOM_COLORS.WHITE,
     paddingTop: 10,
-    fontSize: 17,
+    fontSize: 17
   },
   videoContainer: {
     justifyContent: 'center'

@@ -1,3 +1,6 @@
+// Import Constants
+import { CUSTOM_COLORS } from '../common/constants/colors/customColors';
+
 // Import i18next
 import { t } from 'i18next';
 
@@ -22,7 +25,7 @@ const TabNavigator = () => (
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        color = focused ? '#fff' : '#555';
+        color = focused ? CUSTOM_COLORS.TAB_BAR_ICON_ACTIVE_COLOR : CUSTOM_COLORS.TAB_BAR_ICON_INACTIVE_COLOR;
 
         if (route.name === t('PAGE_TITLES.HOME')) {
           iconName = 'home';
@@ -34,10 +37,10 @@ const TabNavigator = () => (
           return <ProfileIcon name={iconName} size={size} color={color} />;
         }
       },
-      tabBarActiveTintColor: '#fff',
-      tabBarInactiveTintColor: 'gray',
-      tabBarActiveBackgroundColor: '#000',
-      tabBarInactiveBackgroundColor: '#000',
+      tabBarActiveTintColor: CUSTOM_COLORS.TAB_BAR_ICON_ACTIVE_COLOR,
+      tabBarInactiveTintColor: CUSTOM_COLORS.TAB_BAR_ICON_INACTIVE_COLOR,
+      tabBarActiveBackgroundColor: CUSTOM_COLORS.BLACK,
+      tabBarInactiveBackgroundColor: CUSTOM_COLORS.BLACK,
       headerShown: false
     })}
   >

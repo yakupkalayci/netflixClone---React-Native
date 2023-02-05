@@ -1,4 +1,8 @@
-import {StyleSheet, ViewStyle, ImageStyle, TextStyle} from 'react-native';
+// Import React Native
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native';
+
+// Import constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 type StyleProps = {
   container: ViewStyle;
@@ -19,10 +23,10 @@ export default StyleSheet.create<StyleProps>({
   logo: {
     width: 25,
     height: 45,
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   listItem: {
-    color: '#f0f0f0',
-    fontSize: 18,
+    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
+    fontSize: 18
   }
 });

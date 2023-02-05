@@ -5,6 +5,9 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 // Import Firebase Database
 import { firebase } from '@react-native-firebase/database';
 
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+
 // Import utils
 import { openMovieDetailPage } from '../../common/utils/openMovieDetailPage';
 import { fetchGenre } from '../../common/utils/fetchGenre';
@@ -74,7 +77,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
         <View style={styles.detailContainer}>
           <Text style={styles.genre}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
           <View style={styles.vote}>
-            <Icon name="star" color="yellow" size={20} />
+            <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>
           </View>
         </View>

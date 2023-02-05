@@ -1,12 +1,16 @@
+// Import React Native
 import { StyleSheet } from 'react-native';
+
+// Import Constants
+import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#222222',
+    backgroundColor: CUSTOM_COLORS.MAIN_BACKGROUND_COLOR,
     flex: 1
   },
   innerContainer: {
-    padding: 20,
+    padding: 20
   },
   videoContainer: {
     height: 270
@@ -16,7 +20,7 @@ export default StyleSheet.create({
     height: '100%'
   },
   text: {
-    color: '#fff'
+    color: CUSTOM_COLORS.WHITE
   },
   movieDetails: {
     marginTop: 10
@@ -27,7 +31,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
+    borderBottomColor: CUSTOM_COLORS.GRAY,
     paddingBottom: 10,
     paddingLeft: 5,
     paddingRight: 5
@@ -48,20 +52,20 @@ export default StyleSheet.create({
   },
   voteText: {
     fontSize: 16,
-    color: '#D9d9d9',
+    color: CUSTOM_COLORS.SECONDARY_TEXT_COLOR,
     fontWeight: 'bold'
   },
   genreText: {
     fontSize: 16,
-    color: '#D9d9d9',
+    color: CUSTOM_COLORS.SECONDARY_TEXT_COLOR,
     fontWeight: 'bold'
   },
   describtionText: {
     fontSize: 17,
-    color: '#D9d9d9'
+    color: CUSTOM_COLORS.SECONDARY_TEXT_COLOR
   },
   added: {
-    color: 'green'
+    color: CUSTOM_COLORS.GREEN
   },
   actionButton: {
     alignItems: 'center'
