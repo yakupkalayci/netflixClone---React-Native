@@ -71,20 +71,23 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   commentContainer: {
-    marginTop: 10,
+    marginTop: 10
+  },
+  commentIconContainer: {
+    flexDirection: 'row'
+  },
+  commentIcon: {
+    marginBottom: 10
   },
   label: {
     color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
     paddingLeft: 5,
     paddingBottom: 5
   },
-  input: {
-    backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
-    color: CUSTOM_COLORS.MAIN_TEXT_COLOR,
-    width: '100%',
-    borderRadius: 10,
-    marginBottom: 7,
-    padding: 15,
-    fontSize: 17
+  commentTitle: {
+    fontSize: 17,
+    color: CUSTOM_COLORS.WHITE,
+    marginLeft: 20,
+    marginVertical: 10
   }
 });

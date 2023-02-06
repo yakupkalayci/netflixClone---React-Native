@@ -12,14 +12,16 @@
                     "MOVIE_ADDED": "You added the movie to your list!",
                     "PROFILE_UPDATED": "Profile informations updated!",
                     "INPUTS_CANT_BE_LEFT_EMPTY": "Inputs can't be left empty",
-                    "MOVIE_ALREADY_ADDED": "You have already added the movie to your list!"
+                    "MOVIE_ALREADY_ADDED": "You have already added the movie to your list!",
+                    "ADD_COMMENT": "Please fill the comment box!"
                 }
             },
             "TEXT_INPUT": {
                 "PLACEHOLDERS": {
                     "EMAIL": "Email",
                     "PASSWORD": "Password",
-                    "RE_PASSWORD": "Password Again"
+                    "RE_PASSWORD": "Password Again",
+                    "TYPE_COMMENT": "Type anything"
                 }
             },
             "BUTTON": {
@@ -49,7 +51,9 @@
             "POPULAR_TODAY": "Popular Today",
             "POPULAR_THIS_WEEK": "Popular This Week",
             "GO_BACK": "Go Back",
-            "COMMENT": "comment"
+            "COMMENT": "comment",
+            "COMMENTS": "Comments",
+            "ADD_COMMENT":"Add Comment"
         }
     },
     "PAGE_TITLES": {

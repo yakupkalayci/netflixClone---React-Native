@@ -23,5 +23,10 @@ export const STORE_CONFIG: Record<string, Record<string, string | boolean>> = {
     serviceName: 'addComment',
     successMessage: false,
     errorMessage: true
+  },
+  DELETE_COMMENT: {
+    serviceName: 'deleteComment',
+    successMessage: true,
+    errorMesage: true
   }
 };

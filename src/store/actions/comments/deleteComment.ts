@@ -4,18 +4,21 @@ import { SERVICES } from '../../constants/serviceConstants';
 
 import { api } from '../api';
 
-export const getComments = () => (dispatch) => {
+import { getComments } from './getComment';
+
+export const deleteComment = (id) => (dispatch) => {
   dispatch(
     api(
-      'get',
+      'delete',
 
       SERVICES.COMMENTS_SERVICE,
 
-      '',
+      `/${id}`,
 
       undefined,
 
-      types.GET_COMMENTS
+      types.DELETE_COMMENT,
+      [getComments()]
     )
   );
 };

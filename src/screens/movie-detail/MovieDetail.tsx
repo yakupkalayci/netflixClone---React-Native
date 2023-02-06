@@ -1,12 +1,13 @@
 // Import React
 import { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 
 // Import Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { getComments } from '../../store/actions/comments/getComment';
 import { addComment } from '../../store/actions/comments/addComment';
+import { deleteComment } from '../../store/actions/comments/deleteComment';
 
 // Import Constants
 import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
@@ -16,6 +17,7 @@ import { addMovie } from '../../common/utils/addMovie';
 import { listenDB } from '../../common/utils/listenDB';
 import { checkMovieList } from '../../common/utils/checkMovieList';
 import { fetchGenre } from '../../common/utils/fetchGenre';
+import { showToast } from '../../common/utils/showToast';
 
 // Import i18next
 import { t } from 'i18next';
@@ -29,6 +31,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // Import Components
 import Header from '../../components//header/Header';
 import AddButton from '../../components/add-button/AddButton';
+import CommentForm from '../../components/comment-form/CommentForm';
+import Comment from '../../components/comment/Comment';
+
+// Import Alert Types
+import { ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import Screen Types
 import { MovieDetaiProps } from '../../navigators/types';
@@ -36,7 +43,7 @@ import { MovieDetaiProps } from '../../navigators/types';
 // styles
 import styles from '../../assets/styles/MovieDetail.style';
 
-function MovieDetail({ route, navigation }:MovieDetaiProps): JSX.Element {
+function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   // destruct params
   const { title, genre, desc, imgLink, vote, id, userID } = route.params;
 
@@ -49,15 +56,34 @@ function MovieDetail({ route, navigation }:MovieDetaiProps): JSX.Element {
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
   const [fetchedGenre, setFetchedGenre] = useState();
   const [showComments, setShowComments] = useState(false);
-  const [comment, setComment] = useState<string>();
-  const [commentList, setCommentList] = useState();
+  const [comment, setComment] = useState<string>('');
+  const [commentList, setCommentList] = useState<[]>();
 
+  // method for adding comment
   const handleAddComment = () => {
-    dispatch(addComment({ userID, comments: [{ movieID: id, comment }] }));
-  }
+    if (comment) {
+      dispatch(addComment({ userID, comment: { movieID: id, comment } }));
+      setComment('');
+    } else {
+      showToast(
+        ALERT_TYPE.WARNING,
+        t('GLOBAL.COMPONENTS.ALERT.TITLES.WARNING'),
+        t('GLOBAL.COMPONENTS.ALERT.MESSAGES.ADD_COMMENT')
+      );
+    }
+  };
 
+  // method for getting comment belongs to the movie which has written by this user
   const handleGetComments = () => {
-  }
+    const allComments = comments?.filter((item) => item.userID === userID);
+    const lastComments = allComments?.filter((item) => item.comment.movieID === id);
+
+    setCommentList(lastComments?.map((item) => [{ id: item.id, comment: item.comment.comment }]));
+  };
+
+  const handleDeleteComment = (id) => {
+    dispatch(deleteComment(id));
+  };
 
   // useEffects
   useEffect(() => {
@@ -73,10 +99,6 @@ function MovieDetail({ route, navigation }:MovieDetaiProps): JSX.Element {
   useEffect(() => {
     handleGetComments();
   }, [comments]);
-
-  useEffect(() => {
-    console.log(commentList);
-  }, [commentList]);
 
   useEffect(() => {
     if (Array.isArray(genre)) {
@@ -141,21 +163,28 @@ function MovieDetail({ route, navigation }:MovieDetaiProps): JSX.Element {
             </View>
           </View>
           <View style={styles.commentContainer}>
-            <Icon name="comment" color={CUSTOM_COLORS.WHITE} size={20} onPress={() => setShowComments(!showComments)} />
+            <Icon
+              name="comment"
+              color={CUSTOM_COLORS.WHITE}
+              size={20}
+              style={styles.commentIcon}
+              onPress={() => setShowComments(!showComments)}
+            />
             {showComments && (
-              <View>
-                {/* <Text style={styles.label}>{t('GLOBAL.LABELS.COMMENT')}</Text> */}
-                <TextInput value={comment} onChangeText={setComment} placeholder={'comments'} style={styles.input} />
-                <Button
-                  title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADD_COMMENT')}
-                  color={CUSTOM_COLORS.RED}
-                  onPress={() => handleAddComment()}
-          />
-              </View>
+              <CommentForm comment={comment} setComment={setComment} handleAddComment={handleAddComment} />
             )}
           </View>
         </View>
       </ScrollView>
+      {commentList?.length ? (
+        <View>
+          <Text style={[styles.title, styles.commentTitle]}>{t('GLOBAL.LABELS.COMMENTS')}</Text>
+          <FlatList
+            data={commentList}
+            renderItem={({ item }) => <Comment comment={item} handleDeleteComment={handleDeleteComment} />}
+          />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 }
