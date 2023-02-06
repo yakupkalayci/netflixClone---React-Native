@@ -8,6 +8,9 @@ import Details from './_partials/Detail';
 // Styles
 import styles from '../../assets/styles/MovieCard.style';
 
+// Import Types
+import { MovieListData } from '../../screens/home/Home';
+
 interface MovieCardProps {
   type: 'preview' | 'movie';
   imgName: string;
@@ -16,7 +19,7 @@ interface MovieCardProps {
   desc: string;
   id: number;
   vote: number;
-  movieList: [];
+  movieList: MovieListData[];
   userID?: string;
 }
 

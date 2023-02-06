@@ -7,11 +7,15 @@ import MovieCard from '../movie-card/MovieCard';
 // styles
 import styles from '../../assets/styles/MovieSection.style';
 
+// Import Types
+import { TrendingMoviesData, MoviesWGenreData } from '../../store/actions/movies/_types/apiTypes';
+import { MovieListData } from '../../screens/home/Home';
+
 interface MovieSectionProps {
   title: string;
-  data: [];
+  data: TrendingMoviesData[] | MoviesWGenreData[];
   type: 'preview' | 'movie';
-  movieList?: [];
+  movieList?: MovieListData[];
   userID?: string;
 }
 

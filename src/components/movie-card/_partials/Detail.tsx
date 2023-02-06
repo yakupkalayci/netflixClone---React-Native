@@ -20,6 +20,9 @@ import InfoModal from '../../info-modal/InfoModal';
 // styles
 import styles from '../../../assets/styles/Details.style';
 
+// Import Types
+import { MovieListData } from '../../../screens/home/Home';
+
 interface DetailsProps {
   type: 'preview' | 'movie';
   title: string;
@@ -28,7 +31,7 @@ interface DetailsProps {
   imgLink: string;
   id: number;
   vote: number;
-  movieList: [];
+  movieList: MovieListData[];
   userID?: string;
 }
 

@@ -35,11 +35,23 @@ import InfoModal from '../../components/info-modal/InfoModal';
 import AddButton from '../../components/add-button/AddButton';
 import ActionButton from '../../components/action-button/ActionButton';
 
+// Import Types
+import { TrendingMoviesData, MoviesWGenreData } from '../../store/actions/movies/_types/apiTypes';
+
 // Import Screen Type
 import { HomeScreenProps } from 'src/navigators/types';
 
 // Style
 import styles from '../../assets/styles/HomeScreen.style';
+
+export type MovieListData = {
+  desc: string;
+  genre: object | [];
+  id: number;
+  imgLink: string;
+  title: string;
+  vote: number
+}
 
 function Home({ navigation }: HomeScreenProps) {
   // useState
@@ -48,17 +60,17 @@ function Home({ navigation }: HomeScreenProps) {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalType, setModalType] = useState<'video' | 'text'>('text');
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
-  const [movieList, setMovieList] = useState([]);
+  const [movieList, setMovieList] = useState<MovieListData[]>();
 
   // Variables
   const dispatch = useDispatch();
-  const dailyTrendingMovies = useSelector(
+  const dailyTrendingMovies:TrendingMoviesData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getDailyTrendingMovies?.success?.data?.results
   );
-  const weeklyTrendingMovies = useSelector(
+  const weeklyTrendingMovies:TrendingMoviesData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getWeeklyTrendingMovies?.success?.data?.results
   );
-  const moviesWithGenre = useSelector(
+  const moviesWithGenre:MoviesWGenreData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getMoviesWithGenre?.success?.data?.results
   );
 
