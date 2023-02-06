@@ -32,7 +32,8 @@
                     "INFO": "Info",
                     "ADDED": "Added",
                     "REMOVE": "Remove",
-                    "UPDATE_PROFILE": "Update Profile"
+                    "UPDATE_PROFILE": "Update Profile",
+                    "ADD_COMMENT": "Add Comment"
                 }
             }
         },
@@ -47,13 +48,14 @@
             "CONTIUNE_WATCHING_FOR" : "Contiune watching for",
             "POPULAR_TODAY": "Popular Today",
             "POPULAR_THIS_WEEK": "Popular This Week",
-            "GO_BACK": "Go Back"
+            "GO_BACK": "Go Back",
+            "COMMENT": "comment"
         }
     },
     "PAGE_TITLES": {
         "LOGIN": "Login",
-        "SIGN_UP": "Sign Up",
-        "TAB_NAVIGATOR": "Tab Navigator",
+        "SIGN_UP": "Signup",
+        "TAB_NAVIGATOR": "TabNavigator",
         "HOME": "Home",
         "PROFILE": "Profile",
         "HOME_SCREEN": "Home Screen",

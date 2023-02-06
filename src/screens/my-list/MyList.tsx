@@ -14,10 +14,13 @@ import { emailParser } from '../../common/utils/emailParser';
 import Header from '../../components//header/Header';
 import MovieListItem from '../../components/movie-list-item/MovieListItem';
 
+// Import Screen Types
+import { MyListProps } from '../../navigators/types';
+
 // Style
 import styles from '../../assets/styles/MyList.styles';
 
-function MyList({ navigation }): JSX.Element {
+function MyList({ navigation }: MyListProps): JSX.Element {
   // varibles
   const [user, setUser] = useState(() => getCurrentUser());
   const [movieList, setMovieList] = useState<object[]>();

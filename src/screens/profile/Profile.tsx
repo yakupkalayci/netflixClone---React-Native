@@ -19,12 +19,13 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 // Import i18next
 import { t } from 'i18next';
 
-// import {ProfileProps} from '../screenTypes';
+// Import Screen Type
+import { ProfileProps } from '../../navigators/types';
 
 // styles
 import styles from '../../assets/styles/Profile.style';
 
-function Profile({ navigation }): JSX.Element {
+function Profile({ navigation }: ProfileProps): JSX.Element {
   // useState
   const [user, setUser] = useState(() => getCurrentUser());
   const [username, setUsername] = useState<string>('');

@@ -12,11 +12,11 @@ import { AlertNotificationRoot } from 'react-native-alert-notification';
 // Import Routes
 import { authStackRoutes } from './routes/routes';
 
-// import { RootStackParamList } from './screens/screenTypes';
-// import {TabParamList} from '../screens/screenTypes';
+// Import Type
+import { RootStackParamList } from './navigators/types';
 
 // Constant Variables
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   return (

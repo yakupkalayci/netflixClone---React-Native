@@ -14,10 +14,11 @@ import ProfileIcon from 'react-native-vector-icons/Ionicons';
 // Import Routes
 import { tabRoutes } from '../routes/routes';
 
-// import {TabParamList} from '../screenTypes';
+// Import Type
+import { TabParamList } from './types';
 
 // Constant Variables
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabParamList>();
 
 const TabNavigator = () => (
   <Tab.Navigator

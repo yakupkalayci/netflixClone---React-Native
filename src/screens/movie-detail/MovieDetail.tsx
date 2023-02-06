@@ -1,6 +1,12 @@
 // Import React
 import { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
+
+// Import Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { getComments } from '../../store/actions/comments/getComment';
+import { addComment } from '../../store/actions/comments/addComment';
 
 // Import Constants
 import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
@@ -24,27 +30,53 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '../../components//header/Header';
 import AddButton from '../../components/add-button/AddButton';
 
+// Import Screen Types
+import { MovieDetaiProps } from '../../navigators/types';
+
 // styles
 import styles from '../../assets/styles/MovieDetail.style';
 
-function MovieDetail({ route, navigation }): JSX.Element {
+function MovieDetail({ route, navigation }:MovieDetaiProps): JSX.Element {
   // destruct params
   const { title, genre, desc, imgLink, vote, id, userID } = route.params;
+
+  // variables
+  const dispatch = useDispatch();
+  const comments = useSelector((state: RootState) => state?.globalReducer?.getComments?.success?.data);
 
   // useState
   const [movieList, setMovieList] = useState([]);
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
   const [fetchedGenre, setFetchedGenre] = useState();
+  const [showComments, setShowComments] = useState(false);
+  const [comment, setComment] = useState<string>();
+  const [commentList, setCommentList] = useState();
 
-  // useEffect
+  const handleAddComment = () => {
+    dispatch(addComment({ userID, comments: [{ movieID: id, comment }] }));
+  }
+
+  const handleGetComments = () => {
+  }
+
+  // useEffects
   useEffect(() => {
     listenDB(userID, setMovieList);
     checkMovieList(id, movieList, setMovieListCheck);
+    dispatch(getComments());
   }, []);
 
   useEffect(() => {
     checkMovieList(id, movieList, setMovieListCheck);
   }, [movieList]);
+
+  useEffect(() => {
+    handleGetComments();
+  }, [comments]);
+
+  useEffect(() => {
+    console.log(commentList);
+  }, [commentList]);
 
   useEffect(() => {
     if (Array.isArray(genre)) {
@@ -83,7 +115,7 @@ function MovieDetail({ route, navigation }): JSX.Element {
               </View>
               <TouchableOpacity
                 style={styles.actionButton}
-                onPress={() => addMovie(title, desc, imgLink, id, vote, movieList)}
+                onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre)}
               >
                 {movieListCheck ? (
                   <AddButton
@@ -107,6 +139,20 @@ function MovieDetail({ route, navigation }): JSX.Element {
             <View>
               <Text style={[styles.text, styles.describtionText]}>{desc}</Text>
             </View>
+          </View>
+          <View style={styles.commentContainer}>
+            <Icon name="comment" color={CUSTOM_COLORS.WHITE} size={20} onPress={() => setShowComments(!showComments)} />
+            {showComments && (
+              <View>
+                {/* <Text style={styles.label}>{t('GLOBAL.LABELS.COMMENT')}</Text> */}
+                <TextInput value={comment} onChangeText={setComment} placeholder={'comments'} style={styles.input} />
+                <Button
+                  title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADD_COMMENT')}
+                  color={CUSTOM_COLORS.RED}
+                  onPress={() => handleAddComment()}
+          />
+              </View>
+            )}
           </View>
         </View>
       </ScrollView>

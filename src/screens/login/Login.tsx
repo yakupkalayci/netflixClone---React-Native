@@ -17,9 +17,10 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 // Import components
 import AuthForm from '../../components/auth-form/AuthForm';
 
-// import {LoginProps} from '../screenTypes';
+// Import Screen Type
+import { LoginProps } from '../../navigators/types';
 
-function Login({ navigation }): JSX.Element {
+function Login({ navigation }:LoginProps): JSX.Element {
   // useState
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

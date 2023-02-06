@@ -35,10 +35,13 @@ import InfoModal from '../../components/info-modal/InfoModal';
 import AddButton from '../../components/add-button/AddButton';
 import ActionButton from '../../components/action-button/ActionButton';
 
+// Import Screen Type
+import { HomeScreenProps } from 'src/navigators/types';
+
 // Style
 import styles from '../../assets/styles/HomeScreen.style';
 
-function Home({ navigation }) {
+function Home({ navigation }: HomeScreenProps) {
   // useState
   const [user, setUser] = useState(() => getCurrentUser());
   const [randomImageIndex, setRandomImageIndex] = useState<number>(0);
@@ -171,7 +174,7 @@ function Home({ navigation }) {
       data: dailyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid,
+      userID: user.uid
     },
     {
       id: 13,
@@ -179,7 +182,7 @@ function Home({ navigation }) {
       data: weeklyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid,
+      userID: user.uid
     }
   ];
 
@@ -222,7 +225,9 @@ function Home({ navigation }) {
               style={styles.mainPoster}
               resizeMode={'contain'}
             />
-          ) : <ActivityIndicator size="large" />}
+          ) : (
+            <ActivityIndicator size="large" />
+          )}
         </View>
         <View style={styles.actions}>
           {actionButtonData.map((item) => (

@@ -13,5 +13,15 @@ export const STORE_CONFIG: Record<string, Record<string, string | boolean>> = {
     serviceName: 'getMoviesWithGenre',
     successMessage: false,
     errorMessage: true
+  },
+  GET_COMMENTS: {
+    serviceName: 'getComments',
+    successMessage: false,
+    errorMessage: true
+  },
+  ADD_COMMENT: {
+    serviceName: 'addComment',
+    successMessage: false,
+    errorMessage: true
   }
 };
