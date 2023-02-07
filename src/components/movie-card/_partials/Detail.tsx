@@ -24,7 +24,7 @@ import styles from 'src/assets/styles/Details.style';
 import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 interface DetailsProps {
-  type: 'preview' | 'movie';
+  contentType: 'preview' | 'movie';
   title: string;
   genres: number[];
   desc: string;
@@ -37,7 +37,7 @@ interface DetailsProps {
 
 const Details = (props: DetailsProps) => {
   // destruct props
-  const { type, title, genres, desc, imgLink, id, vote, movieList, userID } = props;
+  const { contentType, title, genres, desc, imgLink, id, vote, movieList, userID } = props;
 
   // variables
   const navigation = useContext(NavigationContext);
@@ -57,8 +57,8 @@ const Details = (props: DetailsProps) => {
   }, []);
 
   return (
-    <View style={type === 'movie' ? styles.detailsContainer : [styles.detailsContainer, styles.playButtonContainer]}>
-      {type === 'movie' ? (
+    <View style={contentType === 'movie' ? styles.detailsContainer : [styles.detailsContainer, styles.playButtonContainer]}>
+      {contentType === 'movie' ? (
         <>
           <View style={styles.header}>
             <View style={styles.headerLeft}>
@@ -77,7 +77,7 @@ const Details = (props: DetailsProps) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID });
+                  openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList });
                 }}
               >
                 <MaterialIcon name="open-in-full" color="green" size={20} />

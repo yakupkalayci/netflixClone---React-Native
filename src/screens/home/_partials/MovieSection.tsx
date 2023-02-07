@@ -12,31 +12,26 @@ import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_
 import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 interface MovieSectionProps {
-  title: string;
-  data: TrendingMoviesData[] | MoviesWGenreData[];
-  type: 'preview' | 'movie';
+  sectionTitle: string;
+  movieData: TrendingMoviesData[] | MoviesWGenreData[];
+  contentType: 'preview' | 'movie';
   movieList: MovieListData[];
   userID?: string;
 }
 
 function MovieSection(props: MovieSectionProps): JSX.Element {
   // destruct props
-  const { title, data, type, movieList, userID } = props;
+  const { sectionTitle, movieData, contentType, movieList, userID } = props;
 
   return (
     <View>
-      <Text style={styles.titles}>{title}</Text>
+      <Text style={styles.titles}>{sectionTitle}</Text>
       <FlatList
-        data={data}
+        data={movieData}
         renderItem={({ item }) => (
           <MovieCard
-            type={type}
-            imgName={item?.poster_path}
-            title={item?.title}
-            genres={item?.genre_ids}
-            desc={item?.overview}
-            id={item?.id}
-            vote={item?.vote_average}
+            contentType={contentType}
+            movieData={item}
             movieList={movieList}
             userID={userID}
           />

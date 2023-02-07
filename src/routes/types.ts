@@ -2,6 +2,9 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 
+// Import Data Types
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 export type RootStackParamList = {
   Login: undefined;
   Signup: undefined;
@@ -23,7 +26,8 @@ export type InnterStackParamList = {
         imgLink: string;
         vote: number;
         id: number;
-        userID: string
+        userID: string,
+        movieList: MovieListData[];
     }
 }
 

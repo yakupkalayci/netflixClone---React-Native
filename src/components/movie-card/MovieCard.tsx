@@ -10,25 +10,21 @@ import styles from 'src/assets/styles/MovieCard.style';
 
 // Import Types
 import { MovieListData } from 'src/screens/home/_types/movieListData';
+import { MoviesWGenreData, TrendingMoviesData } from 'src/store/actions/movies/_types/apiTypes';
 
 interface MovieCardProps {
-  type: 'preview' | 'movie';
-  imgName: string;
-  title: string;
-  genres: number[];
-  desc: string;
-  id: number;
-  vote: number;
+  contentType: 'preview' | 'movie';
+  movieData: MoviesWGenreData | TrendingMoviesData;
   movieList: MovieListData[];
   userID?: string;
 }
 
 function MovieCard(props: MovieCardProps): JSX.Element {
   // destruct props
-  const { type, imgName, title, genres, desc, id, vote, movieList, userID } = props;
+  const { contentType, movieData, movieList, userID } = props;
 
   // variables
-  const imgLink = 'https://image.tmdb.org/t/p/w500' + imgName;
+  const imgLink = 'https://image.tmdb.org/t/p/w500' + movieData.poster_path;
 
   // useState
   const [showContent, setShowContent] = useState(false);
@@ -38,7 +34,7 @@ function MovieCard(props: MovieCardProps): JSX.Element {
       <Image
         source={{ uri: imgLink }}
         style={
-          type === 'preview'
+          contentType === 'preview'
             ? {
                 width: 100,
                 height: 100,
@@ -50,13 +46,13 @@ function MovieCard(props: MovieCardProps): JSX.Element {
       />
       {showContent && (
         <Details
-          type={type}
-          title={title}
-          genres={genres}
-          desc={desc}
+          contentType={contentType}
+          title={movieData.title}
+          genres={movieData.genre_ids}
+          desc={movieData.overview}
           imgLink={imgLink}
-          id={id}
-          vote={vote}
+          id={movieData.id}
+          vote={movieData.vote_average}
           movieList={movieList}
           userID={userID}
         />

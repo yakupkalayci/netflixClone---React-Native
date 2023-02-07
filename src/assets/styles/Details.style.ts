@@ -1,5 +1,5 @@
 // Import React Native
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Import constants
 import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,
     width: '100%',
     height: '100%',
-    zIndex: 1000,
+    zIndex: 1000
   },
   header: {
     flexDirection: 'row',
@@ -23,18 +23,18 @@ export default StyleSheet.create({
   },
   headerButtons: {
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 14,
     color: CUSTOM_COLORS.WHITE,
     fontWeight: 'bold',
-    paddingRight: 10,
+    paddingRight: 10
   },
   genre: {
     fontSize: 12,
     color: CUSTOM_COLORS.WHITE,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   detail: {
     borderTopWidth: 1,
@@ -54,6 +54,6 @@ export default StyleSheet.create({
     zIndex: 1000,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 140 / 2,
+    borderRadius: 140 / 2
   }
 });

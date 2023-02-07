@@ -56,7 +56,7 @@ function Home({ navigation }: HomeScreenProps) {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalType, setModalType] = useState<'video' | 'text'>('text');
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
-  const [movieList, setMovieList] = useState<MovieListData[]>();
+  const [movieList, setMovieList] = useState<MovieListData[] | []>();
 
   // Variables
   const dispatch = useDispatch();
@@ -152,7 +152,8 @@ function Home({ navigation }: HomeScreenProps) {
               `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`
             }
             type={modalType}
-            userID={user.uid}
+            userID={user?.uid}
+            movieList={movieList}
           />
           <IconInfo name="info" size={30} color={CUSTOM_COLORS.WHITE} />
           <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
@@ -174,7 +175,7 @@ function Home({ navigation }: HomeScreenProps) {
       data: moviesWithGenre,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid
+      userID: user?.uid
     },
     {
       id: 12,
@@ -182,7 +183,7 @@ function Home({ navigation }: HomeScreenProps) {
       data: dailyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid
+      userID: user?.uid
     },
     {
       id: 13,
@@ -190,7 +191,7 @@ function Home({ navigation }: HomeScreenProps) {
       data: weeklyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
       movieList,
-      userID: user.uid
+      userID: user?.uid
     }
   ];
 
@@ -244,9 +245,9 @@ function Home({ navigation }: HomeScreenProps) {
           {movieSectionData.map((item) => (
             <MovieSection
               key={item.id}
-              title={item.title}
-              data={item.data}
-              type={item.type}
+              sectionTitle={item.title}
+              movieData={item.data}
+              contentType={item.type}
               movieList={item.movieList}
               userID={item.userID}
             />

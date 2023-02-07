@@ -7,9 +7,12 @@ import { firebase } from '@react-native-firebase/database';
 // Import Utils
 import { movieListDataParser } from './movieListDataParser';
 
+// Import Type
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 export const listenDB = (
   userID: string,
-  setMovieList: Dispatch<SetStateAction<never[]>>,
+  setMovieList: Dispatch<SetStateAction<MovieListData[] | undefined>>,
   setLoading?: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading && setLoading(true);

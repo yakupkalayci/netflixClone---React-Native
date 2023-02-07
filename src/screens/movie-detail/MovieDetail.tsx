@@ -36,24 +36,27 @@ import Header from '../../components/header/Header';
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
 
+// Import Data Types
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 // Import Screen Types
 import { MovieDetaiProps } from 'src/routes/types';
 
 // styles
-import styles from '../../assets/styles/MovieDetail.style';
+import styles from 'src/assets/styles/MovieDetail.style';
 
 function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   // destruct params
-  const { title, genre, desc, imgLink, vote, id, userID } = route.params;
+  const { title, genre, desc, imgLink, vote, id, userID, movieList } = route.params;
 
   // variables
   const dispatch = useDispatch();
   const comments = useSelector((state: RootState) => state?.globalReducer?.getComments?.success?.data);
 
   // useState
-  const [movieList, setMovieList] = useState([]);
+  // const [movieList, setMovieList] = useState<MovieListData[]>();
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
-  const [fetchedGenre, setFetchedGenre] = useState();
+  const [fetchedGenre, setFetchedGenre] = useState<{name:string, id: number}>();
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState<string>('');
   const [commentList, setCommentList] = useState<[]>();
@@ -86,13 +89,14 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
 
   // useEffects
   useEffect(() => {
-    listenDB(userID, setMovieList);
+    // listenDB(userID, setMovieList);
     checkMovieList(id, movieList, setMovieListCheck);
     dispatch(getComments());
   }, []);
 
   useEffect(() => {
     checkMovieList(id, movieList, setMovieListCheck);
+    console.log(movieList);
   }, [movieList]);
 
   useEffect(() => {
@@ -135,13 +139,13 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
               style={styles.commentIcon}
               onPress={() => setShowComments(!showComments)}
             />
-            {showComments && (
+            {showComments ? (
               <CommentForm comment={comment} setComment={setComment} handleAddComment={handleAddComment} />
-            )}
+            ): null}
           </View>
         </View>
       </ScrollView>
-      {commentList?.length && (
+      {commentList?.length ? (
         <View>
           <Text style={[styles.title, styles.commentTitle]}>{t('GLOBAL.LABELS.COMMENTS')}</Text>
           <FlatList
@@ -149,7 +153,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
             renderItem={({ item }) => <Comment comment={item} handleDeleteComment={handleDeleteComment} />}
           />
         </View>
-      )}
+      ): null}
     </SafeAreaView>
   );
 }

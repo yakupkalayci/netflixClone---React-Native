@@ -13,13 +13,16 @@ import { movieListDataParser } from './movieListDataParser';
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
 
+// Import Data Types
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 export const addMovie = (
   title: string,
   desc: string,
   imgLink: string,
   id: number,
   vote: number,
-  movieList: [],
+  movieList: MovieListData[],
   genre: object | [] | undefined
 ) => {
   const user = getCurrentUser();

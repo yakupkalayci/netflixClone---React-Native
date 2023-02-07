@@ -22,13 +22,16 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 // Import Screen Types
 import { MyListProps } from 'src/routes/types';
 
+// Import Data Types
+import { MovieListData } from '../home/_types/movieListData';
+
 // Style
 import styles from 'src/assets/styles/MyList.styles';
 
 function MyList({ navigation }: MyListProps): JSX.Element {
   // varibles
   const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
-  const [movieList, setMovieList] = useState<object[]>();
+  const [movieList, setMovieList] = useState<MovieListData[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
   // useEffect
@@ -56,9 +59,10 @@ function MyList({ navigation }: MyListProps): JSX.Element {
               imgLink={item.imgLink}
               id={item.id}
               vote={item.vote}
-              movieKey={item?.key}
+              movieKey={item.key}
               userID={user?.uid}
               navigation={navigation}
+              movieList={movieList}
             />
           )}
         />

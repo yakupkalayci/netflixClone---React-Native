@@ -24,7 +24,7 @@ import styles from 'src/assets/styles/MovieDetails.style';
 
 interface MovieDetailsProps {
   vote: number;
-  fetchedGenre: undefined;
+  fetchedGenre: {id: number, name:string} | undefined;
   addMovie: (
     title: string,
     desc: string,
@@ -77,7 +77,7 @@ function MovieDetails(props: MovieDetailsProps): JSX.Element {
               <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
               <Text style={[styles.text, styles.voteText]}>{vote}</Text>
             </View>
-            <Text style={[styles.text, styles.genreText]}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
+            <Text style={[styles.text, styles.genreText]}>{fetchedGenre?.name ? fetchedGenre?.name : genre?.name}</Text>
           </View>
           <TouchableOpacity
             style={styles.actionButton}

@@ -17,6 +17,9 @@ import { NavigationContext } from '@react-navigation/native';
 // Import Vector Close Icon
 import IconClose from 'react-native-vector-icons/Fontisto';
 
+// Import Date Types
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 // styles
 import styles from 'src/assets/styles/InfoModal.style';
 
@@ -27,16 +30,17 @@ interface InfoModalProps {
   title: string;
   originalTitle?: string;
   description?: string;
-  genre?: [];
+  genre?: number[];
   vote?: number;
   id?: number
   imgLink?: string;
-  userID?: object;
+  userID?: string;
+  movieList: MovieListData[] | [] | undefined;
 }
 
 function InfoModal(props: InfoModalProps) {
   // destruct props
-  const { isVisible, setIsVisible, title, originalTitle, description, genre, vote, imgLink, id, type, userID } = props;
+  const { isVisible, setIsVisible, title, originalTitle, description, genre, vote, imgLink, id, type, userID, movieList } = props;
 
   // variables
   const navigation = useContext(NavigationContext);
@@ -53,7 +57,7 @@ function InfoModal(props: InfoModalProps) {
             <View style={styles.modalHeader}>
               <TouchableOpacity
                 onPress={() =>
-                  openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID })
+                  openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID, movieList })
                 }
               >
                 <Text style={[styles.modalText, styles.modalTitle]}>{title}</Text>

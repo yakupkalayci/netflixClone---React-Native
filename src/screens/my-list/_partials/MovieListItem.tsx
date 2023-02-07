@@ -18,6 +18,9 @@ import { t } from 'i18next';
 // Import Icons
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Import Data Types
+import { MovieListData } from 'src/screens/home/_types/movieListData';
+
 // styles
 import styles from 'src/assets/styles/MovieListItem.style';
 
@@ -31,14 +34,15 @@ interface MovieListItemProps {
   movieKey: string;
   userID: string | undefined;
   navigation: any;
+  movieList: MovieListData[];
 }
 
 function MovieListItem(props: MovieListItemProps): JSX.Element {
   // destruct props
-  const { imgLink, title, genre, description, id, vote, movieKey, userID, navigation } = props;
+  const { imgLink, title, genre, description, id, vote, movieKey, userID, navigation, movieList } = props;
 
   // useState
-  const [fetchedGenre, setFetchedGenre] = useState();
+  const [fetchedGenre, setFetchedGenre] = useState<{id: number, name: string}>();
 
   // method for remove movie from my list
   const removeMovie = async () => {
@@ -70,12 +74,12 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
       </View>
       <View style={styles.innerContainer}>
         <TouchableOpacity
-          onPress={() => openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID })}
+          onPress={() => openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID, movieList })}
         >
           <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
         <View style={styles.detailContainer}>
-          <Text style={styles.genre}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
+          <Text style={styles.genre}>{fetchedGenre?.name ? fetchedGenre?.name : genre?.name}</Text>
           <View style={styles.vote}>
             <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>

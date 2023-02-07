@@ -5,4 +5,5 @@ export type MovieListData = {
   imgLink: string;
   title: string;
   vote: number;
+  key?: string;
 };
