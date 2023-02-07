@@ -2,20 +2,20 @@
 import { View, Text, FlatList } from 'react-native';
 
 // Import Compontns
-import MovieCard from '../movie-card/MovieCard';
+import MovieCard from 'src/components/movie-card/MovieCard';
 
 // styles
-import styles from '../../assets/styles/MovieSection.style';
+import styles from 'src/assets/styles/MovieSection.style';
 
 // Import Types
-import { TrendingMoviesData, MoviesWGenreData } from '../../store/actions/movies/_types/apiTypes';
-import { MovieListData } from '../../screens/home/Home';
+import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_types/apiTypes';
+import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 interface MovieSectionProps {
   title: string;
   data: TrendingMoviesData[] | MoviesWGenreData[];
   type: 'preview' | 'movie';
-  movieList?: MovieListData[];
+  movieList: MovieListData[];
   userID?: string;
 }
 

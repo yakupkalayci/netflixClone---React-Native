@@ -1,61 +1,57 @@
 // Import React
 import { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 
 // Import Constants
-import { MOVIE_SECTION_TYPES } from '../../common/constants/movie-section/movieSectionTypes';
-import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+import { MOVIE_SECTION_TYPES } from 'src/common/constants/movie-section/movieSectionTypes';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store/store';
-import { getDailyTrendingMovies } from '../../store/actions/movies/getDailyTrendingMovies';
-import { getWeeklyTrendingMovies } from '../../store/actions/movies/getWeeklyTrendingMovies';
-import { getMoviesWithGenre } from '../../store/actions/movies/getMoviesWithGenre';
+import { getDailyTrendingMovies } from 'src/store/actions/movies/getDailyTrendingMovies';
+import { getWeeklyTrendingMovies } from 'src/store/actions/movies/getWeeklyTrendingMovies';
+import { getMoviesWithGenre } from 'src/store/actions/movies/getMoviesWithGenre';
 
 // Import i18next
 import { t } from 'i18next';
 
 // Import Utils
-import { getRandomImageIndex } from '../../common/utils/getRandomImageIndex';
-import { addMovie } from '../../common/utils/addMovie';
-import { getCurrentUser } from '../../common/utils/getCurrentUser';
-import { emailParser } from '../../common/utils/emailParser';
-import { listenDB } from '../../common/utils/listenDB';
-import { checkMovieList } from '../../common/utils/checkMovieList';
+import { getRandomImageIndex } from 'src/common/utils/getRandomImageIndex';
+import { addMovie } from 'src/common/utils/addMovie';
+import { getCurrentUser } from 'src/common/utils/getCurrentUser';
+import { emailParser } from 'src/common/utils/emailParser';
+import { listenDB } from 'src/common/utils/listenDB';
+import { checkMovieList } from 'src/common/utils/checkMovieList';
 
 // Import Icons
 import Icon from 'react-native-vector-icons/Entypo';
 import IconInfo from 'react-native-vector-icons/Foundation';
 
+// Import Partials
+import MainImage from './_partials/MainImage';
+import MovieSection from './_partials/MovieSection';
+
 // Import Components
 import Header from '../../components/header/Header';
-import MovieSection from '../../components/movie-section/MovieSection';
-import InfoModal from '../../components/info-modal/InfoModal';
-import AddButton from '../../components/add-button/AddButton';
-import ActionButton from '../../components/action-button/ActionButton';
+import InfoModal from 'src/components/info-modal/InfoModal';
+import AddButton from 'src/components/add-button/AddButton';
+import ActionButton from 'src/components/action-button/ActionButton';
 
 // Import Types
-import { TrendingMoviesData, MoviesWGenreData } from '../../store/actions/movies/_types/apiTypes';
+import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_types/apiTypes';
+import { MovieListData } from './_types/movieListData';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Screen Type
-import { HomeScreenProps } from 'src/navigators/types';
+import { HomeScreenProps } from 'src/routes/types';
 
 // Style
-import styles from '../../assets/styles/HomeScreen.style';
-
-export type MovieListData = {
-  desc: string;
-  genre: object | [];
-  id: number;
-  imgLink: string;
-  title: string;
-  vote: number
-}
+import styles from 'src/assets/styles/HomeScreen.style';
 
 function Home({ navigation }: HomeScreenProps) {
   // useState
-  const [user, setUser] = useState(() => getCurrentUser());
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
   const [randomImageIndex, setRandomImageIndex] = useState<number>(0);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalType, setModalType] = useState<'video' | 'text'>('text');
@@ -64,13 +60,13 @@ function Home({ navigation }: HomeScreenProps) {
 
   // Variables
   const dispatch = useDispatch();
-  const dailyTrendingMovies:TrendingMoviesData[] = useSelector(
+  const dailyTrendingMovies: TrendingMoviesData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getDailyTrendingMovies?.success?.data?.results
   );
-  const weeklyTrendingMovies:TrendingMoviesData[] = useSelector(
+  const weeklyTrendingMovies: TrendingMoviesData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getWeeklyTrendingMovies?.success?.data?.results
   );
-  const moviesWithGenre:MoviesWGenreData[] = useSelector(
+  const moviesWithGenre: MoviesWGenreData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getMoviesWithGenre?.success?.data?.results
   );
 
@@ -228,14 +224,10 @@ function Home({ navigation }: HomeScreenProps) {
       <ScrollView>
         <View style={styles.imageContainer}>
           {dailyTrendingMovies ? (
-            <Image
-              source={{
-                uri: dailyTrendingMovies
-                  ? 'https://image.tmdb.org/t/p/w500' + dailyTrendingMovies[randomImageIndex]?.poster_path
-                  : ''
-              }}
+            <MainImage
+              dailyTrendingMovies={dailyTrendingMovies}
+              randomImageIndex={randomImageIndex}
               style={styles.mainPoster}
-              resizeMode={'contain'}
             />
           ) : (
             <ActivityIndicator size="large" />

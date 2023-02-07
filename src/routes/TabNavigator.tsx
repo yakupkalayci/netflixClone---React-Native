@@ -1,5 +1,5 @@
 // Import Constants
-import { CUSTOM_COLORS } from '../common/constants/colors/customColors';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import i18next
 import { t } from 'i18next';
@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import ProfileIcon from 'react-native-vector-icons/Ionicons';
 
 // Import Routes
-import { tabRoutes } from '../routes/routes';
+import { tabRoutes } from 'src/routes/routes';
 
 // Import Type
 import { TabParamList } from './types';

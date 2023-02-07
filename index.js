@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native';
-import App from './src/Router';
+import App from 'src/App';
 import { name as appName } from './app.json';
 
 // i18n Import

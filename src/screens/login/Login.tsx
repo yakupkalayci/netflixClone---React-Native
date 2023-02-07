@@ -8,17 +8,17 @@ import auth from '@react-native-firebase/auth';
 import { t } from 'i18next';
 
 // Import Utils
-import { showToast } from '../../common/utils/showToast';
-import { authErrorParser } from '../../common/utils/authErrorParser';
+import { showToast } from 'src/common/utils/showToast';
+import { authErrorParser } from 'src/common/utils/authErrorParser';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import components
-import AuthForm from '../../components/auth-form/AuthForm';
+import AuthForm from 'src/components/auth-form/AuthForm';
 
 // Import Screen Type
-import { LoginProps } from '../../navigators/types';
+import { LoginProps } from 'src/routes/types';
 
 function Login({ navigation }:LoginProps): JSX.Element {
   // useState

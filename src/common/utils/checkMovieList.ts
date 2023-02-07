@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { MovieListData } from '../../screens/home/Home';
+import { MovieListData } from 'src/screens/home//_types/movieListData';
 
 export const checkMovieList = (
   movieID: number,

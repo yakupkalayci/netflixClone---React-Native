@@ -6,23 +6,28 @@ import { SafeAreaView, Text, FlatList, ActivityIndicator } from 'react-native';
 import { t } from 'i18next';
 
 // Import Utils
-import { listenDB } from '../../common/utils/listenDB';
-import { getCurrentUser } from '../../common/utils/getCurrentUser';
-import { emailParser } from '../../common/utils/emailParser';
+import { listenDB } from 'src/common/utils/listenDB';
+import { getCurrentUser } from 'src/common/utils/getCurrentUser';
+import { emailParser } from 'src/common/utils/emailParser';
+
+// Import Partials
+import MovieListItem from './_partials/MovieListItem';
 
 // Import Components
-import Header from '../../components//header/Header';
-import MovieListItem from '../../components/movie-list-item/MovieListItem';
+import Header from 'src/components//header/Header';
+
+// Import Types
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Screen Types
-import { MyListProps } from '../../navigators/types';
+import { MyListProps } from 'src/routes/types';
 
 // Style
-import styles from '../../assets/styles/MyList.styles';
+import styles from 'src/assets/styles/MyList.styles';
 
 function MyList({ navigation }: MyListProps): JSX.Element {
   // varibles
-  const [user, setUser] = useState(() => getCurrentUser());
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
   const [movieList, setMovieList] = useState<object[]>();
   const [loading, setLoading] = useState<boolean>(false);
 

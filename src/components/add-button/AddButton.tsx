@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 // styles
-import styles from '../../assets/styles/AddButton.style';
+import styles from 'src/assets/styles/AddButton.style';
 
 interface AddButtonProps {
   iconName: string;

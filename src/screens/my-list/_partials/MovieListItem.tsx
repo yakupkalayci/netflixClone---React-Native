@@ -6,11 +6,11 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { firebase } from '@react-native-firebase/database';
 
 // Import Constants
-import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import utils
-import { openMovieDetailPage } from '../../common/utils/openMovieDetailPage';
-import { fetchGenre } from '../../common/utils/fetchGenre';
+import { openMovieDetailPage } from 'src/common/utils/openMovieDetailPage';
+import { fetchGenre } from 'src/common/utils/fetchGenre';
 
 // Import i18next
 import { t } from 'i18next';
@@ -19,7 +19,7 @@ import { t } from 'i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 // styles
-import styles from '../../assets/styles/MovieListItem.style';
+import styles from 'src/assets/styles/MovieListItem.style';
 
 interface MovieListItemProps {
   imgLink: string;

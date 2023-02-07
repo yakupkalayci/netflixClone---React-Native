@@ -1,44 +1,43 @@
 // Import React
 import { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, FlatList } from 'react-native';
 
 // Import Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { getComments } from '../../store/actions/comments/getComment';
-import { addComment } from '../../store/actions/comments/addComment';
-import { deleteComment } from '../../store/actions/comments/deleteComment';
+import { RootState } from 'src/store/store';
+import { getComments } from 'src/store/actions/comments/getComment';
+import { addComment } from 'src/store/actions/comments/addComment';
+import { deleteComment } from 'src/store/actions/comments/deleteComment';
 
 // Import Constants
-import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import utils
-import { addMovie } from '../../common/utils/addMovie';
-import { listenDB } from '../../common/utils/listenDB';
-import { checkMovieList } from '../../common/utils/checkMovieList';
-import { fetchGenre } from '../../common/utils/fetchGenre';
-import { showToast } from '../../common/utils/showToast';
+import { addMovie } from 'src/common/utils/addMovie';
+import { listenDB } from 'src/common/utils/listenDB';
+import { checkMovieList } from 'src/common/utils/checkMovieList';
+import { fetchGenre } from 'src/common/utils/fetchGenre';
+import { showToast } from 'src/common/utils/showToast';
 
 // Import i18next
 import { t } from 'i18next';
 
-// Import React-native-video
-import Video from 'react-native-video';
-
 // Import Icon
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Import Partials
+import MovieDetails from './_partials/MovieDetails';
+import CommentForm from './_partials/CommentForm';
+import Comment from './_partials/Comment';
+
 // Import Components
-import Header from '../../components//header/Header';
-import AddButton from '../../components/add-button/AddButton';
-import CommentForm from '../../components/comment-form/CommentForm';
-import Comment from '../../components/comment/Comment';
+import Header from '../../components/header/Header';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import Screen Types
-import { MovieDetaiProps } from '../../navigators/types';
+import { MovieDetaiProps } from 'src/routes/types';
 
 // styles
 import styles from '../../assets/styles/MovieDetail.style';
@@ -116,52 +115,18 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
       <Header navigation={navigation} />
       <ScrollView>
         <View style={styles.innerContainer}>
-          <View style={styles.videoContainer}>
-            <Video
-              source={{ uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }}
-              controls={true}
-              resizeMode={'cover'}
-              poster={imgLink}
-              style={styles.video}
-            />
-          </View>
-          <View style={styles.movieDetails}>
-            <Text style={[styles.text, styles.title]}>{title}</Text>
-            <View style={styles.upperDetails}>
-              <View style={styles.upperLeft}>
-                <View style={styles.voteContainer}>
-                  <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
-                  <Text style={[styles.text, styles.voteText]}>{vote}</Text>
-                </View>
-                <Text style={[styles.text, styles.genreText]}>{fetchedGenre ? fetchedGenre?.name : genre?.name}</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.actionButton}
-                onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre)}
-              >
-                {movieListCheck ? (
-                  <AddButton
-                    iconName="plus"
-                    iconColor={CUSTOM_COLORS.GREEN}
-                    iconSize={30}
-                    added={true}
-                    text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')}
-                  />
-                ) : (
-                  <AddButton
-                    iconName="plus"
-                    iconColor={CUSTOM_COLORS.GREEN}
-                    iconSize={30}
-                    added={false}
-                    text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-            <View>
-              <Text style={[styles.text, styles.describtionText]}>{desc}</Text>
-            </View>
-          </View>
+          <MovieDetails
+            addMovie={addMovie}
+            desc={desc}
+            fetchedGenre={fetchedGenre}
+            genre={genre}
+            id={id}
+            imgLink={imgLink}
+            movieList={movieList}
+            movieListCheck={movieListCheck}
+            title={title}
+            vote={vote}
+          />
           <View style={styles.commentContainer}>
             <Icon
               name="comment"
@@ -176,7 +141,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
           </View>
         </View>
       </ScrollView>
-      {commentList?.length ? (
+      {commentList?.length && (
         <View>
           <Text style={[styles.title, styles.commentTitle]}>{t('GLOBAL.LABELS.COMMENTS')}</Text>
           <FlatList
@@ -184,7 +149,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
             renderItem={({ item }) => <Comment comment={item} handleDeleteComment={handleDeleteComment} />}
           />
         </View>
-      ) : null}
+      )}
     </SafeAreaView>
   );
 }

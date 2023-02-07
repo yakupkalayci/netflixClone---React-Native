@@ -10,18 +10,18 @@ import Icon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 // Import Utils
-import { addMovie } from '../../../common/utils/addMovie';
-import { openMovieDetailPage } from '../../../common/utils/openMovieDetailPage';
-import { fetchGenre } from '../../../common/utils/fetchGenre';
+import { addMovie } from 'src/common/utils/addMovie';
+import { openMovieDetailPage } from 'src/common/utils/openMovieDetailPage';
+import { fetchGenre } from 'src/common/utils/fetchGenre';
 
 // Import Components
-import InfoModal from '../../info-modal/InfoModal';
+import InfoModal from 'src/components/info-modal/InfoModal';
 
 // styles
-import styles from '../../../assets/styles/Details.style';
+import styles from 'src/assets/styles/Details.style';
 
 // Import Types
-import { MovieListData } from '../../../screens/home/Home';
+import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 interface DetailsProps {
   type: 'preview' | 'movie';

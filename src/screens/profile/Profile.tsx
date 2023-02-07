@@ -3,15 +3,16 @@ import { useState } from 'react';
 import { SafeAreaView, Text, View, TextInput, Button } from 'react-native';
 
 // Import Constants
-import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import Firebase Auth
 import auth from '@react-native-firebase/auth';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Utils
-import { showToast } from '../../common/utils/showToast';
-import { authErrorParser } from '../../common/utils/authErrorParser';
-import { getCurrentUser } from '../../common/utils/getCurrentUser';
+import { showToast } from 'src/common/utils/showToast';
+import { authErrorParser } from 'src/common/utils/authErrorParser';
+import { getCurrentUser } from 'src/common/utils/getCurrentUser';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
@@ -20,14 +21,14 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 import { t } from 'i18next';
 
 // Import Screen Type
-import { ProfileProps } from '../../navigators/types';
+import { ProfileProps } from 'src/routes/types';
 
 // styles
-import styles from '../../assets/styles/Profile.style';
+import styles from 'src/assets/styles/Profile.style';
 
 function Profile({ navigation }: ProfileProps): JSX.Element {
   // useState
-  const [user, setUser] = useState(() => getCurrentUser());
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 

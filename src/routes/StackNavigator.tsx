@@ -2,7 +2,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Import Routes
-import { homeStackRoutes } from '../routes/routes';
+import { homeStackRoutes } from 'src/routes/routes';
 
 // Import Type
 import { InnterStackParamList } from './types';

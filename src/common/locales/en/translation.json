@@ -13,7 +13,9 @@
                     "PROFILE_UPDATED": "Profile informations updated!",
                     "INPUTS_CANT_BE_LEFT_EMPTY": "Inputs can't be left empty",
                     "MOVIE_ALREADY_ADDED": "You have already added the movie to your list!",
-                    "ADD_COMMENT": "Please fill the comment box!"
+                    "ADD_COMMENT": "Please fill the comment box!",
+                    "SAME_PASSWORD": "Passwords must be same..",
+                    "SIGNED_SUCCESS": "You have signed successfully!"
                 }
             },
             "TEXT_INPUT": {

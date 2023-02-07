@@ -3,7 +3,7 @@ import { Dispatch, Fragment, SetStateAction, useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 // Import Utils
-import { openMovieDetailPage } from '../../common/utils/openMovieDetailPage';
+import { openMovieDetailPage } from 'src/common/utils/openMovieDetailPage';
 
 // Import react-native-modal
 import Modal from 'react-native-modal';
@@ -18,7 +18,7 @@ import { NavigationContext } from '@react-navigation/native';
 import IconClose from 'react-native-vector-icons/Fontisto';
 
 // styles
-import styles from '../../assets/styles/InfoModal.style';
+import styles from 'src/assets/styles/InfoModal.style';
 
 interface InfoModalProps {
   isVisible: boolean;

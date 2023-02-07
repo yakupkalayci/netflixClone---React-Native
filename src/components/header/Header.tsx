@@ -5,7 +5,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { t } from 'i18next';
 
 // styles
-import styles from '../../assets/styles/Header.style';
+import styles from 'src/assets/styles/Header.style';
 
 function Header({ navigation }): JSX.Element {
 

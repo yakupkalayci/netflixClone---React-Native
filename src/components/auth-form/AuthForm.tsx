@@ -6,7 +6,7 @@ import { SafeAreaView, Text, View, Image, TextInput, TouchableOpacity, ActivityI
 import { t } from 'i18next';
 
 // Styles
-import styles from '../../assets/styles/AuthForm.style';
+import styles from 'src/assets/styles/AuthForm.style';
 
 interface AuthFormProps {
   type: 'login' | 'signup';

@@ -8,17 +8,17 @@ import auth from '@react-native-firebase/auth';
 import { t } from 'i18next';
 
 // Import Utils
-import { showToast } from '../../common/utils/showToast';
-import { authErrorParser } from '../../common/utils/authErrorParser';
+import { showToast } from 'src/common/utils/showToast';
+import { authErrorParser } from 'src/common/utils/authErrorParser';
 
 // IMPORT React-native-alert ALERT TYPES
 import { ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import components
-import AuthForm from '../../components/auth-form/AuthForm';
+import AuthForm from 'src/components/auth-form/AuthForm';
 
 // Import Screen Type
-import { SignupProps } from '../../navigators/types';
+import { SignupProps } from 'src/routes/types';
 
 function SignUp({ navigation }:SignupProps): JSX.Element {
   // useState
@@ -31,7 +31,7 @@ function SignUp({ navigation }:SignupProps): JSX.Element {
   const handleSignUp = () => {
     if (email && password) {
       if (password !== rePassword) {
-        showToast(ALERT_TYPE.DANGER, 'Try Again', 'Passwords must be same..');
+        showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.WARNING'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.SAME_PASSWORD'));
 
         return;
       }
@@ -39,7 +39,7 @@ function SignUp({ navigation }:SignupProps): JSX.Element {
       auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          showToast(ALERT_TYPE.SUCCESS, 'Success', 'You have signed successfully!');
+          showToast(ALERT_TYPE.SUCCESS, t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.SIGNED_SUCCESS'));
           setTimeout(() => {
             navigation.navigate(t('PAGE_TITLES.TAB_NAVIGATOR'));
           }, 2000);

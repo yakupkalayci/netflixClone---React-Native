@@ -6,10 +6,10 @@ import { Image, TouchableOpacity } from 'react-native';
 import Details from './_partials/Detail';
 
 // Styles
-import styles from '../../assets/styles/MovieCard.style';
+import styles from 'src/assets/styles/MovieCard.style';
 
 // Import Types
-import { MovieListData } from '../../screens/home/Home';
+import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 interface MovieCardProps {
   type: 'preview' | 'movie';

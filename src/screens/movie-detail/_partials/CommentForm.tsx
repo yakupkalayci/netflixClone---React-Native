@@ -3,13 +3,13 @@ import { Dispatch, SetStateAction } from 'react';
 import { View, TextInput, Button } from 'react-native';
 
 // Import Constant
-import { CUSTOM_COLORS } from '../../common/constants/colors/customColors';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import i18next
 import { t } from 'i18next';
 
 // Import styles
-import styles from '../../assets/styles/CommentForm.style';
+import styles from 'src/assets/styles/CommentForm.style';
 
 interface CommentProps {
   comment: string;

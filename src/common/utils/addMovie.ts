@@ -8,10 +8,10 @@ import { t } from 'i18next';
 import { getCurrentUser } from './getCurrentUser';
 import { showToast } from './showToast';
 import { authErrorParser } from './authErrorParser';
+import { movieListDataParser } from './movieListDataParser';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
-import { movieListDataParser } from './movieListDataParser';
 
 export const addMovie = (
   title: string,
@@ -24,7 +24,7 @@ export const addMovie = (
 ) => {
   const user = getCurrentUser();
 
-  const result = movieList.length ? movieListDataParser(movieList).find((movie) => movie.id === id) : undefined;
+  const result = movieList?.length ? movieListDataParser(movieList).find((movie) => movie.id === id) : undefined;
 
   if (result) {
     showToast(

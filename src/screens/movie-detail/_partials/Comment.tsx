@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import IconClose from 'react-native-vector-icons/Ionicons';
 
 // Import styles
-import styles from '../../assets/styles/Comment.style';
+import styles from 'src/assets/styles/Comment.style';
 
 interface CommentProps {
   comment: [];

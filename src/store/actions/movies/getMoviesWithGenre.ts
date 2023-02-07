@@ -1,6 +1,6 @@
 import * as types from '../types';
 
-import { SERVICES } from '../../constants/serviceConstants';
+import { SERVICES } from 'src/store/constants/serviceConstants';
 
 import { api } from '../api';
 

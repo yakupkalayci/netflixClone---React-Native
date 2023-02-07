@@ -2,28 +2,28 @@
 import { t } from 'i18next';
 
 // Login
-import Login from '../screens/login/Login';
+import Login from 'src/screens/login/Login';
 
 // SignUp
-import SignUp from '../screens/sign-up/SignUp';
+import SignUp from 'src/screens/sign-up/SignUp';
 
 // TabNavigator
-import TabNavigator from '../navigators/TabNavigator';
+import TabNavigator from 'src/routes/TabNavigator';
 
 // StackNavigator
-import StackNavigator from '../navigators/StackNavigator';
+import StackNavigator from 'src/routes/StackNavigator';
 
 // Profile
-import Profile from '../screens/profile/Profile';
+import Profile from 'src/screens/profile/Profile';
 
 // Home
-import Home from '../screens/home/Home';
+import Home from 'src/screens/home/Home';
 
 // MyList
-import MyList from '../screens/my-list/MyList';
+import MyList from 'src/screens/my-list/MyList';
 
 // Movie Detail
-import MovieDetail from '../screens/movie-detail/MovieDetail';
+import MovieDetail from 'src/screens/movie-detail/MovieDetail';
 
 export const authStackRoutes = [
   {
