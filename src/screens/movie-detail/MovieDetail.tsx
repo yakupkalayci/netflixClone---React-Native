@@ -97,7 +97,6 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
 
   useEffect(() => {
     checkMovieList(id, movieList, setMovieListCheck);
-    console.log(movieList);
   }, [movieList]);
 
   useEffect(() => {

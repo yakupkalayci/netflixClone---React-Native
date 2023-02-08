@@ -37,7 +37,8 @@
                     "ADDED": "Added",
                     "REMOVE": "Remove",
                     "UPDATE_PROFILE": "Update Profile",
-                    "ADD_COMMENT": "Add Comment"
+                    "ADD_COMMENT": "Add Comment",
+                    "DETAILS": "Details"
                 }
             }
         },

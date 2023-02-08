@@ -1,21 +1,30 @@
 // Import React
-import { useState, useEffect, useContext, Fragment } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 // Import Navigation Context
 import { NavigationContext } from '@react-navigation/native';
 
+// Import i18next
+import { t } from 'i18next';
+
+// Import Constants
+import { CUSTOM_COLORS, CUSTOM_COLORS_TYPE } from 'src/common/constants/colors/customColors';
+import { CUSTOM_ICON_SIZES } from 'src/common/constants/icon/iconSizes';
+
 // Import Icons
 import Icon from 'react-native-vector-icons/Entypo';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Import Utils
 import { addMovie } from 'src/common/utils/addMovie';
 import { openMovieDetailPage } from 'src/common/utils/openMovieDetailPage';
 import { fetchGenre } from 'src/common/utils/fetchGenre';
+import { checkMovieList } from 'src/common/utils/checkMovieList';
 
 // Import Components
 import InfoModal from 'src/components/info-modal/InfoModal';
+import CustomButton from 'src/components/button/CustomButton';
 
 // styles
 import styles from 'src/assets/styles/Details.style';
@@ -45,6 +54,8 @@ const Details = (props: DetailsProps) => {
   // useState
   const [genre, setGenre] = useState();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
+
 
   // useEffect
   useEffect(() => {
@@ -54,39 +65,43 @@ const Details = (props: DetailsProps) => {
     };
 
     getGenre();
+    checkMovieList(id, movieList, setMovieListCheck);
   }, []);
 
+  useEffect(() => {
+    checkMovieList(id, movieList, setMovieListCheck);
+  }, [movieList]);
+
   return (
-    <View style={contentType === 'movie' ? styles.detailsContainer : [styles.detailsContainer, styles.playButtonContainer]}>
+    <View
+      style={contentType === 'movie' ? styles.detailsContainer : [styles.detailsContainer, styles.playButtonContainer]}
+    >
       {contentType === 'movie' ? (
         <>
           <View style={styles.header}>
-            <View style={styles.headerLeft}>
-              <Text style={styles.title} numberOfLines={2}>
+            <View>
+              <Text style={styles.title} numberOfLines={1}>
                 {title}
               </Text>
               <Text style={styles.genre}>{genre?.name}</Text>
             </View>
-            <View style={styles.headerButtons}>
-              <TouchableOpacity
-                onPress={() => {
-                  addMovie(title, desc, imgLink, id, vote, movieList, genre);
-                }}
-              >
-                <Icon name="plus" color="red" size={25} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList });
-                }}
-              >
-                <MaterialIcon name="open-in-full" color="green" size={20} />
-              </TouchableOpacity>
-            </View>
           </View>
-          <Text style={styles.detail} numberOfLines={6}>
-            {desc}
-          </Text>
+          <View style={styles.actionButtons}>
+            <CustomButton
+              title={movieListCheck ? t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED') : t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
+              icon={<Icon name="plus" size={CUSTOM_ICON_SIZES.MEDIUM} color={movieListCheck ? CUSTOM_COLORS.GREEN : CUSTOM_COLORS.WHITE} />}
+              textColor={movieListCheck ? CUSTOM_COLORS_TYPE.GREEN : CUSTOM_COLORS_TYPE.WHITE}
+              bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
+              onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre)}
+            />
+            <CustomButton
+              title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.DETAILS')}
+              icon={<MaterialIcon name="page-next-outline" color={CUSTOM_COLORS.WHITE} size={CUSTOM_ICON_SIZES.SEMIMEDIUM} />}
+              textColor={CUSTOM_COLORS_TYPE.WHITE}
+              bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
+              onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList })}
+            />
+          </View>
         </>
       ) : (
         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>

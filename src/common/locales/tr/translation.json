@@ -37,7 +37,8 @@
                     "ADDED": "Eklendi",
                     "REMOVE": "Kaldır",
                     "UPDATE_PROFILE": "Profil Güncelle",
-                    "ADD_COMMENT": "Yorum Ekle"
+                    "ADD_COMMENT": "Yorum Ekle",
+                    "DETAILS": "Detaylar"
                 }
             }
         },

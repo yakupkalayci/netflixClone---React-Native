@@ -1,6 +1,6 @@
 // Import React
 import { Dispatch, SetStateAction } from 'react';
-import { SafeAreaView, Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 
 // Import 18next
 import { t } from 'i18next';
@@ -43,7 +43,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
       <View>
         <Image source={require('../../assets/img/logo.png')} style={styles.image} />
       </View>
-      <View style={styles.inputContainer}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.inputContainer}>
         <TextInput
           value={email}
           onChangeText={setEmail}
@@ -91,7 +91,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
             </Text>
           </>
         )}
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

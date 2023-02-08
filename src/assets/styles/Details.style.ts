@@ -19,29 +19,30 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 7
+    paddingBottom: 7,
+    borderBottomWidth: 1,
+    borderBottomColor: CUSTOM_COLORS.RED,
   },
   headerButtons: {
     flexDirection: 'column',
     alignItems: 'center'
   },
   title: {
-    fontSize: 14,
+    fontSize: 17,
     color: CUSTOM_COLORS.WHITE,
     fontWeight: 'bold',
-    paddingRight: 10
   },
   genre: {
-    fontSize: 12,
-    color: CUSTOM_COLORS.WHITE,
-    paddingBottom: 5
-  },
-  detail: {
-    borderTopWidth: 1,
-    borderTopColor: CUSTOM_COLORS.RED,
+    fontSize: 14,
     color: CUSTOM_COLORS.WHITE,
     paddingTop: 5,
-    fontSize: 13
+    paddingBottom: 5
+  },
+  actionButtons: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    paddingTop: 10
   },
   playButtonContainer: {
     flex: 1,

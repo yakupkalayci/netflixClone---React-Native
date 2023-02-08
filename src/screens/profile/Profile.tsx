@@ -1,9 +1,9 @@
 // Import React
 import { useState } from 'react';
-import { SafeAreaView, Text, View, TextInput, Button } from 'react-native';
+import { SafeAreaView, Text, View, TextInput } from 'react-native';
 
 // Import Constants
-import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
+import { CUSTOM_BG_COLORS_TYPE, CUSTOM_COLORS_TYPE } from 'src/common/constants/colors/customColors';
 
 // Import Firebase Auth
 import auth from '@react-native-firebase/auth';
@@ -23,6 +23,9 @@ import { withTranslation } from 'react-i18next';
 
 // Import Screen Type
 import { ProfileProps } from 'src/routes/types';
+
+// Import Components
+import CustomButton from 'src/components/button/CustomButton';
 
 // styles
 import styles from 'src/assets/styles/Profile.style';
@@ -84,14 +87,22 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
         <Text style={styles.label}>{t('GLOBAL.LABELS.PASSWORD')}</Text>
         <TextInput value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
         <View style={styles.buttonContainer}>
-          <Button
+          <CustomButton
             title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.UPDATE_PROFILE')}
-            color={CUSTOM_COLORS.RED}
+            bgColor={CUSTOM_BG_COLORS_TYPE.RED_BG}
+            textColor={CUSTOM_COLORS_TYPE.WHITE}
+            extraStyles={{ 'paddingVertical': 10, 'paddingHorizontal': 15 }}
             onPress={() => updateProfile()}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_OUT')} color={CUSTOM_COLORS.GRAY} onPress={() => handleSignOut()} />
+          <CustomButton
+            title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_OUT')}
+            bgColor={CUSTOM_BG_COLORS_TYPE.GRAY_BG}
+            textColor={CUSTOM_COLORS_TYPE.WHITE}
+            extraStyles={{ 'paddingVertical': 10, 'paddingHorizontal': 15 }}
+            onPress={() => handleSignOut()}
+          />
         </View>
       </View>
     </SafeAreaView>

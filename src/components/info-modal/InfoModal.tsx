@@ -35,7 +35,7 @@ interface InfoModalProps {
   id?: number
   imgLink?: string;
   userID?: string;
-  movieList: MovieListData[] | [] | undefined;
+  movieList?: MovieListData[] | [] | undefined;
 }
 
 function InfoModal(props: InfoModalProps) {

@@ -30,7 +30,8 @@ export default StyleSheet.create<StyleProps>({
   inputContainer: {
     alignItems: 'center',
     marginTop: 80,
-    width: '80%'
+    width: '80%',
+    flex: 1
   },
   input: {
     backgroundColor: CUSTOM_COLORS.MAIN_INPUT_BG_COLOR,

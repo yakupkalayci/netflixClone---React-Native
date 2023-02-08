@@ -64,6 +64,10 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
     }
   }, [genre]);
 
+  useEffect(() => {
+    console.log(movieList);
+  }, [movieList]);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
