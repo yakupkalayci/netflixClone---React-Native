@@ -22,7 +22,7 @@ interface MovieSectionProps {
 function MovieSection(props: MovieSectionProps): JSX.Element {
   // destruct props
   const { sectionTitle, movieData, contentType, movieList, userID } = props;
-
+  
   return (
     <View>
       <Text style={styles.titles}>{sectionTitle}</Text>

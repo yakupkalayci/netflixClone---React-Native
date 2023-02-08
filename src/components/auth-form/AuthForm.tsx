@@ -73,7 +73,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_UP')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => navigation.navigate(t('PAGE_TITLES.LOGIN'))}>
+            <Text style={styles.infoText} onPress={() => navigation.navigate('Login')}>
               {t('GLOBAL.LABELS.GO_BACK')}
             </Text>
           </>
@@ -86,7 +86,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.LOGIN')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => navigation.navigate(t('PAGE_TITLES.SIGN_UP'))}>
+            <Text style={styles.infoText} onPress={() => navigation.navigate('Signup')}>
               {t('GLOBAL.LABELS.SIGN_UP_NOW')}
             </Text>
           </>

@@ -1,0 +1,76 @@
+{
+    "GLOBAL": {
+        "COMPONENTS": {
+            "ALERT": {
+                "TITLES": {
+                    "SUCCESS": "Başarılı",
+                    "ERROR": "Hata",
+                    "WARNING": "Uyarı"
+                },
+                "MESSAGES": {
+                    "TRY_AGAIN": "Tekrar Deneyin...",
+                    "MOVIE_ADDED": "Film listenize eklendi!",
+                    "PROFILE_UPDATED": "Profil bilgileri güncellendi!",
+                    "INPUTS_CANT_BE_LEFT_EMPTY": "Input alanları boş bırakılamaz.",
+                    "MOVIE_ALREADY_ADDED": "Film zaten listenizde!",
+                    "ADD_COMMENT": "Lütfen yorum satırını doldurun!",
+                    "SAME_PASSWORD": "Şifreler aynı olmalı...",
+                    "SIGNED_SUCCESS": "Başarılı bir şekilde kayıt olundu!"
+                }
+            },
+            "TEXT_INPUT": {
+                "PLACEHOLDERS": {
+                    "EMAIL": "E-posta",
+                    "PASSWORD": "Şifre",
+                    "RE_PASSWORD": "Şifre Tekrar",
+                    "TYPE_COMMENT": "Bir şeyler yazın"
+                }
+            },
+            "BUTTON": {
+                "TITLES": {
+                    "LOGIN": "Giriş",
+                    "SIGN_UP": "Kayıt",
+                    "SIGN_OUT": "Çıkış",
+                    "MY_LIST":"Listem",
+                    "PLAY": "Oynat",
+                    "INFO": "Bilgi",
+                    "ADDED": "Eklendi",
+                    "REMOVE": "Kaldır",
+                    "UPDATE_PROFILE": "Profil Güncelle",
+                    "ADD_COMMENT": "Yorum Ekle"
+                }
+            }
+        },
+        "LABELS": {
+            "S_MOVIES": "'nın Filmleri",
+            "NO_MOVIE": "Film listenizde film yok!",
+            "ACCOUNT_INFORMATION": "Hesap Bilgileri",
+            "USERNAME": "kullanıcı adı",
+            "PASSWORD": "şifre",
+            "SIGN_UP_NOW": "Netflix'de Yeni Misiniz? Şimdi Kayıt Olun!",
+            "PREVIEWS" : "Önizlemeler",
+            "CONTIUNE_WATCHING_FOR" : "İzlemeye devam edin",
+            "POPULAR_TODAY": "Bugün Popüler",
+            "POPULAR_THIS_WEEK": "Bu Hafta Popüler",
+            "GO_BACK": "Geri",
+            "COMMENT": "yorum",
+            "COMMENTS": "Yorumlar",
+            "ADD_COMMENT":"Yorum Ekle"
+        }
+    },
+    "PAGE_TITLES": {
+        "LOGIN": "Giriş",
+        "SIGN_UP": "Kayıt",
+        "TAB_NAVIGATOR": "TabNavigator",
+        "HOME": "Ana Sayfa",
+        "PROFILE": "Profil",
+        "HOME_SCREEN": "Ana Sayfa",
+        "MY_LIST": "Listem",
+        "MOVIE_DETAIL": "Film Detayı"
+    },
+    "NAVIGATION_MENU": {
+        "MOVIES": "Filmler",
+        "TV_SHOWS": "TV Showları",
+        "MY_LIST": "Listem"
+    }
+}

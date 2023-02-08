@@ -1,5 +1,6 @@
 // Import i18next
 import { t } from 'i18next';
+import i18n from 'src/common/locales/i18n';
 
 // Login
 import Login from 'src/screens/login/Login';
@@ -35,14 +36,14 @@ export const authStackRoutes = [
     component: SignUp
   },
   {
-    name: t('PAGE_TITLES.TAB_NAVIGATOR'),
+    name: i18n.t('PAGE_TITLES.TAB_NAVIGATOR'),
     component: TabNavigator
   }
 ];
 
 export const tabRoutes = [
   {
-    name: t('PAGE_TITLES.HOME'),
+    name: i18n.t('PAGE_TITLES.HOME'),
     component: StackNavigator
   },
   {

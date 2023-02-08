@@ -15,6 +15,7 @@ import { getMoviesWithGenre } from 'src/store/actions/movies/getMoviesWithGenre'
 
 // Import i18next
 import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 // Import Utils
 import { getRandomImageIndex } from 'src/common/utils/getRandomImageIndex';
@@ -258,4 +259,4 @@ function Home({ navigation }: HomeScreenProps) {
   );
 }
 
-export default Home;
+export default withTranslation()(Home);

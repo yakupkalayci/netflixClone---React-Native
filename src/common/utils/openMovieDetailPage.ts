@@ -13,5 +13,5 @@ type params = {
 };
 
 export const openMovieDetailPage = (navigation: any, params: params) => {
-  navigation.navigate(t('PAGE_TITLES.MOVIE_DETAIL'), params);
+  navigation.navigate('Movie Detail', params);
 };

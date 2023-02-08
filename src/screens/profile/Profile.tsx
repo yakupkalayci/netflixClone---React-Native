@@ -19,6 +19,7 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 
 // Import i18next
 import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 // Import Screen Type
 import { ProfileProps } from 'src/routes/types';
@@ -36,7 +37,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
   const handleSignOut = async () => {
     await auth()
       .signOut()
-      .then(() => navigation.navigate(t('PAGE_TITLES.LOGIN')));
+      .then(() => navigation.navigate('Login'));
   };
 
   // method for update profile informations
@@ -53,7 +54,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
             t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'),
             t('GLOBAL.COMPONENTS.ALERT.MESSAGES.PROFILE_UPDATED')
           );
-          navigation.navigate(t('PAGE_TITLES.LOGIN'));
+          navigation.navigate('Login');
           setUsername('');
           setPassword('');
         })
@@ -97,4 +98,4 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
   );
 }
 
-export default Profile;
+export default withTranslation()(Profile);

@@ -35,7 +35,7 @@ function Login({ navigation }:LoginProps): JSX.Element {
         .then(() => {
           setEmail('');
           setPassword('');
-          navigation.navigate(t('PAGE_TITLES.TAB_NAVIGATOR'));
+          navigation.navigate('TabNavigator');
         })
         .catch((err) =>
           showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.ERROR'), authErrorParser(err.message))

@@ -21,6 +21,7 @@ import { showToast } from 'src/common/utils/showToast';
 
 // Import i18next
 import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 // Import Icon
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -158,4 +159,4 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   );
 }
 
-export default MovieDetail;
+export default withTranslation()(MovieDetail);

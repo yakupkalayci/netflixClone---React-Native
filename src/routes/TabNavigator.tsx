@@ -28,11 +28,11 @@ const TabNavigator = () => (
 
         color = focused ? CUSTOM_COLORS.TAB_BAR_ICON_ACTIVE_COLOR : CUSTOM_COLORS.TAB_BAR_ICON_INACTIVE_COLOR;
 
-        if (route.name === t('PAGE_TITLES.HOME')) {
+        if (route.name === 'Home') {
           iconName = 'home';
 
           return <Icon name={iconName} size={size} color={color} />;
-        } else if (route.name === t('PAGE_TITLES.PROFILE')) {
+        } else if (route.name === 'Profile') {
           iconName = 'person';
 
           return <ProfileIcon name={iconName} size={size} color={color} />;

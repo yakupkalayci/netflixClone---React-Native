@@ -41,7 +41,7 @@ function SignUp({ navigation }:SignupProps): JSX.Element {
         .then(() => {
           showToast(ALERT_TYPE.SUCCESS, t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.SIGNED_SUCCESS'));
           setTimeout(() => {
-            navigation.navigate(t('PAGE_TITLES.TAB_NAVIGATOR'));
+            navigation.navigate('TabNavigator');
           }, 2000);
         })
         .catch((err) => {

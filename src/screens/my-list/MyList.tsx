@@ -4,6 +4,7 @@ import { SafeAreaView, Text, FlatList, ActivityIndicator } from 'react-native';
 
 // Import i18next
 import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 // Import Utils
 import { listenDB } from 'src/common/utils/listenDB';
@@ -73,4 +74,4 @@ function MyList({ navigation }: MyListProps): JSX.Element {
   );
 }
 
-export default MyList;
+export default withTranslation()(MyList);

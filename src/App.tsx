@@ -1,3 +1,6 @@
+// Import React
+import { withTranslation } from 'react-i18next';
+
 // Import Redux
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -18,4 +21,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default withTranslation()(App);
