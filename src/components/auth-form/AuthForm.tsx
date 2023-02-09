@@ -15,6 +15,9 @@ import {
 // Import 18next
 import { t } from 'i18next';
 
+// Import Components
+import Input from '../form-items/Input';
+
 // Styles
 import styles from 'src/assets/styles/AuthForm.style';
 
@@ -54,27 +57,27 @@ function AuthForm(props: AuthFormProps): JSX.Element {
         <Image source={require('../../assets/img/logo.png')} style={styles.image} />
       </View>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.inputContainer}>
-        <TextInput
+        <Input
           value={email}
-          onChangeText={setEmail}
+          onChange={setEmail}
           placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.EMAIL')}
-          style={styles.input}
+          inputStyle={styles.input}
         />
-        <TextInput
+        <Input
           value={password}
-          onChangeText={setPassword}
+          onChange={setPassword}
           placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.PASSWORD')}
-          secureTextEntry
-          style={styles.input}
+          inputStyle={styles.input}
+          isPassword={true}
         />
         {type === 'signup' ? (
           <>
-            <TextInput
+            <Input
               value={rePassword}
-              onChangeText={setRePassword}
+              onChange={setRePassword}
               placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.RE_PASSWORD')}
-              secureTextEntry
-              style={styles.input}
+              inputStyle={styles.input}
+              isPassword={true}
             />
             <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp}>
               {loading ? (

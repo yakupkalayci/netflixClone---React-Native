@@ -1,6 +1,5 @@
 // Import React
-import { Fragment } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 // Import Icon
 import Icon from 'react-native-vector-icons/Entypo';

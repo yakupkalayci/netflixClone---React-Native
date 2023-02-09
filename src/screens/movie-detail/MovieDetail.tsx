@@ -48,14 +48,14 @@ import styles from 'src/assets/styles/MovieDetail.style';
 
 function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   // destruct params
-  const { title, genre, desc, imgLink, vote, id, userID, movieList } = route.params;
+  const { title, genre, desc, imgLink, vote, id, userID } = route.params;
 
   // variables
   const dispatch = useDispatch();
   const comments = useSelector((state: RootState) => state?.globalReducer?.getComments?.success?.data);
 
   // useState
-  // const [movieList, setMovieList] = useState<MovieListData[]>();
+  const [movieList, setMovieList] = useState<MovieListData[]>();
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
   const [fetchedGenre, setFetchedGenre] = useState<{name:string, id: number}>();
   const [showComments, setShowComments] = useState(false);
@@ -90,7 +90,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
 
   // useEffects
   useEffect(() => {
-    // listenDB(userID, setMovieList);
+    listenDB(userID, setMovieList);
     checkMovieList(id, movieList, setMovieListCheck);
     dispatch(getComments());
   }, []);

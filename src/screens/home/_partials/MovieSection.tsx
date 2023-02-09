@@ -15,7 +15,7 @@ interface MovieSectionProps {
   sectionTitle: string;
   movieData: TrendingMoviesData[] | MoviesWGenreData[];
   contentType: 'preview' | 'movie';
-  movieList: MovieListData[];
+  movieList: MovieListData[] | undefined;
   userID?: string;
 }
 

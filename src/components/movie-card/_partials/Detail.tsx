@@ -36,7 +36,7 @@ import { MoviesWGenreData, TrendingMoviesData } from 'src/store/actions/movies/_
 interface DetailsProps {
   contentType: 'preview' | 'movie';
   movieData: MoviesWGenreData | TrendingMoviesData;
-  movieList: MovieListData[];
+  movieList: MovieListData[] | undefined;
   userID?: string;
   setShowContent: Dispatch<SetStateAction<boolean>>;
 }
@@ -54,7 +54,7 @@ const Details = (props: DetailsProps) => {
   const imgLink = 'https://image.tmdb.org/t/p/w500' + movieData.poster_path;
 
   // useState
-  const [genre, setGenre] = useState();
+  const [genre, setGenre] = useState<{ name: string; id: number }>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
 
@@ -105,11 +105,11 @@ const Details = (props: DetailsProps) => {
               bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
               onPress={() => {
                 addMovie(
-                  movieData.title,
-                  movieData.overview,
+                  title,
+                  desc,
                   imgLink,
-                  movieData.id,
-                  movieData.vote_average,
+                  id,
+                  vote,
                   movieList,
                   genre
                 );
@@ -143,8 +143,8 @@ const Details = (props: DetailsProps) => {
             type="video"
             isVisible={modalVisible}
             setIsVisible={setModalVisible}
-            title={movieData.title}
-            imgLink={movieData.poster_path}
+            title={title}
+            imgLink={imgLink}
           />
         </TouchableOpacity>
       )}

@@ -26,6 +26,7 @@ import { ProfileProps } from 'src/routes/types';
 
 // Import Components
 import CustomButton from 'src/components/button/CustomButton';
+import Input from 'src/components/form-items/Input';
 
 // styles
 import styles from 'src/assets/styles/Profile.style';
@@ -77,15 +78,22 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
     <SafeAreaView style={styles.container}>
       <Text style={styles.pageTitle}>{t('GLOBAL.LABELS.ACCOUNT_INFORMATION')}</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>{t('GLOBAL.LABELS.USERNAME')}</Text>
-        <TextInput
+        <Input
           value={username}
+          onChange={setUsername}
           placeholder={user?.email ? user.email : ''}
-          onChangeText={setUsername}
-          style={styles.input}
+          label={t('GLOBAL.LABELS.USERNAME')}
+          inputStyle={styles.input}
+          labelStyle={styles.label}
         />
-        <Text style={styles.label}>{t('GLOBAL.LABELS.PASSWORD')}</Text>
-        <TextInput value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
+        <Input
+          value={password}
+          onChange={setPassword}
+          label={t('GLOBAL.LABELS.PASSWORD')}
+          inputStyle={styles.input}
+          labelStyle={styles.label}
+          isPassword={true}
+        />
         <View style={styles.buttonContainer}>
           <CustomButton
             title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.UPDATE_PROFILE')}

@@ -94,7 +94,7 @@ function MovieDetails(props: MovieDetailsProps): JSX.Element {
             ) : (
               <AddButton
                 iconName="plus"
-                iconColor={CUSTOM_COLORS.GREEN}
+                iconColor={CUSTOM_COLORS.WHITE}
                 iconSize={30}
                 added={false}
                 text={t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}

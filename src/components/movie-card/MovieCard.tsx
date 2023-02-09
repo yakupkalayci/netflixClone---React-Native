@@ -15,7 +15,7 @@ import { MoviesWGenreData, TrendingMoviesData } from 'src/store/actions/movies/_
 interface MovieCardProps {
   contentType: 'preview' | 'movie';
   movieData: MoviesWGenreData | TrendingMoviesData;
-  movieList: MovieListData[];
+  movieList: MovieListData[] | undefined;
   userID?: string;
 }
 

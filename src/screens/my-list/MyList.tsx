@@ -38,7 +38,7 @@ function MyList({ navigation }: MyListProps): JSX.Element {
   // useEffect
   useEffect(() => {
     listenDB(user?.uid, setMovieList, setLoading);
-  }, [user]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

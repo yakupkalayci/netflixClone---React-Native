@@ -15,7 +15,8 @@
                     "MOVIE_ALREADY_ADDED": "Film zaten listenizde!",
                     "ADD_COMMENT": "Lütfen yorum satırını doldurun!",
                     "SAME_PASSWORD": "Şifreler aynı olmalı...",
-                    "SIGNED_SUCCESS": "Başarılı bir şekilde kayıt olundu!"
+                    "SIGNED_SUCCESS": "Başarılı bir şekilde kayıt olundu!",
+                    "UNKNOWN_ERROR": "Bilinmeyen bir hata oluştu, Lütfen sayfayı yenileyin!"
                 }
             },
             "TEXT_INPUT": {

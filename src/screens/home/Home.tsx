@@ -49,6 +49,8 @@ import { HomeScreenProps } from 'src/routes/types';
 
 // Style
 import styles from 'src/assets/styles/HomeScreen.style';
+import { showToast } from 'src/common/utils/showToast';
+import { ALERT_TYPE } from 'react-native-alert-notification';
 
 function Home({ navigation }: HomeScreenProps) {
   // useState
@@ -75,15 +77,21 @@ function Home({ navigation }: HomeScreenProps) {
     {
       id: 0,
       onPressFunction: () => {
-        addMovie(
-          dailyTrendingMovies[randomImageIndex]?.title,
-          dailyTrendingMovies[randomImageIndex]?.overview,
-          `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
-          dailyTrendingMovies[randomImageIndex]?.id,
-          dailyTrendingMovies[randomImageIndex]?.vote_average,
-          movieList,
-          dailyTrendingMovies[randomImageIndex]?.genre_ids
-        );
+        movieListCheck
+          ? showToast(
+              ALERT_TYPE.WARNING,
+              t('GLOBAL.COMPONENTS.ALERT.TITLES.WARNING'),
+              t('GLOBAL.COMPONENTS.ALERT.MESSAGES.MOVIE_ALREADY_ADDED')
+            )
+          : addMovie(
+              dailyTrendingMovies[randomImageIndex]?.title,
+              dailyTrendingMovies[randomImageIndex]?.overview,
+              `https://image.tmdb.org/t/p/w500/${dailyTrendingMovies[randomImageIndex]?.poster_path}`,
+              dailyTrendingMovies[randomImageIndex]?.id,
+              dailyTrendingMovies[randomImageIndex]?.vote_average,
+              movieList,
+              dailyTrendingMovies[randomImageIndex]?.genre_ids
+            );
       },
       style: styles.actionButton,
       children: movieListCheck ? (
@@ -224,24 +232,26 @@ function Home({ navigation }: HomeScreenProps) {
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />
       <ScrollView>
-        <View style={styles.imageContainer}>
-          {dailyTrendingMovies ? (
-            <MainImage
-              dailyTrendingMovies={dailyTrendingMovies}
-              randomImageIndex={randomImageIndex}
-              style={styles.mainPoster}
-            />
-          ) : (
-            <ActivityIndicator size="large" />
-          )}
-        </View>
-        <View style={styles.actions}>
-          {actionButtonData.map((item) => (
-            <ActionButton key={item.id} onPressFunction={item.onPressFunction} style={item.style}>
-              {item.children}
-            </ActionButton>
-          ))}
-        </View>
+        {dailyTrendingMovies ? (
+          <>
+            <View style={styles.imageContainer}>
+              <MainImage
+                dailyTrendingMovies={dailyTrendingMovies}
+                randomImageIndex={randomImageIndex}
+                style={styles.mainPoster}
+              />
+            </View>
+            <View style={styles.actions}>
+              {actionButtonData.map((item) => (
+                <ActionButton key={item.id} onPressFunction={item.onPressFunction} style={item.style}>
+                  {item.children}
+                </ActionButton>
+              ))}
+            </View>
+          </>
+        ) : (
+          <ActivityIndicator size="large" />
+        )}
         <View style={styles.innerContainer}>
           {movieSectionData.map((item) => (
             <MovieSection

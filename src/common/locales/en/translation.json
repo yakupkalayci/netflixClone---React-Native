@@ -15,7 +15,8 @@
                     "MOVIE_ALREADY_ADDED": "You have already added the movie to your list!",
                     "ADD_COMMENT": "Please fill the comment box!",
                     "SAME_PASSWORD": "Passwords must be same..",
-                    "SIGNED_SUCCESS": "You have signed successfully!"
+                    "SIGNED_SUCCESS": "You have signed successfully!",
+                    "UNKNOWN_ERROR": "An Unknown error has occured! Please refresh the page."
                 }
             },
             "TEXT_INPUT": {

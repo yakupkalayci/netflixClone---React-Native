@@ -22,7 +22,7 @@ export const addMovie = (
   imgLink: string,
   id: number,
   vote: number,
-  movieList: MovieListData[],
+  movieList: MovieListData[] | undefined,
   genre: object | [] | undefined
 ) => {
   const user = getCurrentUser();
@@ -36,7 +36,8 @@ export const addMovie = (
       t('GLOBAL.COMPONENTS.ALERT.MESSAGES.MOVIE_ALREADY_ADDED')
     );
   } else {
-    const reference = firebase
+    if(title && desc && imgLink && id && vote && genre) {
+      const reference = firebase
       .app()
       .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')
       .ref('/users/' + user?.uid + '/movies')
@@ -54,5 +55,8 @@ export const addMovie = (
       .catch((err) =>
         showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.ERROR'), authErrorParser(err.message))
       );
+    } else {
+      showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.ERROR'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.UNKNONW_ERROR'));
+    }
   }
 };

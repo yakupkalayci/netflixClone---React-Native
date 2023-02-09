@@ -8,6 +8,9 @@ import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 // Import i18next
 import { t } from 'i18next';
 
+// Import Components
+import Input from 'src/components/form-items/Input';
+
 // Import styles
 import styles from 'src/assets/styles/CommentForm.style';
 
@@ -23,11 +26,11 @@ function CommentForm(props: CommentProps): JSX.Element {
 
   return (
     <View>
-      <TextInput
+      <Input
         value={comment}
-        onChangeText={setComment}
+        onChange={setComment}
         placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.TYPE_COMMENT')}
-        style={styles.input}
+        inputStyle={styles.input}
       />
       <Button
         title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADD_COMMENT')}
