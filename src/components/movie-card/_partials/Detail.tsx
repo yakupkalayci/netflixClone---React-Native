@@ -1,5 +1,5 @@
 // Import React
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 // Import Navigation Context
@@ -13,7 +13,6 @@ import { CUSTOM_COLORS, CUSTOM_COLORS_TYPE } from 'src/common/constants/colors/c
 import { CUSTOM_ICON_SIZES } from 'src/common/constants/icon/iconSizes';
 
 // Import Icons
-import Icon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Import Utils
@@ -25,51 +24,53 @@ import { checkMovieList } from 'src/common/utils/checkMovieList';
 // Import Components
 import InfoModal from 'src/components/info-modal/InfoModal';
 import CustomButton from 'src/components/button/CustomButton';
+import AddButton from 'src/components/add-button/AddButton';
 
 // styles
 import styles from 'src/assets/styles/Details.style';
 
 // Import Types
 import { MovieListData } from 'src/screens/home/_types/movieListData';
+import { MoviesWGenreData, TrendingMoviesData } from 'src/store/actions/movies/_types/apiTypes';
 
 interface DetailsProps {
   contentType: 'preview' | 'movie';
-  title: string;
-  genres: number[];
-  desc: string;
-  imgLink: string;
-  id: number;
-  vote: number;
+  movieData: MoviesWGenreData | TrendingMoviesData;
   movieList: MovieListData[];
   userID?: string;
+  setShowContent: Dispatch<SetStateAction<boolean>>;
 }
 
 const Details = (props: DetailsProps) => {
   // destruct props
-  const { contentType, title, genres, desc, imgLink, id, vote, movieList, userID } = props;
+  const { contentType, movieData, movieList, userID, setShowContent } = props;
 
   // variables
   const navigation = useContext(NavigationContext);
+  const title = movieData.title;
+  const desc = movieData.overview;
+  const vote = movieData.vote_average;
+  const id = movieData.id;
+  const imgLink = 'https://image.tmdb.org/t/p/w500' + movieData.poster_path;
 
   // useState
   const [genre, setGenre] = useState();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
 
-
   // useEffect
   useEffect(() => {
     // method for getting the genre name according to genre id
     const getGenre = async () => {
-      setGenre(await fetchGenre(genres[0]));
+      setGenre(await fetchGenre(movieData.genre_ids[0]));
     };
 
     getGenre();
-    checkMovieList(id, movieList, setMovieListCheck);
+    checkMovieList(movieData.id, movieList, setMovieListCheck);
   }, []);
 
   useEffect(() => {
-    checkMovieList(id, movieList, setMovieListCheck);
+    checkMovieList(movieData.id, movieList, setMovieListCheck);
   }, [movieList]);
 
   return (
@@ -81,25 +82,57 @@ const Details = (props: DetailsProps) => {
           <View style={styles.header}>
             <View>
               <Text style={styles.title} numberOfLines={1}>
-                {title}
+                {movieData.title}
               </Text>
               <Text style={styles.genre}>{genre?.name}</Text>
             </View>
           </View>
           <View style={styles.actionButtons}>
             <CustomButton
-              title={movieListCheck ? t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED') : t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')}
-              icon={<Icon name="plus" size={CUSTOM_ICON_SIZES.MEDIUM} color={movieListCheck ? CUSTOM_COLORS.GREEN : CUSTOM_COLORS.WHITE} />}
+              title={
+                movieListCheck
+                  ? t('GLOBAL.COMPONENTS.BUTTON.TITLES.ADDED')
+                  : t('GLOBAL.COMPONENTS.BUTTON.TITLES.MY_LIST')
+              }
+              icon={
+                <AddButton
+                  iconName="plus"
+                  added={movieListCheck}
+                  iconColor={movieListCheck ? CUSTOM_COLORS.GREEN : CUSTOM_COLORS.WHITE}
+                />
+              }
               textColor={movieListCheck ? CUSTOM_COLORS_TYPE.GREEN : CUSTOM_COLORS_TYPE.WHITE}
               bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
-              onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre)}
+              onPress={() => {
+                addMovie(
+                  movieData.title,
+                  movieData.overview,
+                  imgLink,
+                  movieData.id,
+                  movieData.vote_average,
+                  movieList,
+                  genre
+                );
+                setTimeout(() => setShowContent(false), 1000);
+              }}
+              extraStyles={{ padding: 3 }}
             />
             <CustomButton
               title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.DETAILS')}
-              icon={<MaterialIcon name="page-next-outline" color={CUSTOM_COLORS.WHITE} size={CUSTOM_ICON_SIZES.SEMIMEDIUM} />}
+              icon={
+                <MaterialIcon
+                  name="page-next-outline"
+                  color={CUSTOM_COLORS.WHITE}
+                  size={CUSTOM_ICON_SIZES.SEMIMEDIUM}
+                />
+              }
               textColor={CUSTOM_COLORS_TYPE.WHITE}
               bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
-              onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList })}
+              onPress={() => {
+                openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList });
+                setTimeout(() => setShowContent(false), 1000);
+              }}
+              extraStyles={{ padding: 3 }}
             />
           </View>
         </>
@@ -110,8 +143,8 @@ const Details = (props: DetailsProps) => {
             type="video"
             isVisible={modalVisible}
             setIsVisible={setModalVisible}
-            title={title}
-            imgLink={imgLink}
+            title={movieData.title}
+            imgLink={movieData.poster_path}
           />
         </TouchableOpacity>
       )}

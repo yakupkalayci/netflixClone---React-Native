@@ -18,12 +18,14 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 import AuthForm from 'src/components/auth-form/AuthForm';
 
 // Import Screen Type
-import { LoginProps } from 'src/routes/types';
+import { AuthenticationProps } from 'src/routes/types';
 
-function Login({ navigation }:LoginProps): JSX.Element {
+function Auth({ navigation }:AuthenticationProps): JSX.Element {
   // useState
+  const [pageType, setPageType] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [rePassword, setRePassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   // Method for user login
@@ -50,18 +52,51 @@ function Login({ navigation }:LoginProps): JSX.Element {
     }
   };
 
+    // Method for user signup
+    const handleSignUp = () => {
+      if (email && password) {
+        if (password !== rePassword) {
+          showToast(ALERT_TYPE.DANGER, t('GLOBAL.COMPONENTS.ALERT.TITLES.WARNING'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.SAME_PASSWORD'));
+
+          return;
+        }
+        setLoading(true);
+        auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            showToast(ALERT_TYPE.SUCCESS, t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'), t('GLOBAL.COMPONENTS.ALERT.MESSAGES.SIGNED_SUCCESS'));
+            setTimeout(() => {
+              navigation.navigate('TabNavigator');
+            }, 2000);
+          })
+          .catch((err) => {
+            showToast(ALERT_TYPE.DANGER, 'Error', authErrorParser(err.message));
+          })
+          .finally(() => setLoading(false));
+      } else {
+        showToast(
+          ALERT_TYPE.WARNING,
+          t('GLOBAL.COMPONENTS.ALERT.TITLES.WARNING'),
+          t('GLOBAL.COMPONENTS.ALERT.MESSAGES.INPUTS_CANT_BE_LEFT_EMPTY')
+        );
+      }
+    };
+
   return (
     <AuthForm
-      type="login"
+      type={pageType}
+      setPageType={setPageType}
       email={email}
       password={password}
       setEmail={setEmail}
       setPassword={setPassword}
-      navigation={navigation}
+      rePassword={rePassword}
+      setRePassword={setRePassword}
       handleLogin={handleLogin}
       loading={loading}
+      handleSignUp={handleSignUp}
     />
   );
 }
 
-export default Login;
+export default Auth;

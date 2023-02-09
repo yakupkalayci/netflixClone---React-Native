@@ -1,12 +1,8 @@
 // Import i18next
-import { t } from 'i18next';
-import i18n from 'src/common/locales/i18n';
+import { t } from 'i18next'
 
-// Login
-import Login from 'src/screens/login/Login';
-
-// SignUp
-import SignUp from 'src/screens/sign-up/SignUp';
+// Authentication
+import Auth from 'src/screens/authentication/Auth';
 
 // TabNavigator
 import TabNavigator from 'src/routes/TabNavigator';
@@ -28,22 +24,18 @@ import MovieDetail from 'src/screens/movie-detail/MovieDetail';
 
 export const authStackRoutes = [
   {
-    name: t('PAGE_TITLES.LOGIN'),
-    component: Login
+    name: t('PAGE_TITLES.AUTH'),
+    component: Auth
   },
   {
-    name: t('PAGE_TITLES.SIGN_UP'),
-    component: SignUp
-  },
-  {
-    name: i18n.t('PAGE_TITLES.TAB_NAVIGATOR'),
+    name: t('PAGE_TITLES.TAB_NAVIGATOR'),
     component: TabNavigator
   }
 ];
 
 export const tabRoutes = [
   {
-    name: i18n.t('PAGE_TITLES.HOME'),
+    name: t('PAGE_TITLES.HOME'),
     component: StackNavigator
   },
   {

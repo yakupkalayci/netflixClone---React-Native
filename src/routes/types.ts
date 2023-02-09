@@ -6,8 +6,7 @@ import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/n
 import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 export type RootStackParamList = {
-  Login: undefined;
-  Signup: undefined;
+  Authentication: undefined;
   TabNavigator: undefined;
 };
 
@@ -31,8 +30,7 @@ export type InnterStackParamList = {
     }
 }
 
-export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
-export type SignupProps = NativeStackScreenProps<RootStackParamList, 'Signup'>;
+export type AuthenticationProps = NativeStackScreenProps<RootStackParamList, 'Authentication'>;
 
 export type ProfileProps = CompositeScreenProps<
 BottomTabScreenProps<TabParamList, 'Profile'>,

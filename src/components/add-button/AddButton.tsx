@@ -1,5 +1,6 @@
 // Import React
-import { Text } from 'react-native';
+import { Fragment } from 'react';
+import { Text, View } from 'react-native';
 
 // Import Icon
 import Icon from 'react-native-vector-icons/Entypo';
@@ -11,7 +12,7 @@ interface AddButtonProps {
   iconName: string;
   iconSize?: number;
   iconColor: string;
-  text: string;
+  text?: string;
   added: boolean;
 }
 

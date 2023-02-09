@@ -47,14 +47,10 @@ function MovieCard(props: MovieCardProps): JSX.Element {
       {showContent && (
         <Details
           contentType={contentType}
-          title={movieData.title}
-          genres={movieData.genre_ids}
-          desc={movieData.overview}
-          imgLink={imgLink}
-          id={movieData.id}
-          vote={movieData.vote_average}
+          movieData={movieData}
           movieList={movieList}
           userID={userID}
+          setShowContent={setShowContent}
         />
       )}
     </TouchableOpacity>

@@ -15,12 +15,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Import Components
 import CustomIcon from '../icons/CustomIcon';
+import NavigationItem from '../navigation-item/NavigationItem';
 
 // styles
 import styles from 'src/assets/styles/Header.style';
 
 function Header({ navigation }): JSX.Element {
-
   // method for navigation to home screen
   const navigateToMovies = () => {
     navigation.navigate('Home Screen');
@@ -32,7 +32,7 @@ function Header({ navigation }): JSX.Element {
   };
 
   useEffect(() => {
-    const changeLang = async() => await AsyncStorage.setItem('language', JSON.stringify(i18n.language));
+    const changeLang = async () => await AsyncStorage.setItem('language', JSON.stringify(i18n.language));
 
     changeLang();
   }, [i18n.language]);
@@ -40,17 +40,18 @@ function Header({ navigation }): JSX.Element {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/img/icon.png')} style={styles.logo} />
-      <TouchableOpacity onPress={() => navigateToMovies()}>
-        <Text style={styles.listItem}>{t('NAVIGATION_MENU.MOVIES')}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={styles.listItem}>{t('NAVIGATION_MENU.TV_SHOWS')}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToMyList()}>
-        <Text style={styles.listItem}>{t('NAVIGATION_MENU.MY_LIST')}</Text>
-      </TouchableOpacity>
+      <NavigationItem onPress={() => navigateToMovies()} target={t('NAVIGATION_MENU.MOVIES')} style={styles.listItem} />
+      <NavigationItem target={t('NAVIGATION_MENU.TV_SHOWS')} style={styles.listItem} />
+      <NavigationItem
+        onPress={() => navigateToMyList()}
+        target={t('NAVIGATION_MENU.MY_LIST')}
+        style={styles.listItem}
+      />
       <TouchableOpacity onPress={() => i18n.changeLanguage(i18n.language === 'en' ? 'tr' : 'en')}>
-        <CustomIcon name={i18n.language === 'en' ? CUSTOM_ICON_LIST.UK : CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE}/>
+        <CustomIcon
+          name={i18n.language === 'en' ? CUSTOM_ICON_LIST.UK : CUSTOM_ICON_LIST.TR}
+          size={CUSTOM_ICON_SIZES.LARGE}
+        />
       </TouchableOpacity>
     </View>
   );

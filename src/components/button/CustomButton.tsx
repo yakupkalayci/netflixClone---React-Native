@@ -33,7 +33,7 @@ function CustomButton(props: CustomButtonProps): JSX.Element {
       onPress={() => onPress()}
     >
       {icon}
-      <Text style={textColor && finalStyle[textColor]}>{title}</Text>
+      <Text style={textColor ? [styles.text, finalStyle[textColor]] : styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 }

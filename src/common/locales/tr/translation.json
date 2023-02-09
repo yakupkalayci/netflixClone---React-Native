@@ -60,8 +60,7 @@
         }
     },
     "PAGE_TITLES": {
-        "LOGIN": "Giriş",
-        "SIGN_UP": "Kayıt",
+        "AUTH": "Kimlik Doğrulama",
         "TAB_NAVIGATOR": "TabNavigator",
         "HOME": "Ana Sayfa",
         "PROFILE": "Profil",

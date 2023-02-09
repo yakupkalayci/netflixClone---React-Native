@@ -2,16 +2,16 @@
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 
-// Import Constants
-import { MOVIE_SECTION_TYPES } from 'src/common/constants/movie-section/movieSectionTypes';
-import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
-
 // Import Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store/store';
 import { getDailyTrendingMovies } from 'src/store/actions/movies/getDailyTrendingMovies';
 import { getWeeklyTrendingMovies } from 'src/store/actions/movies/getWeeklyTrendingMovies';
 import { getMoviesWithGenre } from 'src/store/actions/movies/getMoviesWithGenre';
+
+// Import Constants
+import { MOVIE_SECTION_TYPES } from 'src/common/constants/movie-section/movieSectionTypes';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import i18next
 import { t } from 'i18next';

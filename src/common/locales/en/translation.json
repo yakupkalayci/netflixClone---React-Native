@@ -60,8 +60,7 @@
         }
     },
     "PAGE_TITLES": {
-        "LOGIN": "Login",
-        "SIGN_UP": "Signup",
+        "AUTH": "Authentication",
         "TAB_NAVIGATOR": "TabNavigator",
         "HOME": "Home",
         "PROFILE": "Profile",

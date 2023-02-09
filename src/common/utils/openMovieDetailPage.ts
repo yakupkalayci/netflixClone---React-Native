@@ -1,6 +1,3 @@
-// Import i18next
-import { t } from 'i18next';
-
 type params = {
   title: string;
   genre: string | object | undefined;
@@ -9,7 +6,7 @@ type params = {
   vote;
   id;
   userID;
-  movieList
+  movieList;
 };
 
 export const openMovieDetailPage = (navigation: any, params: params) => {

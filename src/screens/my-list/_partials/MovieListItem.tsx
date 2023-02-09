@@ -25,13 +25,7 @@ import { MovieListData } from 'src/screens/home/_types/movieListData';
 import styles from 'src/assets/styles/MovieListItem.style';
 
 interface MovieListItemProps {
-  imgLink: string;
-  title: string;
-  genre: object | [];
-  description: string;
-  id: number;
-  vote: number;
-  movieKey: string;
+  data: MovieListData;
   userID: string | undefined;
   navigation: any;
   movieList: MovieListData[];
@@ -39,22 +33,25 @@ interface MovieListItemProps {
 
 function MovieListItem(props: MovieListItemProps): JSX.Element {
   // destruct props
-  const { imgLink, title, genre, description, id, vote, movieKey, userID, navigation, movieList } = props;
+  const { data, userID, navigation, movieList } = props;
+
+  // destruct data
+  const { desc, genre, id, imgLink, title, vote, key } = data;
 
   // useState
-  const [fetchedGenre, setFetchedGenre] = useState<{id: number, name: string}>();
+  const [fetchedGenre, setFetchedGenre] = useState<{ id: number; name: string }>();
 
   // method for remove movie from my list
   const removeMovie = async () => {
     await firebase
       .app()
       .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')
-      .ref('/users/' + userID + '/movies/' + movieKey)
+      .ref('/users/' + userID + '/movies/' + key)
       .remove();
   };
 
   useEffect(() => {
-    if(Array.isArray(genre)) {
+    if (Array.isArray(genre)) {
       // method for getting the genre name according to genre id
       const getGenre = async () => {
         setFetchedGenre(await fetchGenre(genre[0]));
@@ -63,10 +60,6 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
       getGenre();
     }
   }, [genre]);
-
-  useEffect(() => {
-    console.log(movieList);
-  }, [movieList]);
 
   return (
     <View style={styles.container}>
@@ -78,7 +71,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
       </View>
       <View style={styles.innerContainer}>
         <TouchableOpacity
-          onPress={() => openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID, movieList })}
+          onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList })}
         >
           <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
@@ -89,7 +82,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>
           </View>
         </View>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{desc}</Text>
       </View>
     </View>
   );

@@ -1,6 +1,16 @@
 // Import React
 import { Dispatch, SetStateAction } from 'react';
-import { SafeAreaView, Text, View, Image, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform
+} from 'react-native';
 
 // Import 18next
 import { t } from 'i18next';
@@ -10,15 +20,15 @@ import styles from 'src/assets/styles/AuthForm.style';
 
 interface AuthFormProps {
   type: 'login' | 'signup';
+  setPageType: Dispatch<SetStateAction<'login' | 'signup'>>;
   email: string;
   setEmail: Dispatch<SetStateAction<string>>;
   setPassword: Dispatch<SetStateAction<string>>;
   password: string;
-  navigation: any;
-  rePassword?: string;
-  setRePassword?: Dispatch<SetStateAction<string>>;
-  handleLogin?: () => void;
-  handleSignUp?: () => void;
+  rePassword: string;
+  setRePassword: Dispatch<SetStateAction<string>>;
+  handleLogin: () => void;
+  handleSignUp: () => void;
   loading?: boolean;
 }
 
@@ -26,13 +36,13 @@ function AuthForm(props: AuthFormProps): JSX.Element {
   // destruct props
   const {
     type,
+    setPageType,
     email,
     setEmail,
     setPassword,
     password,
     rePassword,
     setRePassword,
-    navigation,
     handleLogin,
     handleSignUp,
     loading
@@ -73,7 +83,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_UP')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.infoText} onPress={() => setPageType('login')}>
               {t('GLOBAL.LABELS.GO_BACK')}
             </Text>
           </>
@@ -86,7 +96,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.LOGIN')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => navigation.navigate('Signup')}>
+            <Text style={styles.infoText} onPress={() => setPageType('signup')}>
               {t('GLOBAL.LABELS.SIGN_UP_NOW')}
             </Text>
           </>

@@ -53,18 +53,7 @@ function MyList({ navigation }: MyListProps): JSX.Element {
         <FlatList
           data={movieList}
           renderItem={({ item }) => (
-            <MovieListItem
-              title={item.title}
-              genre={item.genre}
-              description={item.desc}
-              imgLink={item.imgLink}
-              id={item.id}
-              vote={item.vote}
-              movieKey={item.key}
-              userID={user?.uid}
-              navigation={navigation}
-              movieList={movieList}
-            />
+            <MovieListItem data={item} userID={user?.uid} navigation={navigation} movieList={movieList} />
           )}
         />
       ) : (

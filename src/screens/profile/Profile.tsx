@@ -40,7 +40,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
   const handleSignOut = async () => {
     await auth()
       .signOut()
-      .then(() => navigation.navigate('Login'));
+      .then(() => navigation.navigate('Authentication'));
   };
 
   // method for update profile informations
@@ -91,7 +91,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
             title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.UPDATE_PROFILE')}
             bgColor={CUSTOM_BG_COLORS_TYPE.RED_BG}
             textColor={CUSTOM_COLORS_TYPE.WHITE}
-            extraStyles={{ 'paddingVertical': 10, 'paddingHorizontal': 15 }}
+            extraStyles={{ paddingVertical: 10, paddingHorizontal: 15 }}
             onPress={() => updateProfile()}
           />
         </View>
@@ -100,7 +100,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
             title={t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_OUT')}
             bgColor={CUSTOM_BG_COLORS_TYPE.GRAY_BG}
             textColor={CUSTOM_COLORS_TYPE.WHITE}
-            extraStyles={{ 'paddingVertical': 10, 'paddingHorizontal': 15 }}
+            extraStyles={{ paddingVertical: 10, paddingHorizontal: 15 }}
             onPress={() => handleSignOut()}
           />
         </View>

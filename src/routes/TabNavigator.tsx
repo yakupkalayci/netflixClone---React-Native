@@ -1,9 +1,6 @@
 // Import Constants
 import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
-// Import i18next
-import { t } from 'i18next';
-
 // Import React-Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
