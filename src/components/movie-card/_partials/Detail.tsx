@@ -23,7 +23,7 @@ import { checkMovieList } from 'src/common/utils/checkMovieList';
 
 // Import Components
 import InfoModal from 'src/components/info-modal/InfoModal';
-import CustomButton from 'src/components/button/CustomButton';
+import CustomButton from 'src/components/cta/button/CustomButton';
 import AddButton from 'src/components/add-button/AddButton';
 
 // styles

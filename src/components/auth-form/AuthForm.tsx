@@ -5,7 +5,6 @@ import {
   Text,
   View,
   Image,
-  TextInput,
   TouchableOpacity,
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -56,12 +55,18 @@ function AuthForm(props: AuthFormProps): JSX.Element {
       <View>
         <Image source={require('../../assets/img/logo.png')} style={styles.image} />
       </View>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.inputContainer}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+        style={styles.inputContainer}
+      >
         <Input
           value={email}
           onChange={setEmail}
           placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.EMAIL')}
           inputStyle={styles.input}
+          autoCapitalize={'none'}
+          keyboardType={'email-address'}
         />
         <Input
           value={password}
@@ -69,6 +74,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
           placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.PASSWORD')}
           inputStyle={styles.input}
           isPassword={true}
+          autoCapitalize={'none'}
         />
         {type === 'signup' ? (
           <>
@@ -78,6 +84,7 @@ function AuthForm(props: AuthFormProps): JSX.Element {
               placeholder={t('GLOBAL.COMPONENTS.TEXT_INPUT.PLACEHOLDERS.RE_PASSWORD')}
               inputStyle={styles.input}
               isPassword={true}
+              autoCapitalize={'none'}
             />
             <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp}>
               {loading ? (
@@ -86,7 +93,15 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.SIGN_UP')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => setPageType('login')}>
+            <Text
+              style={styles.infoText}
+              onPress={() => {
+                setPageType('login');
+                setEmail('');
+                setPassword('');
+                setRePassword('');
+              }}
+            >
               {t('GLOBAL.LABELS.GO_BACK')}
             </Text>
           </>
@@ -99,7 +114,15 @@ function AuthForm(props: AuthFormProps): JSX.Element {
                 <Text style={styles.buttonText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.LOGIN')}</Text>
               )}
             </TouchableOpacity>
-            <Text style={styles.infoText} onPress={() => setPageType('signup')}>
+            <Text
+              style={styles.infoText}
+              onPress={() => {
+                setPageType('signup');
+                setEmail('');
+                setPassword('');
+                setRePassword('');
+              }}
+            >
               {t('GLOBAL.LABELS.SIGN_UP_NOW')}
             </Text>
           </>

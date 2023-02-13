@@ -13,7 +13,7 @@ interface CustomButtonProps {
   textColor: CUSTOM_COLORS_TYPE;
   bgColor: CUSTOM_COLORS_TYPE | CUSTOM_BG_COLORS_TYPE;
   onPress: any;
-  extraStyles?: any;
+  extraStyles?: ViewStyle;
 }
 
 function CustomButton(props: CustomButtonProps): JSX.Element {

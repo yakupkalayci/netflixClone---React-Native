@@ -1,6 +1,6 @@
 // Import React
 import { useState } from 'react';
-import { SafeAreaView, Text, View, TextInput } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 
 // Import Constants
 import { CUSTOM_BG_COLORS_TYPE, CUSTOM_COLORS_TYPE } from 'src/common/constants/colors/customColors';
@@ -25,7 +25,7 @@ import { withTranslation } from 'react-i18next';
 import { ProfileProps } from 'src/routes/types';
 
 // Import Components
-import CustomButton from 'src/components/button/CustomButton';
+import CustomButton from 'src/components/cta/button/CustomButton';
 import Input from 'src/components/form-items/Input';
 
 // styles
@@ -58,7 +58,7 @@ function Profile({ navigation }: ProfileProps): JSX.Element {
             t('GLOBAL.COMPONENTS.ALERT.TITLES.SUCCESS'),
             t('GLOBAL.COMPONENTS.ALERT.MESSAGES.PROFILE_UPDATED')
           );
-          navigation.navigate('Login');
+          navigation.navigate('Authentication');
           setUsername('');
           setPassword('');
         })

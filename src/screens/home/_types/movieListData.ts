@@ -1,6 +1,6 @@
 export type MovieListData = {
   desc: string;
-  genre: object | [];
+  genre: { name: string; id: number } | number[];
   id: number;
   imgLink: string;
   title: string;

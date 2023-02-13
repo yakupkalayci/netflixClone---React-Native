@@ -17,6 +17,9 @@ import { NavigationContext } from '@react-navigation/native';
 // Import Vector Close Icon
 import IconClose from 'react-native-vector-icons/Fontisto';
 
+// Import Components
+import NavigationItem from '../navigation-item/NavigationItem';
+
 // Import Date Types
 import { MovieListData } from 'src/screens/home/_types/movieListData';
 
@@ -32,7 +35,7 @@ interface InfoModalProps {
   description?: string;
   genre?: number[];
   vote?: number;
-  id?: number
+  id?: number;
   imgLink?: string;
   userID?: string;
   movieList?: MovieListData[] | [] | undefined;
@@ -40,7 +43,20 @@ interface InfoModalProps {
 
 function InfoModal(props: InfoModalProps) {
   // destruct props
-  const { isVisible, setIsVisible, title, originalTitle, description, genre, vote, imgLink, id, type, userID, movieList } = props;
+  const {
+    isVisible,
+    setIsVisible,
+    title,
+    originalTitle,
+    description,
+    genre,
+    vote,
+    imgLink,
+    id,
+    type,
+    userID,
+    movieList
+  } = props;
 
   // variables
   const navigation = useContext(NavigationContext);
@@ -55,13 +71,22 @@ function InfoModal(props: InfoModalProps) {
         {type === 'text' ? (
           <Fragment>
             <View style={styles.modalHeader}>
-              <TouchableOpacity
+              <NavigationItem
+                target={title}
                 onPress={() =>
-                  openMovieDetailPage(navigation, { title, genre, desc: description, imgLink, vote, id, userID, movieList })
+                  openMovieDetailPage(navigation, {
+                    title,
+                    genre,
+                    desc: description,
+                    imgLink,
+                    vote,
+                    id,
+                    userID,
+                    movieList
+                  })
                 }
-              >
-                <Text style={[styles.modalText, styles.modalTitle]}>{title}</Text>
-              </TouchableOpacity>
+                style={[styles.modalText, styles.modalTitle]}
+              />
               <IconClose name="close" color="red" size={20} onPress={() => setIsVisible(false)} />
             </View>
             <Text style={[styles.modalText, styles.originalTitle]}>Original Title: {originalTitle}</Text>

@@ -1,6 +1,6 @@
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import { CompositeScreenProps, NavigatorScreenParams, CompositeNavigationProp } from '@react-navigation/native';
 
 // Import Data Types
 import { MovieListData } from 'src/screens/home/_types/movieListData';
@@ -46,6 +46,11 @@ export type MyListProps = CompositeScreenProps<
 NativeStackScreenProps<InnterStackParamList, 'MyList'>,
 NativeStackScreenProps<RootStackParamList>
 >;
+
+export type MyListNavigationProp = CompositeNavigationProp<
+NativeStackNavigationProp<InnterStackParamList, 'MyList'>,
+NativeStackNavigationProp<RootStackParamList>
+>
 
 export type MovieDetaiProps = CompositeScreenProps<
 NativeStackScreenProps<InnterStackParamList, 'MovieDetail'>,

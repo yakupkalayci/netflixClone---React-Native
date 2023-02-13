@@ -1,6 +1,6 @@
 // Import React
 import { useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 
 // Import i18next
 import { t } from 'i18next';
@@ -20,15 +20,16 @@ import NavigationItem from '../navigation-item/NavigationItem';
 // styles
 import styles from 'src/assets/styles/Header.style';
 
-function Header({ navigation }): JSX.Element {
+function Header(props): JSX.Element {
   // method for navigation to home screen
   const navigateToMovies = () => {
-    navigation.navigate('Home Screen');
+    // navigation.navigate('Home Screen');
+    props.navigation.navigate('Home Screen');
   };
 
   // method for navigation to my list
   const navigateToMyList = () => {
-    navigation.navigate('My List');
+    props.navigation.navigate('My List');
   };
 
   useEffect(() => {

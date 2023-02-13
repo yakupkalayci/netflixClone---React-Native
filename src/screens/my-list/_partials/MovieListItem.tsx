@@ -15,11 +15,18 @@ import { fetchGenre } from 'src/common/utils/fetchGenre';
 // Import i18next
 import { t } from 'i18next';
 
+// Import Navigation Context
+import { NavigationContext } from '@react-navigation/native';
+
 // Import Icons
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Import Components
+import NavigationItem from 'src/components/navigation-item/NavigationItem';
+
 // Import Data Types
 import { MovieListData } from 'src/screens/home/_types/movieListData';
+import { MyListNavigationProp } from 'src/routes/types';
 
 // styles
 import styles from 'src/assets/styles/MovieListItem.style';
@@ -27,7 +34,7 @@ import styles from 'src/assets/styles/MovieListItem.style';
 interface MovieListItemProps {
   data: MovieListData;
   userID: string | undefined;
-  navigation: any;
+  navigation: MyListNavigationProp;
   movieList: MovieListData[];
 }
 
@@ -39,7 +46,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
   const { desc, genre, id, imgLink, title, vote, key } = data;
 
   // useState
-  const [fetchedGenre, setFetchedGenre] = useState<{ id: number; name: string }>();
+  const [fetchedGenre, setFetchedGenre] = useState<{ name: string; id: number }>();
 
   // method for remove movie from my list
   const removeMovie = async () => {
@@ -70,13 +77,13 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
         </TouchableOpacity>
       </View>
       <View style={styles.innerContainer}>
-        <TouchableOpacity
+        <NavigationItem
+          target={title}
           onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList })}
-        >
-          <Text style={styles.title}>{title}</Text>
-        </TouchableOpacity>
+          style={styles.title}
+        />
         <View style={styles.detailContainer}>
-          <Text style={styles.genre}>{fetchedGenre?.name ? fetchedGenre?.name : genre?.name}</Text>
+          <Text style={styles.genre}>{fetchedGenre?.name ? fetchedGenre?.name : fetchedGenre?.name}</Text>
           <View style={styles.vote}>
             <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>

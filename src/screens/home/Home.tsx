@@ -37,7 +37,7 @@ import MovieSection from './_partials/MovieSection';
 import Header from '../../components/header/Header';
 import InfoModal from 'src/components/info-modal/InfoModal';
 import AddButton from 'src/components/add-button/AddButton';
-import ActionButton from 'src/components/action-button/ActionButton';
+import ActionButton from 'src/components/cta/action-button/ActionButton';
 
 // Import Types
 import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_types/apiTypes';

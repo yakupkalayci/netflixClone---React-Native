@@ -2,18 +2,18 @@
 import React, { ReactElement } from 'react';
 
 // Import Constants
-import { CUSTOM_ICON_SIZES } from '../../common/constants/icon/iconSizes';
-import { ICON_STATUS } from '../../common/constants/icon/iconStatus';
+import { CUSTOM_ICON_SIZES } from 'src/common/constants/icon/iconSizes';
+import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 export interface IconProps {
-  status: ICON_STATUS;
+  status: CUSTOM_COLORS;
   size?: CUSTOM_ICON_SIZES | number;
   name: ReactElement;
 }
 
 CustomIcon.defaultProps = {
   size: CUSTOM_ICON_SIZES.MEDIUM,
-  status: ICON_STATUS.SECONDARY
+  status: CUSTOM_COLORS.GRAY
 };
 
 function CustomIcon(props: IconProps) {

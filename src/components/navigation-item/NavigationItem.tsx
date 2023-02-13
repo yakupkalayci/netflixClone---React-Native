@@ -2,14 +2,14 @@
 import { TouchableOpacity, Text, TextStyle } from 'react-native';
 
 interface NavigationItemProps {
-    onPress?: () => void;
-    style: TextStyle,
-    target: string;
+  onPress?: () => void;
+  style: TextStyle | TextStyle[];
+  target: string;
 }
 
-function NavigationItem(props:NavigationItemProps): JSX.Element {
-    // destruct props
-    const { onPress, style, target } = props;
+function NavigationItem(props: NavigationItemProps): JSX.Element {
+  // destruct props
+  const { onPress, style, target } = props;
 
   return (
     <TouchableOpacity onPress={onPress}>

@@ -1,5 +1,5 @@
 // Import React
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 
 // Import Compontns
 import MovieCard from 'src/components/movie-card/MovieCard';
@@ -26,18 +26,17 @@ function MovieSection(props: MovieSectionProps): JSX.Element {
   return (
     <View>
       <Text style={styles.titles}>{sectionTitle}</Text>
-      <FlatList
-        data={movieData}
-        renderItem={({ item }) => (
-          <MovieCard
-            contentType={contentType}
-            movieData={item}
-            movieList={movieList}
-            userID={userID}
-          />
-        )}
-        horizontal={true}
-      />
+      {movieData ? (
+        <FlatList
+          data={movieData}
+          renderItem={({ item }) => (
+            <MovieCard contentType={contentType} movieData={item} movieList={movieList} userID={userID} />
+          )}
+          horizontal={true}
+        />
+      ) : (
+        <ActivityIndicator size="large" />
+      )}
     </View>
   );
 }

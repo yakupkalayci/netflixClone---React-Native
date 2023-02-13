@@ -9,11 +9,14 @@ interface InputProps {
   labelStyle?: TextStyle;
   inputStyle?: TextStyle;
   isPassword?: boolean;
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  keyboardType?: 'number-pad' | 'decimal-pad' | 'numeric' | 'email-address' | 'phone-pad' | 'url';
 }
 
 function Input(props: InputProps) {
   // destruct props
-  const { value, onChange, label, placeholder, labelStyle, inputStyle, isPassword } = props;
+  const { value, onChange, label, placeholder, labelStyle, inputStyle, isPassword, autoCapitalize, keyboardType } =
+    props;
 
   return (
     <>
@@ -24,6 +27,8 @@ function Input(props: InputProps) {
         placeholder={placeholder}
         style={inputStyle}
         secureTextEntry={isPassword}
+        autoCapitalize={autoCapitalize}
+        keyboardType={keyboardType}
       />
     </>
   );
