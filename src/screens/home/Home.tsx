@@ -205,8 +205,11 @@ function Home({ navigation }: HomeScreenProps) {
     dispatch(getDailyTrendingMovies());
     dispatch(getWeeklyTrendingMovies());
     dispatch(getMoviesWithGenre(10751));
-    listenDB(user?.uid, setMovieList);
   }, []);
+
+  useEffect(() => {
+    listenDB(user?.uid, setMovieList);
+  }, [user]);
 
   useEffect(() => {
     if (dailyTrendingMovies?.length > 0) {
@@ -216,7 +219,7 @@ function Home({ navigation }: HomeScreenProps) {
 
   useEffect(() => {
     if (dailyTrendingMovies?.length > 0) {
-      checkMovieList(dailyTrendingMovies[randomImageIndex]?.id, movieList, setMovieListCheck);
+      setMovieListCheck(() => checkMovieList(dailyTrendingMovies[randomImageIndex]?.id, movieList));
     }
   }, [movieList]);
 

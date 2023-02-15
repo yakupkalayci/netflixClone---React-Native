@@ -80,7 +80,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
           style={styles.title}
         />
         <View style={styles.detailContainer}>
-          <Text style={styles.genre}>{fetchedGenre?.name ? fetchedGenre?.name : fetchedGenre?.name}</Text>
+          <Text style={styles.genre}>{Array.isArray(genre) ? fetchedGenre?.name : genre?.name}</Text>
           <View style={styles.vote}>
             <Icon name="star" color={CUSTOM_COLORS.YELLOW} size={20} />
             <Text style={styles.voteText}>{vote?.toFixed(2)}</Text>

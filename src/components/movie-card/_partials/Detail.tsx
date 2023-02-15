@@ -73,11 +73,11 @@ const Details = (props: DetailsProps) => {
     };
 
     getGenre();
-    checkMovieList(movieData.id, movieList, setMovieListCheck);
+    setMovieListCheck(() => checkMovieList(movieData.id, movieList));
   }, []);
 
   useEffect(() => {
-    checkMovieList(movieData.id, movieList, setMovieListCheck);
+    setMovieListCheck(() => checkMovieList(movieData.id, movieList));
   }, [movieList]);
 
   return (

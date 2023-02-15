@@ -90,12 +90,12 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   // useEffects
   useEffect(() => {
     listenDB(userID, setMovieList);
-    checkMovieList(id, movieList, setMovieListCheck);
+    setMovieListCheck(() => checkMovieList(id, movieList));
     dispatch(getComments());
   }, []);
 
   useEffect(() => {
-    checkMovieList(id, movieList, setMovieListCheck);
+    setMovieListCheck(() => checkMovieList(id, movieList));
   }, [movieList]);
 
   useEffect(() => {
