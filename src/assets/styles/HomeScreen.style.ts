@@ -55,12 +55,13 @@ export default StyleSheet.create<HomeScreenStyleProps>({
     backgroundColor: CUSTOM_COLORS.WHITE,
     borderRadius: 3,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 50
   },
   actionButtonPlayText: {
     color: CUSTOM_COLORS.BLACK,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 17
   },
   actionText: {
     color: CUSTOM_COLORS.WHITE,

@@ -1,26 +1,29 @@
 // Import React
-import { Image, ImageStyle } from 'react-native';
+import { View, Image, ImageStyle, ViewStyle } from 'react-native';
 
 interface MainImageProps {
   dailyTrendingMovies: any;
   randomImageIndex: number;
-  style: ImageStyle;
+  imgStyle: ImageStyle;
+  viewStyle: ViewStyle
 }
 
 function MainImage(props: MainImageProps): JSX.Element {
   // destructp props
-  const { dailyTrendingMovies, randomImageIndex, style } = props;
+  const { dailyTrendingMovies, randomImageIndex, imgStyle, viewStyle } = props;
 
   return (
-    <Image
-      source={{
-        uri: dailyTrendingMovies
-          ? 'https://image.tmdb.org/t/p/w500' + dailyTrendingMovies[randomImageIndex]?.poster_path
-          : ''
-      }}
-      style={style}
-      resizeMode={'contain'}
-    />
+    <View style={viewStyle}>
+      <Image
+        source={{
+          uri: dailyTrendingMovies
+            ? 'https://image.tmdb.org/t/p/w500' + dailyTrendingMovies[randomImageIndex]?.poster_path
+            : ''
+        }}
+        style={imgStyle}
+        resizeMode={'contain'}
+      />
+    </View>
   );
 }
 

@@ -30,13 +30,13 @@ import IconInfo from 'react-native-vector-icons/Foundation';
 
 // Import Partials
 import MainImage from './_partials/MainImage';
+import ActionButtons from './_partials/ActionButtons';
 import MovieSection from './_partials/MovieSection';
 
 // Import Components
 import Header from '../../components/header/Header';
 import InfoModal from 'src/components/info-modal/InfoModal';
 import AddButton from 'src/components/cta/add-button/AddButton';
-import ActionButton from 'src/components/cta/action-button/ActionButton';
 
 // Import Types
 import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_types/apiTypes';
@@ -233,20 +233,13 @@ function Home({ navigation }: HomeScreenProps) {
       <ScrollView>
         {dailyTrendingMovies ? (
           <>
-            <View style={styles.imageContainer}>
-              <MainImage
-                dailyTrendingMovies={dailyTrendingMovies}
-                randomImageIndex={randomImageIndex}
-                style={styles.mainPoster}
-              />
-            </View>
-            <View style={styles.actions}>
-              {actionButtonData.map((item) => (
-                <ActionButton key={item.id} onPressFunction={item.onPressFunction} style={item.style}>
-                  {item.children}
-                </ActionButton>
-              ))}
-            </View>
+            <MainImage
+              dailyTrendingMovies={dailyTrendingMovies}
+              randomImageIndex={randomImageIndex}
+              imgStyle={styles.mainPoster}
+              viewStyle={styles.imageContainer}
+            />
+            <ActionButtons actionButtonData={actionButtonData} viewStyle={styles.actions} />
           </>
         ) : (
           <ActivityIndicator size="large" />
