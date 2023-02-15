@@ -13,7 +13,6 @@ import { deleteComment } from 'src/store/actions/comments/deleteComment';
 import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import utils
-import { addMovie } from 'src/common/utils/addMovie';
 import { listenDB } from 'src/common/utils/listenDB';
 import { checkMovieList } from 'src/common/utils/checkMovieList';
 import { fetchGenre } from 'src/common/utils/fetchGenre';
@@ -120,7 +119,6 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
       <ScrollView>
         <View style={styles.innerContainer}>
           <MovieDetails
-            addMovie={addMovie}
             desc={desc}
             fetchedGenre={fetchedGenre}
             genre={genre}
@@ -130,6 +128,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
             movieListCheck={movieListCheck}
             title={title}
             vote={vote}
+            userID={userID}
           />
           <View style={styles.commentContainer}>
             <Icon

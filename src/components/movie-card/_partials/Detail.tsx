@@ -2,6 +2,10 @@
 import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
+// Import Redux
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
+
 // Import Navigation Context
 import { NavigationContext } from '@react-navigation/native';
 
@@ -37,13 +41,15 @@ interface DetailsProps {
   contentType: 'preview' | 'movie';
   movieData: MoviesWGenreData | TrendingMoviesData;
   movieList: MovieListData[] | undefined;
-  userID?: string;
   setShowContent: Dispatch<SetStateAction<boolean>>;
 }
 
 const Details = (props: DetailsProps) => {
   // destruct props
-  const { contentType, movieData, movieList, userID, setShowContent } = props;
+  const { contentType, movieData, movieList, setShowContent } = props;
+
+  // useSelector
+  const user = useSelector((state: RootState) => state?.user);
 
   // variables
   const navigation = useContext(NavigationContext);
@@ -52,6 +58,7 @@ const Details = (props: DetailsProps) => {
   const vote = movieData.vote_average;
   const id = movieData.id;
   const imgLink = 'https://image.tmdb.org/t/p/w500' + movieData.poster_path;
+  const userID = user?.uid;
 
   // useState
   const [genre, setGenre] = useState<{ name: string; id: number }>();
@@ -104,7 +111,7 @@ const Details = (props: DetailsProps) => {
               textColor={movieListCheck ? CUSTOM_COLORS_TYPE.GREEN : CUSTOM_COLORS_TYPE.WHITE}
               bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
               onPress={() => {
-                addMovie(title, desc, imgLink, id, vote, movieList, genre);
+                addMovie(title, desc, imgLink, id, vote, movieList, genre, userID);
                 setTimeout(() => setShowContent(false), 1000);
               }}
               extraStyles={{ padding: 3 }}

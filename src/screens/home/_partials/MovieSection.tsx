@@ -16,12 +16,11 @@ interface MovieSectionProps {
   movieData: TrendingMoviesData[] | MoviesWGenreData[];
   contentType: 'preview' | 'movie';
   movieList: MovieListData[] | undefined;
-  userID?: string;
 }
 
 function MovieSection(props: MovieSectionProps): JSX.Element {
   // destruct props
-  const { sectionTitle, movieData, contentType, movieList, userID } = props;
+  const { sectionTitle, movieData, contentType, movieList } = props;
 
   return (
     <View>
@@ -30,7 +29,7 @@ function MovieSection(props: MovieSectionProps): JSX.Element {
         <FlatList
           data={movieData}
           renderItem={({ item }) => (
-            <MovieCard contentType={contentType} movieData={item} movieList={movieList} userID={userID} />
+            <MovieCard contentType={contentType} movieData={item} movieList={movieList} />
           )}
           horizontal={true}
         />

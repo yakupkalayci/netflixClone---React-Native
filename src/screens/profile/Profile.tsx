@@ -2,17 +2,19 @@
 import { useState } from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 
+// Import Redux
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
+
 // Import Constants
 import { CUSTOM_BG_COLORS_TYPE, CUSTOM_COLORS_TYPE } from 'src/common/constants/colors/customColors';
 
 // Import Firebase Auth
 import auth from '@react-native-firebase/auth';
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Utils
 import { showToast } from 'src/common/utils/showToast';
 import { authErrorParser } from 'src/common/utils/authErrorParser';
-import { getCurrentUser } from 'src/common/utils/getCurrentUser';
 
 // Import Alert Types
 import { ALERT_TYPE } from 'react-native-alert-notification';
@@ -32,8 +34,10 @@ import Input from 'src/components/form-items/Input';
 import styles from 'src/assets/styles/Profile.style';
 
 function Profile({ navigation }: ProfileProps): JSX.Element {
+  // useSelector
+  const user = useSelector((state: RootState) => state?.user);
+
   // useState
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 

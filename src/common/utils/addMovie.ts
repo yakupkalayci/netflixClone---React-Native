@@ -5,7 +5,6 @@ import { firebase } from '@react-native-firebase/database';
 import { t } from 'i18next';
 
 // Import Utils
-import { getCurrentUser } from './getCurrentUser';
 import { showToast } from './showToast';
 import { authErrorParser } from './authErrorParser';
 import { movieListDataParser } from './movieListDataParser';
@@ -23,10 +22,9 @@ export const addMovie = (
   id: number,
   vote: number,
   movieList: MovieListData[] | undefined,
-  genre: object | [] | undefined
+  genre: object | [] | undefined,
+  userID: string | undefined
 ) => {
-  const user = getCurrentUser();
-
   const result = movieList?.length ? movieListDataParser(movieList).find((movie) => movie.id === id) : undefined;
 
   if (result) {
@@ -40,7 +38,7 @@ export const addMovie = (
       const reference = firebase
       .app()
       .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')
-      .ref('/users/' + user?.uid + '/movies')
+      .ref('/users/' + userID + '/movies')
       .push();
 
     reference

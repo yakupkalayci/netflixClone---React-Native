@@ -20,7 +20,6 @@ import { withTranslation } from 'react-i18next';
 // Import Utils
 import { getRandomImageIndex } from 'src/common/utils/getRandomImageIndex';
 import { addMovie } from 'src/common/utils/addMovie';
-import { getCurrentUser } from 'src/common/utils/getCurrentUser';
 import { emailParser } from 'src/common/utils/emailParser';
 import { listenDB } from 'src/common/utils/listenDB';
 import { checkMovieList } from 'src/common/utils/checkMovieList';
@@ -42,7 +41,6 @@ import ActionButton from 'src/components/cta/action-button/ActionButton';
 // Import Types
 import { TrendingMoviesData, MoviesWGenreData } from 'src/store/actions/movies/_types/apiTypes';
 import { MovieListData } from './_types/movieListData';
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Screen Type
 import { HomeScreenProps } from 'src/routes/types';
@@ -54,7 +52,6 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 
 function Home({ navigation }: HomeScreenProps) {
   // useState
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
   const [randomImageIndex, setRandomImageIndex] = useState<number>(0);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalType, setModalType] = useState<'video' | 'text'>('text');
@@ -72,6 +69,7 @@ function Home({ navigation }: HomeScreenProps) {
   const moviesWithGenre: MoviesWGenreData[] = useSelector(
     (state: RootState) => state?.globalReducer?.getMoviesWithGenre?.success?.data?.results
   );
+  const user = useSelector((state: RootState) => state?.user);
 
   const actionButtonData = [
     {
@@ -90,7 +88,8 @@ function Home({ navigation }: HomeScreenProps) {
               dailyTrendingMovies[randomImageIndex]?.id,
               dailyTrendingMovies[randomImageIndex]?.vote_average,
               movieList,
-              dailyTrendingMovies[randomImageIndex]?.genre_ids
+              dailyTrendingMovies[randomImageIndex]?.genre_ids,
+              user?.uid
             );
       },
       style: styles.actionButton,
@@ -183,24 +182,21 @@ function Home({ navigation }: HomeScreenProps) {
       title: t('GLOBAL.LABELS.CONTIUNE_WATCHING_FOR') + ` ${emailParser(user?.email)}`,
       data: moviesWithGenre,
       type: MOVIE_SECTION_TYPES.MOVIE,
-      movieList,
-      userID: user?.uid
+      movieList
     },
     {
       id: 12,
       title: t('GLOBAL.LABELS.POPULAR_TODAY'),
       data: dailyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
-      movieList,
-      userID: user?.uid
+      movieList
     },
     {
       id: 13,
       title: t('GLOBAL.LABELS.POPULAR_THIS_WEEK'),
       data: weeklyTrendingMovies,
       type: MOVIE_SECTION_TYPES.MOVIE,
-      movieList,
-      userID: user?.uid
+      movieList
     }
   ];
 
@@ -260,7 +256,6 @@ function Home({ navigation }: HomeScreenProps) {
               movieData={item.data}
               contentType={item.type}
               movieList={item.movieList}
-              userID={item.userID}
             />
           ))}
         </View>

@@ -1,6 +1,6 @@
 // Import React
 import { Dispatch, Fragment, SetStateAction, useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
 // Import Utils
 import { openMovieDetailPage } from 'src/common/utils/openMovieDetailPage';

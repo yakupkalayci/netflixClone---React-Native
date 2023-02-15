@@ -11,6 +11,9 @@ import { t } from 'i18next';
 // Import Icon
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Import utils
+import { addMovie } from 'src/common/utils/addMovie';
+
 // Import Constant
 import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
@@ -25,15 +28,6 @@ import styles from 'src/assets/styles/MovieDetails.style';
 interface MovieDetailsProps {
   vote: number;
   fetchedGenre: { id: number; name: string } | undefined;
-  addMovie: (
-    title: string,
-    desc: string,
-    imgLink: string,
-    id: number,
-    vote: number,
-    movieList: MovieListData[],
-    genre: object | [] | undefined
-  ) => void;
   title: string;
   desc: string;
   imgLink: string;
@@ -41,11 +35,12 @@ interface MovieDetailsProps {
   movieList: MovieListData[];
   genre: [] | object;
   movieListCheck: boolean;
+  userID: string;
 }
 
 function MovieDetails(props: MovieDetailsProps): JSX.Element {
   // destruct props
-  const { vote, fetchedGenre, addMovie, title, desc, imgLink, id, movieList, genre, movieListCheck } = props;
+  const { vote, fetchedGenre, title, desc, imgLink, id, movieList, genre, movieListCheck, userID } = props;
 
   return (
     <Fragment>
@@ -70,7 +65,7 @@ function MovieDetails(props: MovieDetailsProps): JSX.Element {
           </View>
           <TouchableOpacity
             style={styles.actionButton}
-            onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre)}
+            onPress={() => addMovie(title, desc, imgLink, id, vote, movieList, genre, userID)}
           >
             {movieListCheck ? (
               <AddButton

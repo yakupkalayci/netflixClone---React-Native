@@ -2,13 +2,16 @@
 import { useState, useEffect } from 'react';
 import { SafeAreaView, Text, FlatList, ActivityIndicator } from 'react-native';
 
+// Import Redux
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
+
 // Import i18next
 import { t } from 'i18next';
 import { withTranslation } from 'react-i18next';
 
 // Import Utils
 import { listenDB } from 'src/common/utils/listenDB';
-import { getCurrentUser } from 'src/common/utils/getCurrentUser';
 import { emailParser } from 'src/common/utils/emailParser';
 
 // Import Partials
@@ -16,9 +19,6 @@ import MovieListItem from './_partials/MovieListItem';
 
 // Import Components
 import Header from 'src/components//header/Header';
-
-// Import Types
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // Import Screen Types
 import { MyListProps } from 'src/routes/types';
@@ -30,8 +30,11 @@ import { MovieListData } from '../home/_types/movieListData';
 import styles from 'src/assets/styles/MyList.styles';
 
 function MyList({ navigation }: MyListProps): JSX.Element {
-  // varibles
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null | undefined>(() => getCurrentUser());
+
+  // useSelector
+  const user = useSelector((state: RootState) => state?.user);
+
+  // useState
   const [movieList, setMovieList] = useState<MovieListData[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
