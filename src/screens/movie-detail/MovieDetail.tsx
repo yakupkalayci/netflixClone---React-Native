@@ -57,7 +57,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   // useState
   const [movieList, setMovieList] = useState<MovieListData[]>();
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
-  const [fetchedGenre, setFetchedGenre] = useState<{name:string, id: number}>();
+  const [fetchedGenre, setFetchedGenre] = useState<{ name: string; id: number }>();
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState<string>('');
   const [commentList, setCommentList] = useState<[]>();
@@ -141,7 +141,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
             />
             {showComments ? (
               <CommentForm comment={comment} setComment={setComment} handleAddComment={handleAddComment} />
-            ): null}
+            ) : null}
           </View>
         </View>
       </ScrollView>
@@ -153,7 +153,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
             renderItem={({ item }) => <Comment comment={item} handleDeleteComment={handleDeleteComment} />}
           />
         </View>
-      ): null}
+      ) : null}
     </SafeAreaView>
   );
 }

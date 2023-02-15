@@ -24,7 +24,7 @@ import { checkMovieList } from 'src/common/utils/checkMovieList';
 // Import Components
 import InfoModal from 'src/components/info-modal/InfoModal';
 import CustomButton from 'src/components/cta/button/CustomButton';
-import AddButton from 'src/components/add-button/AddButton';
+import AddButton from 'src/components/cta/add-button/AddButton';
 
 // styles
 import styles from 'src/assets/styles/Details.style';
@@ -104,15 +104,7 @@ const Details = (props: DetailsProps) => {
               textColor={movieListCheck ? CUSTOM_COLORS_TYPE.GREEN : CUSTOM_COLORS_TYPE.WHITE}
               bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
               onPress={() => {
-                addMovie(
-                  title,
-                  desc,
-                  imgLink,
-                  id,
-                  vote,
-                  movieList,
-                  genre
-                );
+                addMovie(title, desc, imgLink, id, vote, movieList, genre);
                 setTimeout(() => setShowContent(false), 1000);
               }}
               extraStyles={{ padding: 3 }}

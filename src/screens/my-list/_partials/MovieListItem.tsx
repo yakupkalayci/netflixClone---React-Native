@@ -15,9 +15,6 @@ import { fetchGenre } from 'src/common/utils/fetchGenre';
 // Import i18next
 import { t } from 'i18next';
 
-// Import Navigation Context
-import { NavigationContext } from '@react-navigation/native';
-
 // Import Icons
 import Icon from 'react-native-vector-icons/FontAwesome';
 

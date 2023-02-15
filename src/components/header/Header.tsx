@@ -20,16 +20,15 @@ import NavigationItem from '../navigation-item/NavigationItem';
 // styles
 import styles from 'src/assets/styles/Header.style';
 
-function Header(props): JSX.Element {
+function Header({ navigation }): JSX.Element {
   // method for navigation to home screen
   const navigateToMovies = () => {
-    // navigation.navigate('Home Screen');
-    props.navigation.navigate('Home Screen');
+    navigation.navigate('Movies');
   };
 
   // method for navigation to my list
   const navigateToMyList = () => {
-    props.navigation.navigate('My List');
+    navigation.navigate('My List');
   };
 
   useEffect(() => {

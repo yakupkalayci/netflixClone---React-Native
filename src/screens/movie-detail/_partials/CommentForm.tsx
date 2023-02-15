@@ -1,6 +1,6 @@
 // Import React
 import { Dispatch, SetStateAction } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import { View, Button } from 'react-native';
 
 // Import Constant
 import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';

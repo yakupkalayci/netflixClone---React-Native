@@ -1,5 +1,5 @@
 // Import i18next
-import { t } from 'i18next'
+import { t } from 'i18next';
 
 // Authentication
 import Auth from 'src/screens/authentication/Auth';
@@ -46,7 +46,7 @@ export const tabRoutes = [
 
 export const homeStackRoutes = [
   {
-    name: t('PAGE_TITLES.HOME_SCREEN'),
+    name: t('PAGE_TITLES.MOVIES'),
     component: Home
   },
   {

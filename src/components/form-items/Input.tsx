@@ -1,3 +1,4 @@
+// Import React
 import { Dispatch, SetStateAction } from 'react';
 import { Text, TextInput, TextStyle } from 'react-native';
 

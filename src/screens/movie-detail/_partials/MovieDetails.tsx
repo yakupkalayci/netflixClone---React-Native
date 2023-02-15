@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { CUSTOM_COLORS } from 'src/common/constants/colors/customColors';
 
 // Import Components
-import AddButton from 'src/components/add-button/AddButton';
+import AddButton from 'src/components/cta/add-button/AddButton';
 
 // Import movielist data type
 import { MovieListData } from 'src/screens/home/_types/movieListData';
@@ -24,7 +24,7 @@ import styles from 'src/assets/styles/MovieDetails.style';
 
 interface MovieDetailsProps {
   vote: number;
-  fetchedGenre: {id: number, name:string} | undefined;
+  fetchedGenre: { id: number; name: string } | undefined;
   addMovie: (
     title: string,
     desc: string,
@@ -45,18 +45,7 @@ interface MovieDetailsProps {
 
 function MovieDetails(props: MovieDetailsProps): JSX.Element {
   // destruct props
-  const {
-    vote,
-    fetchedGenre,
-    addMovie,
-    title,
-    desc,
-    imgLink,
-    id,
-    movieList,
-    genre,
-    movieListCheck
-  } = props;
+  const { vote, fetchedGenre, addMovie, title, desc, imgLink, id, movieList, genre, movieListCheck } = props;
 
   return (
     <Fragment>

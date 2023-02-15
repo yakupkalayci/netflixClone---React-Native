@@ -36,7 +36,7 @@ import MovieSection from './_partials/MovieSection';
 // Import Components
 import Header from '../../components/header/Header';
 import InfoModal from 'src/components/info-modal/InfoModal';
-import AddButton from 'src/components/add-button/AddButton';
+import AddButton from 'src/components/cta/add-button/AddButton';
 import ActionButton from 'src/components/cta/action-button/ActionButton';
 
 // Import Types

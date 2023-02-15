@@ -16,43 +16,43 @@ export type TabParamList = {
 };
 
 export type InnterStackParamList = {
-    HomeScreen: undefined;
-    MyList: undefined;
-    MovieDetail: {
-        title: string;
-        genre: [] | object;
-        desc: string;
-        imgLink: string;
-        vote: number;
-        id: number;
-        userID: string,
-        movieList: MovieListData[];
-    }
-}
+  HomeScreen: undefined;
+  MyList: undefined;
+  MovieDetail: {
+    title: string;
+    genre: [] | object;
+    desc: string;
+    imgLink: string;
+    vote: number;
+    id: number;
+    userID: string;
+    movieList: MovieListData[];
+  };
+};
 
 export type AuthenticationProps = NativeStackScreenProps<RootStackParamList, 'Authentication'>;
 
 export type ProfileProps = CompositeScreenProps<
-BottomTabScreenProps<TabParamList, 'Profile'>,
-NativeStackScreenProps<RootStackParamList>
+  BottomTabScreenProps<TabParamList, 'Profile'>,
+  NativeStackScreenProps<RootStackParamList>
 >;
 
 export type HomeScreenProps = CompositeScreenProps<
-NativeStackScreenProps<InnterStackParamList, 'HomeScreen'>,
-NativeStackScreenProps<TabParamList>
+  NativeStackScreenProps<InnterStackParamList, 'HomeScreen'>,
+  NativeStackScreenProps<TabParamList>
 >;
 
 export type MyListProps = CompositeScreenProps<
-NativeStackScreenProps<InnterStackParamList, 'MyList'>,
-NativeStackScreenProps<RootStackParamList>
+  NativeStackScreenProps<InnterStackParamList, 'MyList'>,
+  NativeStackScreenProps<RootStackParamList>
 >;
 
 export type MyListNavigationProp = CompositeNavigationProp<
-NativeStackNavigationProp<InnterStackParamList, 'MyList'>,
-NativeStackNavigationProp<RootStackParamList>
->
+  NativeStackNavigationProp<InnterStackParamList, 'MyList'>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
 export type MovieDetaiProps = CompositeScreenProps<
-NativeStackScreenProps<InnterStackParamList, 'MovieDetail'>,
-NativeStackScreenProps<RootStackParamList>
+  NativeStackScreenProps<InnterStackParamList, 'MovieDetail'>,
+  NativeStackScreenProps<RootStackParamList>
 >;
