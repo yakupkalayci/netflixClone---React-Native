@@ -34,7 +34,7 @@ export const addMovie = (
       t('GLOBAL.COMPONENTS.ALERT.MESSAGES.MOVIE_ALREADY_ADDED')
     );
   } else {
-    if(title && desc && imgLink && id && vote && genre) {
+    if(title && desc && imgLink && id && genre) {
       const reference = firebase
       .app()
       .database('https://netflix-1b6c5-default-rtdb.europe-west1.firebasedatabase.app/')

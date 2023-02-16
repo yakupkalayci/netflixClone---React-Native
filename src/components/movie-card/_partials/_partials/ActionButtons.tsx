@@ -84,7 +84,7 @@ function ActionButtons(props: ActionButtonsProps): JSX.Element {
         textColor={CUSTOM_COLORS_TYPE.WHITE}
         bgColor={CUSTOM_COLORS_TYPE.MAIN_BACKGROUND_COLOR}
         onPress={() => {
-          openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList });
+          openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID });
           setTimeout(() => setShowContent(false), 1000);
         }}
         extraStyles={{ padding: 3 }}

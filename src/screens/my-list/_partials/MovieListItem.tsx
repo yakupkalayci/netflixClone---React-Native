@@ -76,7 +76,7 @@ function MovieListItem(props: MovieListItemProps): JSX.Element {
       <View style={styles.innerContainer}>
         <NavigationItem
           target={title}
-          onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID, movieList })}
+          onPress={() => openMovieDetailPage(navigation, { title, genre, desc, imgLink, vote, id, userID })}
           style={styles.title}
         />
         <View style={styles.detailContainer}>

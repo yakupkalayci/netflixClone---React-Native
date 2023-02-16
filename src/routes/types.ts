@@ -26,7 +26,6 @@ export type InnterStackParamList = {
     vote: number;
     id: number;
     userID: string;
-    movieList: MovieListData[];
   };
 };
 
@@ -52,7 +51,7 @@ export type MyListNavigationProp = CompositeNavigationProp<
   NativeStackNavigationProp<RootStackParamList>
 >;
 
-export type MovieDetaiProps = CompositeScreenProps<
+export type MovieDetailProps = CompositeScreenProps<
   NativeStackScreenProps<InnterStackParamList, 'MovieDetail'>,
   NativeStackScreenProps<RootStackParamList>
 >;

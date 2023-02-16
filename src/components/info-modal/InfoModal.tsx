@@ -81,8 +81,7 @@ function InfoModal(props: InfoModalProps) {
                     imgLink,
                     vote,
                     id,
-                    userID,
-                    movieList
+                    userID
                   })
                 }
                 style={[styles.modalText, styles.modalTitle]}

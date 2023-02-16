@@ -32,7 +32,7 @@ interface MovieDetailsProps {
   desc: string;
   imgLink: string;
   id: number;
-  movieList: MovieListData[];
+  movieList: MovieListData[] | undefined;
   genre: [] | object;
   movieListCheck: boolean;
   userID: string;

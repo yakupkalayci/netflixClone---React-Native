@@ -6,7 +6,6 @@ type params = {
   vote;
   id;
   userID;
-  movieList;
 };
 
 export const openMovieDetailPage = (navigation: any, params: params) => {

@@ -1,5 +1,5 @@
 // Import React
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { SafeAreaView, View, Text, ScrollView, FlatList } from 'react-native';
 
 // Import Redux
@@ -40,12 +40,14 @@ import { ALERT_TYPE } from 'react-native-alert-notification';
 import { MovieListData } from 'src/screens/home/_types/movieListData';
 
 // Import Screen Types
-import { MovieDetaiProps } from 'src/routes/types';
+import { MovieDetailProps } from 'src/routes/types';
+
+import { useFocusEffect } from '@react-navigation/native';
 
 // styles
 import styles from 'src/assets/styles/MovieDetail.style';
 
-function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
+function MovieDetail({ route, navigation }: MovieDetailProps): JSX.Element {
   // destruct params
   const { title, genre, desc, imgLink, vote, id, userID } = route.params;
 
@@ -54,7 +56,7 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   const comments = useSelector((state: RootState) => state?.globalReducer?.getComments?.success?.data);
 
   // useState
-  const [movieList, setMovieList] = useState<MovieListData[]>();
+  const [movieList, setMovieList] = useState<MovieListData[] | undefined>();
   const [movieListCheck, setMovieListCheck] = useState<boolean>(false);
   const [fetchedGenre, setFetchedGenre] = useState<{ name: string; id: number }>();
   const [showComments, setShowComments] = useState(false);
@@ -88,11 +90,12 @@ function MovieDetail({ route, navigation }: MovieDetaiProps): JSX.Element {
   };
 
   // useEffects
-  useEffect(() => {
-    listenDB(userID, setMovieList);
-    setMovieListCheck(() => checkMovieList(id, movieList));
-    dispatch(getComments());
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      listenDB(userID, setMovieList);
+      dispatch(getComments());
+    }, [])
+  );
 
   useEffect(() => {
     setMovieListCheck(() => checkMovieList(id, movieList));
