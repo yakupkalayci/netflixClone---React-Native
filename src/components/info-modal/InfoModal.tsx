@@ -54,8 +54,7 @@ function InfoModal(props: InfoModalProps) {
     imgLink,
     id,
     type,
-    userID,
-    movieList
+    userID
   } = props;
 
   // variables

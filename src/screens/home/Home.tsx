@@ -161,7 +161,6 @@ function Home({ navigation }: HomeScreenProps) {
             }
             type={modalType}
             userID={user?.uid}
-            movieList={movieList}
           />
           <IconInfo name="info" size={30} color={CUSTOM_COLORS.WHITE} />
           <Text style={styles.actionText}>{t('GLOBAL.COMPONENTS.BUTTON.TITLES.INFO')}</Text>
